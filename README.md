@@ -52,9 +52,36 @@ Web Site recomendado: http://www.scielo.org.co/scielo.php?script=sci_arttext&pid
 ### REGLA 4
 
 
+<!-- Diagramas de Flujo de Datos  -  DFD --->
 
-### REGLA 5
+---
 
+## Diagramas de flujo de datos
 
+El diagrama de flujo o flujograma o diagrama de actividades es la representación gráfica de un algoritmo o proceso. Se utiliza en disciplinas como programación, economía, procesos industriales y psicología cognitiva.
 
-### REGLA 6
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/LampFlowchart_es.svg/250px-LampFlowchart_es.svg.png"/>
+
+DFD: Descposición por Niveles, un diagrama de contexto es el primer nivel, lueg ovrios DFd EN NIVELES INTERMEDIOS. Hay 5 niveles de DFD
+
+Una entidad es cualquier cosa que pueda tener sus datos propios. Como una silla (Numero de patas, color, altura, ancho) El mundo entero esta lleno de entidades.
+
+El color rojo puede ser una caracteristica de una entidad tipo (Mesa, Silla, Carro) por lo que los nombres deben tener significado tanto para los procesos como para los flujo de datos
+
+> Procesos:
+> Flujos de Datos:
+
+### Diagrama de nivel 0 = Diagrama de contexto
+
+Un diagrama de contexto, también conocido como diagrama de contexto de sistema o diagrama de flujo de datos de nivel 0, es una representación visual que define los límites entre un sistema, o parte del sistema, y su entorno, mostrando las entidades que interactúan con él.
+
+<img src = "https://cmapsconverted.ihmc.us/rid=1J4Y48BKX-28V41ZN-QW6/DIAGRAMA%20DE%20CONTEXTO.cmap?rid=1J4Y48BKX-28V41ZN-QW6&partName=htmljpeg"/>
+
+[Diagrama de contexto](https://imgs.search.brave.com/8gAFA4pGj65_-qB5eULVoia3z40Lzdvce0lX0Pa9UE8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZWRyYXdtYXgu/Y29tL2ltYWdlcy9r/bm93bGVkZ2Uvd2hh/dC1pcy1jb250ZXh0/LWRpYWdyYW0uanBn "Imagen diagrama de contexto") en estas, lo que vemos son los inputs y outputs
+
+### Software para Diagramas
+
++ [Star UML](https://staruml.io/ "Website: Star UML")
++ [Dia UML](http://dia-installer.de/shapes/UML/index.html.en "dia UML")
+
+Esto representa el MVC (Modelo Vista Controlador)
