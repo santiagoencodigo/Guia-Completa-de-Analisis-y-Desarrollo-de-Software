@@ -68,10 +68,16 @@ Una entidad es cualquier cosa que pueda tener sus datos propios. Como una silla 
 
 El color rojo puede ser una caracteristica de una entidad tipo (Mesa, Silla, Carro) por lo que los nombres deben tener significado tanto para los procesos como para los flujo de datos
 
+Hay que tener mucho cuidado con redes desconectadas debido a que todas deben estar relacionadas.
+
+Es importante pensar quien es fuente de infromación y qué proceso ocurre y quien es destino de información. 
+
+Es fundamental ser lo más general posible.
+
 > Procesos:
 > Flujos de Datos:
 
-### Diagrama de nivel 0 = Diagrama de contexto
+## Diagrama de nivel 0 = Diagrama de contexto
 
 Un diagrama de contexto, también conocido como diagrama de contexto de sistema o diagrama de flujo de datos de nivel 0, es una representación visual que define los límites entre un sistema, o parte del sistema, y su entorno, mostrando las entidades que interactúan con él.
 
@@ -85,3 +91,26 @@ Un diagrama de contexto, también conocido como diagrama de contexto de sistema 
 + [Dia UML](http://dia-installer.de/shapes/UML/index.html.en "dia UML")
 
 Esto representa el MVC (Modelo Vista Controlador)
+
+
+<!-- Conexiones DFD -->
+
+
+### Conexiones permitidas entre los componentes de un DFD
+
+Una entidad externa no puede conectarse directamente a un almacen.
+
+### Tipos de Datos
+
+### Tipos de flujo de datos
+
+Flujo de dialogo: Representa una interacción entre un proceso y un almacén de datos, específicamente una consulta seguida de una actualización
+
+Flujo de consulta:
+Flujo de acualización:
+
+## Diagrama de nivel 1 = Diagrama de contexto
+
+
+
+
