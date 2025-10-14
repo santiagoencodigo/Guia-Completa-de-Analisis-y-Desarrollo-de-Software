@@ -159,6 +159,26 @@ Barreras para resolver el reto?
 
 >Realizar un mapa mental para entender el reto: ¿Qué aplicación deseamos desarrollar? - Mapa mental de acuerdo a la reflexión inicial.
 
+---
+
+## ¿Cual es el estado de mi proyecto? | Preguntas a tener
+
+>La repetición ayuda a eaprender
+
+De acuerdo a cada ciclo de vida del software se tienen ciertos artefactos/entregables
+
+En la segunda fase ya debe tener claro cual es el objetivo del proyecto
+
+1. Cual es el estado de mi proyecto
+2. Cual son los artefactos/entregables se tiene hasta ahora
+3. Entonces... ¿Cómo vamos a verificar si faltan artefactos?
+
+  Con angelica vamos a mirar conceptos de programación y sintaxis de javascript
+
+  ¿Hasta el momento qué temas de programación hemos visto?
+
+  POO, variales, condicionales, ciclos, arrays.
+
 
 
 
