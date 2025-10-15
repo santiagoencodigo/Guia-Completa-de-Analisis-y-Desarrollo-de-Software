@@ -1,0 +1,21 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos temporales o de respaldo
+*.tmp
+*.bak
+*.swp
+
+# Configuraciones de editor
+.vscode/
+.idea/
+
+# Archivos generados por procesadores de texto
+~$*
+
+# Archivos de logs o exportaciones temporales
+*.log
+
+# Archivos de LibreOffice o similares
+*.lock
