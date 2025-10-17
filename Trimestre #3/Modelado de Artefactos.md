@@ -4,7 +4,7 @@
 
 ### ¿Qué es una base de datos?
 
-Es una colección organizada y estructurada de información que se almacena electrónicamente para facilitar su acceso, gestión y actualización.
+Es una colección organizada y estructurada de información que se almacena electrónicamente para facilitar su acceso, gestión y actualización. (Permiten almacenar grandes volúmenes de datos)
 
 Su desarrollo es de forma lineal (waterfall) se realizan los siguentes procesos:
 
@@ -18,7 +18,19 @@ Su desarrollo es de forma lineal (waterfall) se realizan los siguentes procesos:
 
 ### Motor de Bases de Datos
 
+#### Los 6 Motores de Bases de Datos más reconocidos en el mercado
 
+Oracle: Es el motor relacional más antiguo, comenzó el negocio de las bases de datos. En ese entonces no era un negocio sino un proyecto cientifico, fue entonces que [Larry Ellison](https://www.forbes.com/profile/larry-ellison/) vio potencial y fundo la empresa. (Hoy en día es de los 10 hombres más ricos en el mundo)
+  
+Microsoft SQL Server: Es la respuesta de Microsoft hacia Oracle, paso muchos años sólo funcionando para windows, fue desde 2017 que ha sido multiplataforma. (Son lideres en Business Intelligence)
+
+My SQL: Es el motor más usado por los desarrolladores
+
+SQlite: Es una base de datos pequeña, es muy usada para hacer persistencia local en aplicaciones móviles
+
+PostgreSQL: Inicio como un proyecto universitario llamado INGRES, inspirado en Oracle e incluyó funciones avanzadas y tiggers que MySQL no tuvo por años.
+
+MariaBD:
 
 ### Gestor de bases de datos
 
