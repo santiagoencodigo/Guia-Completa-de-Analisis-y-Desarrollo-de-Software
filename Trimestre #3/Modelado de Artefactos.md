@@ -16,7 +16,115 @@ Su desarrollo es de forma lineal (waterfall) se realizan los siguentes procesos:
 
 *Imagen Tomada de: https://depositphotos.com/es/photos/base-de-datos.html*
 
-### Motor de Bases de Datos
+## Tipos de Datos
+
+Existen tipos de datos y entonces encontramos subtipos en estos tipos de datos
+
+### Tipo Númerico
+
+Cuando en unos datos no queremos que se ingresen caracteres como por ejemplo, en una cedula. No esperamos que se ingrese información con letras sino solamente números.
+
+#### Tipo Númerico - INT
+
+Los numeros enteros son aquellos que terminan en un numero positivo o negativo y son exactos como por ejemplo: 1, 2, 3, 4, 5, 6, 7, 9 -1, -2, -3, -4, -5, -6...
+
+#### Tipo Númerico - SMALLINT
+
+Es un entero pequeño, ocupa menos espacio por lo que podemos pensarlo como datos que son menores que el número 100, como un ejemplo preciso de este tipo de cosas podemos pensarlo como cuando en las variables de las tablas vamos a integrar una edad por lo que va en un rango de 1 - 100.
+
+#### Tipo Númerico - BIGINT
+
+Es un entero grande (más rango) por lo que puede ser facilmente 94596859685
+
+#### Tipo Númerico - DECIMAL/NUMERICO
+
+Son números con decimales exactos, eso quiere decir que cuentan con p = precision y s = escala como por ejemplo 12.50, 13.30, 16.70 ...
+
+#### Tipo Númerico - FLOAT/REAL
+
+## Ejemplo Aplicado
+
+Tenemos una tabla que se llama **Estudiante**
+
+  En la tabla con tenemos entonces:
+  Cedula 
+  Nombre
+  Telefono
+  Tipo de documento
+
+---
+
+
+### Datos tipo texto o cadenas de caracteres
+
+#### CHAR(n)
+
+es una cadena de longitud fija (rellena con espacios) 'ABC' como por ejemplo un nombre.
+
+#### VARCHAR(n) 
+
+Cadena de longitud variable (Más eficiente) 'Colombia' por lo que una dirección puede ser un VARCHAR(50) es decir una cantidad de 
+
+#### TEXT
+
+es un texto largo con parrafos, descripciones
+
+
+
+---
+
+
+### Variable Tipos de Fecha y Hora
+
+Permiten registrar momentos en eltiempo
+
+#### Date 
+
+#### TIME
+
+#### DATETIME/TIMESTAMP
+
+#### YEAR
+
+
+
+
+---
+
+
+### Variable de tipo BOOLEANO
+
+Binario
+
+Bit
+
+---
+
+
+### Variable tipos de identificación Binario
+
+UUID
+BLOB
+VARBINARY
+
+
+---
+
+### Tipos espaciales y JSON (avanzados)
+
+Usados en bases modernas como postgreSQL
+
+JSON
+
+GEOMETRY, POINT, POLYGON
+
+
+---
+
+
+
+
+#### Motor de Bases de Datos
 
 #### Los 6 Motores de Bases de Datos más reconocidos en el mercado
 
@@ -32,14 +140,26 @@ PostgreSQL: Inicio como un proyecto universitario llamado INGRES, inspirado en O
 
 MariaBD:
 
+
+---
+
+
+
 ### Gestor de bases de datos
+
+
 
 
 ### Un objeto en BD
 
-Hay dos tipos de bases de datos (relacionales y no relacionales) 
+
+---
+
+
 
 ## Tipos de Bases de Datos
+
+Hay dos tipos de bases de datos (relacionales y no relacionales) 
 
 
 ### BD Relacional
@@ -143,3 +263,53 @@ Generalmente en el sistema el usuario pide información, por lo que... ¿Cómo a
 
 
 ---
+
+
+## Llave Foranea FK - Primary Key
+
+Llave priamria (PK) su funcion es identificar de forma unia cada registro dentro de una tabla
+
+por loo que se caracterisa por ser unica, no puede repetirse y no puede contener valores nulos (aunque hay excepciones)
+
+Y un ejemplo claro de este tipo de cosas es cuando en una identificación personal (DNI) de un empleado o la matricula de un carro
+
+
+---
+
+
+Llave Primaria PK
+
+Suu funcion es establecer relacion
+
+
+---
+
+MDOELO E R MER
+
+Un CAMPO es toda la columna de cualquier dato
+Una tabla es todo el cuadro como tal
+Y toda la fila es un registro
+Y si solamente tomo un dato es un campo.
+
+<img src = "https://imgs.search.brave.com/wJghNrpxhcmeXbmav0fPeoeKIGGgp1w90Mawn9Fe10Q/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5zbGlkZXNoYXJl/Y2RuLmNvbS9zcy0y/MDA4MjUyMjE3NDEv/NzUvQ2xhc2UtMi1N/b2RlbG8tRW50aWRh/ZC1SZWxhY2lvbi1N/RVItMjMtMjA0OC5q/cGc">
+
+
+---
+
+Diseño de Entidades : 
+
+Este proceso en donde se definen las tablas que representaran los objetos principales del sistema dentro de una base de datos.
+
+Pasos para Diseñar una Entidad:
+
+1. Nombre de entidad - tabla:
+   El nombre debe ser claro, representativo y estar directamente relacionado con el objeto que almacena.
+   
+2. Fila del nombre del Campo - Tipo de Dato - Tamaño (Caracteres)
+   Se debe especificar cada uno de estos campos
+    * Nombre del campo: 
+    * Tipo de Dato: Si es texto, entero, decimal, fecha
+    * Tamaño: Por ejemplo en una cedula - INT(15), Telefono - INT(13)
+      
+3. Definir si es PK o FK
+4. Definir si es NULL o NOTNULL (SI es obligado llenar el campo / Si se puede dejar vacio el campo en el registro)
