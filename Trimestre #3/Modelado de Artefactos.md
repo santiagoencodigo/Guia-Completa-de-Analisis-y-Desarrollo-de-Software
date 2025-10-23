@@ -313,3 +313,16 @@ Pasos para Diseñar una Entidad:
       
 3. Definir si es PK o FK
 4. Definir si es NULL o NOTNULL (SI es obligado llenar el campo / Si se puede dejar vacio el campo en el registro)
+
+
+
+---
+
+## Carnalidad
+
+## Nomenclatura PascalCase y camelCase
+
+Para las entidades PascalCase = FechaCompra
+Para los atributos se usa camelCase = fechaCompra
+
+## Modelo Físico
