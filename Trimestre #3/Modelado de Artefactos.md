@@ -1,5 +1,26 @@
 # Modelado de Artefactos de Software
 
+Esta es una competencia del tercer trimestre que consiste en elaborar loas artefactos del diseño del software siguendo las prácticas de la metodologia seleccionada, por lo que:
+
+>Competencia: Es la capacidad de realizar algo, generalmente en las instituciones se les nombran asi, en otros lugares se les distingue como materias. Pero como es formación para el trabajo son competencias ya que estamos estudiando para realizar determinado trabajo.
+
+1. se va a estructurar el modelo de datos del software de acuerdo con las esspecificaciones del analisis
+
+2. Se va a elaborar los artefactos del diseño de software siguendo las práticas de la metodolo´gia seleccionada
+
+3. Estructurar el modelo de datos del software de acuerdo con las especiifcaciones del análisis
+
+4. Por ultimo con esta competencia se busca (Con la instructora angelica triana) verificar los entregables de la fase de diseño del software de acuerdo con lo establecido en el informe de naalisis
+
+---
+
+<!-- TALBA DE CONTENIDO -->
+
+## Tabla de Contenido
+
+1. [](#bases-de-datos)
+2. [](##tipos)
+
 # Bases de datos
 
 ### ¿Qué es una base de datos?
