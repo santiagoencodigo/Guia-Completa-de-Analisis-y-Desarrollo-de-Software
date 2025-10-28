@@ -62,11 +62,11 @@ Cualitativo: Interpretación - En parte subjetiva a partir usualmente de persona
 
 Cuantitativo: Medición - Cualific a partir de herramienta estadísticas y matemáticas (Etnográfico, Hermenéutico, Fenomenológico) (Encuestas, test)
 
-Mixo: Mezcla la investigación cuantitativa y cualitativa que es la que generalmente se realiza. 
+Mixto: Mezcla la investigación cuantitativa y cualitativa que es la que generalmente se realiza. 
 
 ---
 
-eL PROBLEMA Y LA PREGUNTA DE INVESTIGACIÓN
+## El problema y la pregunta del problema
 
 a partir de la pregunta inicial, tenemos un objetivo general que sera el fin último de la investigación y con este se construye una base en la pregunta de investigación
 
@@ -180,8 +180,31 @@ En la segunda fase ya debe tener claro cual es el objetivo del proyecto
   POO, variales, condicionales, ciclos, arrays.
 
 
+--- 
 
+## Etapas de la investigación
 
+Tenemos diferentes procesos para nuestra investigación
+
+## Muestra no probabilística 
+
+Es una técnica de muestreo en el cual el investigador 
+
+### Muestra por conveniencia
+
+**Muestreo por cuotas**: Sólo necesitará una muestra
+**Muestreo intencional o por juicio**: 
+**Muestreo de bola de nieve**: Para cuando es dificil de encontrar gente como personas 1 en un millon
+
+---
+
+## ¿Cual es la diferencia entre un cuestioanrio y una encuesta? 
+
+La encuesta te permite un grupo de opciones, mientras que el cuestionario sólo contiene preguntas abiertas
+
+## Diseñar un instrumento de investigación
+
+Análisis de Inf: Debe haber ya información para poder eralizar una comparación
 
 
 
