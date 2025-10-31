@@ -11,6 +11,7 @@
 print("Ejercicios Operadores PYTHON")
 print()
 print("Menú")
+
 print("Seleccione Número 1 Para: Las 4 Operadores (/, *, +, -, //, **)")
 print("Seleccione Número 2 Para: Condicionales IF, ELIF y ELSE - Genero, Mayor de Edad")
 print("Seleccione Número 3 Para: Operaciones Aplicadas a Calculo del Monto Total por Días Trabajados")
@@ -204,4 +205,5 @@ elif seleccion_ejercicios == 5:
 
 
 else:
+
     print("No existe este ejercicio")
