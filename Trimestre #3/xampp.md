@@ -1,4 +1,4 @@
-# XAMPP - Bases de Datos - 10/11/2025
+# XAMPP - Bases de Datos
 
 <a href="https://www.apachefriends.org/es/index.html">Sitio Oficial de XAMPP</a>
 
@@ -21,6 +21,10 @@ El objetivo de esta sección es documentar, de forma clara y progresiva, todo el
 4. [MariaDB](#mariadb)
 5. [Workbench](#workbench)
 6. [Normalización de Bases de Datos](#normalización-de-bases-de-datos)
+7. [SQL](#sql)
+8. [Consola SQL](#consola-sql)
+9. [Sintaxis SQL](#sintaxis-sql)
+10. [Procedimientos SQL](#procedimientos-sql)
 
 
 ---
@@ -251,3 +255,155 @@ Aplicar la normalización permite:
 * Facilitar el mantenimiento y actualización de la base de datos.
 
 Sin embargo, una normalización excesiva puede generar muchas tablas relacionadas (JOINs), lo que vuelve las consultas más complejas y puede afectar el rendimiento en sistemas muy grandes.
+
+
+
+
+---
+
+
+## SQL
+
+El archivo .sql no es una Base de Datos en si, sino una copia o instrucción para crearla. Pues contiene sentencias SQL como CREATE DATABASE, CREATE TABLE, INSERT INTO, etc... por lo que dentro del archivo .sql se encuentran las ordenes necesarias para construir la base de datos por ende: Toda la **Estructura y Datos**
+
+La base de datos real existe dentro del servior MYSQL/MariaDB guardada en los archivos internos del sistema *(normalmente guardada en una carpeta llamada data/)*
+
+Entonces en el archivo SQL se encuentran las instrucciones para crear la base de datos (Fuera del Servidor) mientras que la base de datos real se encuentran las tablas, registros, índices, etc... Dentro del servidor MySQL (Carpeta Xampp/MySQL/Data).
+
+Cuando importas una base de datos en PHPMYADMIN lo que haces es ejecutar todas las instrucciones que contiene, y MySQL crea la base real en su sistema.
+
+Lectura Recomendada: https://www.w3schools.com/sql/
+
+
+
+---
+
+
+
+## Consola SQL
+
+Usar la consola SQL de phpMyAdmin es útil para cuando quieres:
+
+* Hacer Consultas Rápidas
+* Probar Comandos SQL
+
+como por ejemplo:
+
+    SELECT * FROM empleados WHERE cargo = 'Gerente';
+
+phpMyAdmin las traduce y envía al motor MySQL, que devuelve los resultados.
+
+>Aqui escribo ejemplos con PhpMyAdmin porque se esta utilizando en las clases, pero tambien se puede con MySQL Workbench. Muy buena alternativa: Es una herramienta profesional creada por ORACLE, donde permite mirar esquemas, ejecutar consultas y diseñas tablas visualmente.
+
+>phpMyAdmin es sólo una interfaz web para MySQL, pero el motor puede ser manejado desde cualquier cliente SQL.
+
+
+### ¿Qué puedo hacer en la consola SQL?
+
+Ya sea en phpMyAdmin, Workbench o terminal, se puede hacer todo tipo de operaciones sobre la base de datos dividas en categorias:
+
+**DDL (Data Definition Language)**: Sirve para crear, modificar o eliminar estructuras como tablas, columnas, índices. Todo esto es por medio de sintaxis como CREATE TABLE, ALTER TABLE, DROP DATABASE.
+
+**DML (Data Manipulation Language)**: Es funcional para manipular los datos dentro de las tablas y es por medio de: INSERT, UPDATE, DELETE.
+
+**DQL (Data Query Language)**: Es para consultar información y se usa por medio de SELECT
+
+**DCL (Data Control Language)**: Es para asignar o quitar permisos a usuarios y es por medio de GRANT o REVOKE.
+
+**TCL (Transaction Control Language)**: Es para controlar transacciones, muy usado en entornos empresariales y es por medio de COMMIT, ROLLBACK
+
+Entonces al crear tablas o modificar información por medio de phpMyAdmin no guarda automaticamente esa información dentro del archivo SQL, pero si lo guarda dentro de la base de datos dentro de MySQL
+
+    CREATE TABLE empleados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    cargo VARCHAR(50)
+    );
+
+* MySQL crea físicamente la tabla dentro del motor (en sus propios archivos .frm, .ibd, etc. en la carpeta data).
+
+Por lo que si se quiere salvar esos archivos en un respaldo, se deberá exportar la base de datos en phpMyAdmin. Creando asi un archivo SQL con las instrucciones y datos que sirven como copia de esa Base de Datos
+
+* Archivos .frm: describe cómo es la tabla,
+
+* Archivos .ibd: guarda lo que hay dentro de la tabla
+
+<img src="https://kbase.pt/wp-content/uploads/2018/04/phpMyAdmin_exportar-1024x348.png">
+
+*Imagen Sacada De: https://kbase.pt/exportar-importar-uma-base-de-dados-usando-o-phpmyadmin/*
+
+
+---
+
+
+
+
+
+## Sintaxis SQL
+
+A continuación es un ejemplo de Código SQL (Structured Query Language), utilizado para consultar y manipular bases de datos relacionales como MySQL, MariaDB, PostSQL, Oracle, entre otros...
+
+    SELECT * FROM customers 
+    WHERE Country = 'Germany';
+
+Por ende lo que hará este código en consola es: **Mostrar** en todos los **Registros** de la **Tabla Customers** 
+
+---
+
+### LIKE - Uso de Comodin
+
+Es para filtrar la información y encontrar la inicial de lo que se escoja al lado del comodín % es decir, en el ejercicio se busca en la tabla customers en el registro de ContactName los datos que inicien por la letra A
+
+    SELECT * FROM `customers`
+    WHERE ContactName LIKE 'a%'
+
+---
+
+### Función IN
+
+    SELECT * FROM `customers`
+    WHERE Country IN ('Germany', 'France', 'UK');
+
+---
+
+### IF anidados
+    
+    SELECT * FROM `customers` 
+    WHERE Country IN (SELECT Country FROM suppliers);
+
+
+
+---
+
+
+
+## Procedimientos almacenados en MySQL  
+
+>Presentado por HebraTec
+
+Un procedimiento almacenado es una función definida por el usuario dentro del servidor MySQL, diseñada para recibir parámetros, ejecutar instrucciones SQL y devolver resultados.  
+
+En otras palabras, es un **bloque de código SQL predefinido** que se guarda en el servidor y puede ejecutarse múltiples veces sin necesidad de volver a escribirlo.  
+Esto permite automatizar tareas, mejorar la eficiencia y optimizar el rendimiento de las operaciones en la base de datos.  
+
+### Ejemplos de uso
+
+Los procedimientos almacenados se pueden utilizar para:  
+- Enviar notificaciones automáticas (como correos o alertas).  
+- Generar documentos o reportes.  
+- Actualizar registros masivamente.  
+- Realizar cálculos o validaciones repetitivas.  
+
+---
+
+## Tipos de parámetros
+
+Los procedimientos almacenados pueden recibir distintos tipos de parámetros:
+
+| Tipo | Descripción |
+|------|--------------|
+| **IN** | Recibe un valor de entrada (solo lectura). |
+| **OUT** | Devuelve un valor de salida (solo escritura). |
+| **INOUT** | Permite tanto recibir como devolver un valor (lectura y escritura). |
+
+
