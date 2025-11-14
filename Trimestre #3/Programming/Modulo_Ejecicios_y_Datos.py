@@ -11,9 +11,9 @@
 
 #-------------------------------------------------------------------------------------------------------------
 
+
+
 # Función Datos Para Importar
-
-
 
 def datos():
 
@@ -35,6 +35,24 @@ def datos():
 
 
 
+# Funcion tablas de multiplicar
+
+def multiplicar():
+    numero = int(input("¿Qué numero deseas mirar sus tablas de multiplicar?"))
+
+    for i in range(1,11):
+        resultado = numero * i
+        print(f"El numero {numero} multiplicado por {i} da = {resultado}")
+
+    
+
+
+
+# -------------------------------------------------------------------------------------------------------------
+
+
+
+
 if __name__ == "__main__": # Esto lo utilizo para ejecutar los ejercicios solamente en este archivo y no en los otros porque se importa
 
     # Función Ejercicios de lo que se practico en clase
@@ -47,7 +65,10 @@ if __name__ == "__main__": # Esto lo utilizo para ejecutar los ejercicios solame
         print("Seleccione 1 para mirar ejercicio: Estructura de control FOR")
         print("Seleccione 2 para mirar ejercicio: Estructura de control FOR IN RANGE")
         print("Seleccione 3 para mirar ejercicio: Dos Ciclos FOR anidados")
-        print("Seleccione 4 para mirar ejercicio: Estructura de control FOR IN RANGE")
+        print("Seleccione 4 para mirar ejercicio: PASS")
+        print("Seleccione 5 para mirar MODULO DATOS")
+        print("Seleccione 6 para mirar MODULO TABLAS DE MULTIPLICAR")
+
 
 
 
@@ -122,7 +143,11 @@ if __name__ == "__main__": # Esto lo utilizo para ejecutar los ejercicios solame
 
         elif seleccion_ejercicios == 5:
         # Modulo de calculo de notas
-            print("a")
+            datos()
+
+        elif seleccion_ejercicios == 6:
+        # Modulo de tablas de multiplicar
+            multiplicar()            
 
         else:
             print("El ejercicio no existe")
