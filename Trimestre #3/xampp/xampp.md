@@ -24,7 +24,7 @@ El objetivo de esta sección es documentar, de forma clara y progresiva, todo el
 7. [SQL](#sql)
 8. [Consola SQL](#consola-sql)
 9. [Sintaxis SQL](#sintaxis-sql)
-10. [Procedimientos SQL](#procedimientos-sql)
+10. [Procedimientos Almacenados SQL](#procedimientos-almacenados-en-mysql)
 
 
 ---
@@ -405,4 +405,12 @@ Los procedimientos almacenados pueden recibir distintos tipos de parámetros:
 | **IN** | Recibe un valor de entrada (solo lectura). |
 | **OUT** | Devuelve un valor de salida (solo escritura). |
 | **INOUT** | Permite tanto recibir como devolver un valor (lectura y escritura). |
+
+
+
+
+---
+
+
+
 
