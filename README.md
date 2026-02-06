@@ -20,5 +20,6 @@ Cada apartado contiene explicaciones técnicas, apuntes teóricos, diagramas, ej
 
 El contenido está estructurado para facilitar su navegación por trimestres, permitiendo seguir el avance del proceso formativo de forma cronológica y progresiva.
 
+> Es importante definir que los trabajos los fuimos realizando por medio de DRIVE y usamos el paquete ofimatico que ofrece google: google docs, sheets, presentaciones. Y que la gestion de proyectos/tareas usamos JIRA
 
 
