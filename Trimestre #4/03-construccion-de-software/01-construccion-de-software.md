@@ -17,6 +17,8 @@ A continuación mis apuntes y/o documentación de los temas vistos en Construcci
 
 [2. Control de Versiones](#control-de-versiones)
 
+[3. Git y Github](#git-y-github)
+
 
 
 
@@ -257,6 +259,59 @@ Se permite trabajar de forma colaborativa, distribución del trabajo, integrar e
 
 
 
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Git y Github
+
+git es lo local, se tiene que instalar.
+
+github ya es distribución
+
+Hay una competencia directa con GitHub:
+
+* [GitLab](https://about.gitlab.com/ "https://about.gitlab.com/")
+
+* [BitBucket](https://bitbucket.org/product/ "https://bitbucket.org/product/")
+
+Sus principales diferencias es la privatización del repositorio y su integración con flujos de trabajo.
+
+---
+
+En la clase miramos los diferentes comandos que se usaria en la terminal y linea de comandos de bash y por ende:
+
+* git init
+
+* git add .
+
+* git commit 
+
+* git status
+
+* git log
+
+* git checkout
+
+> ¿Realmente entiendes qué hace y el funcionamiento de cada uno de estos comandos?
+
+Nodo = Punto de Guardado en la Línea del tiempo.
+
+Se habla de la instalación de git. La navegación entre la terminal y línea de comandos.
 
 
 
