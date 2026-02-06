@@ -1,30 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- 
+    Santiago Muñeton Hernandez 
+
+    05/02/2026
+    
+    Se pide realizar cada uno de los siguentes puntos por parte de la instrutora Angelica Triana.
+
+    A continuación este trabajo que:
+        debe ser de forma indivual. 
+        Y en la guia se invita a realizar un repositorio de apuntes.
+-->
+
+
+
+
+
+
+<!-- Punto #1: Realice un comentario en cada línea del código dado a continuación y explique allí en que
+consiste cada una de sus etiquetas: -->
+
+<!-- Define que el HTML es la versión 5, pues anteriormente esta etiqueta era una muy larga. -->
+<!DOCTYPE html> 
+
+<!-- html determina que el documento es HTML -->
+<!-- LANG Determina que el lenguaje del HTML (Del desarrollador pienso yo) siendo ES = Español, aunque se puede agregar EN de inglés. -->
+<html lang="es">
+
+<!-- Inicio de etiqueta HEAD para escribir dentro de esta, las configuraciones del HTML, vinculación al CSS y etiquetas META para el SEO -->
 <head>
+
+    <!-- Determina que se puedan usar caracteres especiales como tildes Á, É, Ó y 👾👽🤖 -->
     <meta charset="UTF-8">
+
+    <!-- Determina que la pantalla inicie y cubra toda la pantalla del dispositivo en el que se abre la page. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de mi documento apareciendo este en el nombre de la página. -->
     <title>Santiagoencodigo | Ejercicio 1</title>
+
+<!-- Finaliza Etiqueta HEAD -->
 </head>
 <style>
+    :root {
+        --main-background-color: #dbdbdb;
+    }
+
     html{
-        background: #0a970598 ;
+        background: var(--main-background-color);
         background-repeat: no-repeat;
         color: rgb(58, 60, 78); 
+    }
+
+    body, .tablas {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
+
+    table, th {
+        border:1px solid black;
     }
 </style>
 <body>
 
-    <!-- Introducción a HTML -->
-    <h1 style="background-color: white;">Thi is a heading</h1>
-    <p>This is a paragraph</p>
-    
-    <nav style="background-color: yellowgreen;">
-        <p>Barra de Navegación</p>
-    </nav>
-
     <!-- Contenido Principal de la Página. -->
     <main>
-        <section style="background-color: blue;">
+
+        <!-- Introducción a HTML -->
+        <section class="introduccion-html">
+            <h1 style="background-color: white;">This is a heading</h1>
+            <p>This is a paragraph</p>
+            
+            <nav style="background-color: yellowgreen;">
+                <p>Barra de Navegación</p>
+            </nav>
+        </section>
+    
+        <section style="background-color: white;">
             <p>Seccion de elementos relcionados</p>
         </section>
 
@@ -33,50 +86,100 @@
 
 
         <!-- Sección Mi Primera Página -->
-        <section class="mi-primera-pagina">
-            <h1>Mi priemera pagina web</h1>
-            <p>Mi pagina trata de animales y paisajes bonitos</p>
-            <img src="/colorida-majestuosa-cascada-bosque-parque-nacional-otono_554837-661.avif " alt="paisaje" width="500px" height="500rem">
 
-            <a rel="stylesheet" href="https://www.rockstargames.com/gta-v"> gta-v
+        <!-- Punto #2 y Punto #3 -->
+        <section class="mi-primera-pagina">
+            <hr>
+
+            <h1>Mi primera pagina web</h1>
+            <p>Mi pagina trata de los robots que esta haciendo Boston Dynamics.</p>
+            <img src="https://bostondynamics.com/wp-content/uploads/2025/12/atlas-home-2026-v2-1024x683.jpg" alt="paisaje" width="500px" height="500rem">
+            <p>
+                <!-- <a> Inicia la Etiqueta -->
+                <!-- href indica la referencia o dirección de la página, en este caso entre "" https://bostondynamics.com/ -->
+                <!-- </a> Finaliza la Etiqueta -->
+                <a href="https://bostondynamics.com/">bostondynamics.com</a>
+            </p>
+            
         </section>
 
 
 
 
 
-        <!-- Sección Tablas -->
+        <!-- Sección Tablas | Punto #4 -->
         <section class="tablas">
             <table>
                 <tr>
-                    <td>Nombre</td>
-                    <td>edad</td>
-                    <td>pais</td>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>País</th>
                 </tr>
 
                 <tr>
-                    <td>daniel</td>
-                    <td>12</td>
-                    <td>rusia</td>
+                    <td>Santiago</td>
+                    <td>25</td>
+                    <td>España</td>
                 </tr>
                 
                 <tr>
-                    <td>andres</td>
-                    <td>19</td>
-                    <td>ecuador</td>
+                    <td>Esteban</td>
+                    <td>26</td>
+                    <td>Argentina</td>
                 </tr>
 
                 <tr>
-                    <td>luis</td>
-                    <td>20</td>
-                    <td>atlanta</td>
+                    <td>Cristian</td>
+                    <td>28</td>
+                    <td>Mexico</td>
                 </tr>
             </table>
         </section>
+
+
+
+
+
+        <!-- Punto #5: ¿Qué es el HTML semántico?
+                La semántica entonces, se refiere a utilizar las etiquetas HTML de acuerdo a su significado y propósito.
+                Un claro ejemplo de esto es usar las etiquetas header, main, section, article, aside, footer etc... En vez de sólo divs.
+        -->
+
+
             
     </main>
-    <footer style="background-color: green;">
-        <p>pie de pagina</p>
+
+
+
+
+    <footer>
+        <p>Gracias por Leer.</p>
     </footer>
 </body>
+
+<!-- Finaliza HTML -->
 </html>
+
+<!-- Finalmente para responder el punto #6 del trabajo.
+    Etiquetas Identificadas en: https://www.sadiesfloral.com/
+
+    Dire mi punto de vista respecto a lo que miro de arriba hacia abajo:
+
+        1. Inicia con un Ancla hacia su página de ig
+        2. Luego tienen un DIV enorme que cubre todo el documento sin HTML semantico
+        3. Luego contiene una etiqueta ANCLA que por dentro tiene la imagen|logo de la empresa
+        4. Contienen diferentes etiquetas Ancla hacia las secciones de la pagina dentro de un NAV
+        5. Luego dentro de un DIV tienen una imagen de background y un título "A LA CARTE"
+        6. Eventualmente tienen un H3 que considero que podría ser un parrafo
+        7. Eventualmente tienen un strong que dice "Leave the rest to us!"
+        8. Eventualmente tienen una serie de imagenes en un div que scrollean de forma vertical
+        9. Otro título
+        
+            Se crea una etiqueta foooter
+
+        10. Una imagen dentro de un ancla para un trabajo hecho a la carta
+        11. Un nuevo DIV que contiene un pequeño formulario 
+        12. Finalmente un nav con los iconos de sus redes sociales cada uno dentro de un ancla
+
+        Siendo asi encontre sólo etiquetas de nav, footer y ya respecto a etiquetas semánticas pues la mayoria de separaciones fue por divs.
+-->
