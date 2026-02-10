@@ -26,7 +26,9 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 ## Tabla de Contenidos
 
-1. [1. Introducción](#introducción)
+[1. Introducción](#introducción)
+
+[2. Bases de Datos](#bases-de-datos)
 
 
 
@@ -352,4 +354,646 @@ Nosotros estamos usando XAMPP, es un servidor web local siendo un paquete de pro
 
 
 
-## 
+## Bases de Datos
+
+> A continuación tendremos una explicación
+
+SQL es un lenguaje estándar de programación para el acceso a bases de datos. Este nacio de una idea de alguien que trabajaba en IBM y se paso a ORACLE.
+
+Hay tres grandes grupos para aprender a programar.
+
+1. DDL - Lenguaje de Definición de Datos (Palabras Reservadas: Create (crear), Alter (modificar), Drop(Eliminar))
+
+2. DML - Lenguaje de Manipulación de Datos: Create, Update, Delete, Select (CRUD: 4 acciones básicas que nuestro sistema deberia tener)
+
+3. DCL - Lenguaje de Control de Datos (Se administra quien puede en el grupo de devs hacer ciertas cosas: Como por ejemplo "Si usted es JR no puede hacer DROP en la BD.") - Grant Revoke, Deny
+
+---
+
+**Tipos de Datos Cadena**
+
+Como hablamos de gestionar una base de datos, tenemos muchos tipos de datos por lo que como debemos tener control sobre nuestra estructura de datos tenemos muchos tipos de datos.
+
+    Letras
+
+* CHAR - 255 Caracteres
+
+* VARCHAR - 65535 Caracteres
+
+    Peso en Bytes
+
+* Binary - 255 
+
+* VARBINARY 2^16
+
+    Multimedia
+
+* TINYBLOB 255 bytes
+
+* TINYTEXT 255 Caracteres
+
+* BLOB
+
+* TEXT
+
+* MEDIUM BLOB
+
+* MEDIUM TEXT
+
+* LONGBLOB
+
+* LONGTEXT
+
+* ENUM(v1, v2)
+
+* SET(v1, v2)
+
+---
+
+**Tipos de Datos Númericos**
+
+* INT-INTERGER  - 32 bits
+
+* BIT - 1 bit
+
+* TINYINT - 8 bits
+
+* SMALLINT
+
+* MEDIUMINT
+
+* BIGINT 64 bits
+
+> Size = Cantidad de Números
+
+* FLOAT (size, d) - 32 bits
+
+* DOUBLE(Size, d) - 64 bits
+
+---
+
+**Tipos de Datos Númericos - Booleanos**
+
+> Son booleanos porque al final son 1 y 0
+
+* BOOL - TINYINT(1) - 
+
+* BOOLEAN TINYINT(1) - 
+
+* SERIAL 
+
+* DEC (size, d) - decimal
+
+* FIXED - decimal
+
+* DOUBLE_PRECISION - DOUBLE
+
+* REAL - DOUBLE
+
+---
+
+**Tipo de Datos - Fecha**
+
+> Nosotros tenemos la costumbre de que es AÑO - MES - DÍA
+
+* DATE - 1000-01-01
+
+* DATETIME - 1000-01-01 00:00:01.00000
+
+* TIMESTAMP - Zona Horaria - UTC
+
+> FSP - Fracciones per Second
+
+* TIME - Sólo la hora - FSP
+
+* YEAR - Año
+
+---
+
+**Tipos de Datos - Geoespaciales**
+
+> Se debe hacer de cuenta que es un plano cartesiano
+
+* POINT (X, Y)
+
+* LINESTRING
+
+* POLYGON
+
+* MULTIPOINT
+
+**JSON**
+
+JavaScript
+
+---
+
+**Cojetamiento**
+
+Juego de caracteres que va a haber en las BD, pues no todas las BD no van a estar en español o en ingles. Pues muchas veces las formas de almacenamiento va a cambiar. Muchas vees a esto se le puedeconocer como:
+
+* CHARSET COLLECTION
+
+> El de nosotros será latin.
+
+---
+
+**XAMPP**
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/XAMPP_Windows_10.PNG/330px-XAMPP_Windows_10.PNG">
+
+*Imagen Tomada De: https://es.wikipedia.org/wiki/XAMPP*
+
+Es un conjunto de herramientas para tener una zona de trabajo para testear y hacer trabajos básicos.
+
+Tiene un emparejamient con PHP para la comunicación con la BD.
+
+Apache se conecta con la interfaz en el navegador.
+
+MySQL - Sintaxis para la BD
+
+* Los puertos que aparee al lado de Start en Actions: 80,44 -81 - 3306 - 3307 - 3308. Es porque muchas veces las herramientas que uno usa, aplicaciones utilizan ciertos puertos.
+
+Si no funciona XAMPP, se puede usar onecompiler.com/mysql: https://onecompiler.com/mysql
+
+* Cuando se deja de usar XAMPP, es mejor apagarlo. Porque muchas veces se empieza a trabajar con los archivos internos de XAMPP
+
+> Interesante leer a profundidad y entender cada uno de los elementos de la interfaz del http://localhost/phpmyadmin/ una vez inicias XAMPP.
+
+---
+
+**Pasos para Crear una BD**
+
+1. Necesito determinar mi espacio de atrabajo por lo que se usara DDL. Creación de la base de datos: Escribir en el SQL - CREATE DATABASE.
+Se habria creado asi entonces la BD y necesitamos ahora tablas/entidades
+
+2. CREATE TABLE 
+
+3. Incorporar Elementos de Integridad: not null, primary key, UNIQUE, CHECK, DEFAULT. Por medio de PK y FK hacer conección entre tablas.
+
+    Ya aqui tenemos la BD, pero es una BD vacia.
+
+Ahora nosotros gestionamos la BD, por lo que somos responsables de pedirle a los usuarios como insertar la información y por eso se generan Restricciones o constrain
+
+* NOT NULL - Garantiza que la columna no este vacia.
+
+* UNIQUE: Dato unico e irrepetible. - Como el correo.
+
+* Primary Key: Dato que quiero que sea una llave, una combinación de NOT NULL y UNIQUE que identiifca de forma exclusiva una tabla. - La que tenga esta, se le conoce como tabla maestra.
+
+* Foreing Key: Llave que pide pretada, la tabla que tenga esta tiene una relación tiene una muchos
+
+    CREATE TABLE persons (
+        ID int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Age int,
+        UNIQUE (ID)
+    )
+
+* CHECK: ¿se cumple el dato antes de registrarlo?
+
+    CREATE TABLE persons(
+        Age int
+        CHECK(18<0)
+    )
+
+* DEFAULT: Establece un valor por defect, como registrar automaticamente que una persona es de bogotá
+
+* INDEX: Se utiliza para crear y recuperar datos de la base de datos muy rapidamente.
+
+* Campo AUTO INCREMENT: Importante para la tabla maestra, sólo funciona para llaves primarias. 
+
+    CREATE TABLE persons (
+        Personid int NOT NULL AUTO_INCREMENT
+    )
+
+* Si quiero que inicie desde ciert número.
+
+    ALTER TABLE persons AUTO_INCREMENT=100;
+
+XAMPP nos puede ayudar con esto, pero si fueramos a usar la consola para hacer esto. Generalmente con un servidor:
+
+* show database;
+
+* use nombreBD;
+
+* show tables;
+
+* describe table;
+
+---
+
+en **XAMPP** esta la interfaz para crear la Base de Datos, pero esto no es tan buena practica porque la interfaz puede cambiar, mas no el código.
+
+Para hacer la BD, primero tenemos que haber hecho el diseño.
+
+> Interesante hacerme una ecommerce como proyecto en github, que tenga todo este apartado de diseño y bases de datos.
+
+La miga de pan: Es la ruta. - Por ejemplo: Servidor: 127.0.0.1:3307
+
+¿Qué relación tiene una tabla de ventas con una tabla de productos? - Muchos a muchos - Pueden hacer muchos productos en muchas ventas y muchas ventas con muchos productos
+
+¿Qué relación puede tener una tabla de Clientes y tabla Ventas? - Un cliente puede tener muchas ventas y por ende - Uno a muchos.
+
+> La instructora empieza a Diagramar las tablas para explicar.
+
+---
+
+A continuación vamos con el proceso de la creación de nuestra tabla una vez ya escribimos CREATE DATABASE nombre;
+
+Preguntas para Reflexionar antes de Crearla.
+
+* ¿Qué datos puede tener una cliente?
+
+* ¿Qué datos puede tener Ventas?
+
+* ¿Qué datos puede tener Productos?
+
+* ¿Cual es la primera tabla que se crea?
+
+    Se crea tabla: CREATE TABLE CLIENTE;
+
+* DOCUMENTO: Puede VARCHAR ¿Pero y si tambien alguien agrega letras?, por ende debe ser int, ahora ¿Cuantos caracteres?, Debe ser Obligatorio y por ende NOT NULL.
+
+* NOMBRE: Será un VARCHAR con 45 caracteres, deben ser NOT NULL porque no pueden quedar vacios.
+
+> Despues de crear cada uno de los campos es importante insertar la ,
+
+* CORREO: Será un VARCHAR de 100 caracteres, deben ser NOT NULL porque no pueden quedar vacios.
+
+> Es importante establecer que se quiere NULL y que se quiere NOT NULL
+
+* Restricciones - PRIMARY KEY () - ¿Qué dato es menos probable que se repita y me pueda permitir identificar a un usuario? Dentro de los parametros del PK insertamos el nombre de nuestro campo.
+
+> Al final, ya no se inserta una ,
+
+    CREATE TABLE CLIENTE(
+        DOCUMENTO INT NOT NULL,
+        NOMBRE_COMPLETO VARCHAR(45),
+        CORREO VARCHAR(100),
+        PRIMARY KEY (DOCUMENTO)
+    );
+
+Ahora si queremos mirar en la barra lateral donde se encuentran las BD en XAMPP, podemos encontrar y darle click a nuestra BD ya existente, podemos abrirla y por dentro estará nuestra tabla CLIENTE.
+
+---
+
+**Vamos a crear la tabla VENTA**
+
+* Queremos un ID que se pueda identificar y por ende ID_VENTA
+
+* Queremos una fecha para identificar esta venta y que sea NOT NULL
+
+* Queremos un precio que sea entero y NOT NULL
+
+* Un primary key para identificar y que sea una llave maestra.
+
+* Vamos a establecer una FOREING KEY para hacer la conexión con la tabla CLIENTES:
+
+        1. Ahora quiero que se conecte con la otra tabla ya existente (CLIENTE), por ende necesito una FK. La instructora sugiere pensarlo como pedir prestado o copiar, hay que copiar la PK de la otra tabla principal. Copiando asi entonces, tambien el tipo de dato de nuestra PK de CLIENTE.
+
+        2. Se tiene que definir como si fuera uno de los tipos de datos de la tabla venta común y corriente. Y luego establecemos entonces COPIA_DOCUMENTO como FOREIGN KEY.
+
+        3. Finalmente hay que agregar la referencia de donde vamos a tomar nuestra y por ende será la tabla CLIENTE y su dato DOCUMENTO
+
+por ende:
+
+    CREATE TABLE VENTA(
+        ID_VENTA INT AUTO_INCREMENT,
+        FECHA DATE NOT NULL,
+        PRECIO INT NOT NULL,
+        COPIA_DOCUMENTO INT NOT NULL,
+        PRIMARY KEY(ID_VENTA),
+        FOREIGN KEY(COPIA_DOCUMENTO) REFERENCES CLIENTE(DOCUMENTO)
+    );
+
+Ya entones nosotros podemos clickaer en la barra lateral estas tablas y poder observar cada uno de nuestros campos de nuestra tablas.
+
+Si seleccionamos nuestra tabla, podemos mirar en el apartado de DISEÑADOR para poder mirar la relación entre nuestras tablas.
+
+> Es muy importante tener en cuenta en donde realizamos nuestro ultimo click pues será eso lo que tengamos seleccionados, si nosotros dimos click a una tabla, pues se tendrá que hacer click a la BD.
+
+---
+
+**Vamos a crear una tabla productos**
+
+Es importante nombrar el atributo, luego un _ y finalmente el nombre de nuestra tabla. Entonces para esta tabla: **atributo_PRODUCTO**
+
+Necesitamos:
+
+* ID
+
+* NOMBRE
+
+* PRECIO
+
+* CANTIDAD
+
+> Esta no tiene una FK debido a que esta exista por si misma.
+
+Se le crea entonces una PK para identificarla, pues esta es otra tabla maestra.
+
+Entonces:
+
+    CREATE TABLE PRODUCTO(
+        ID_PRODUCTO INT UNIQUE AUTO_INCREMENT,
+        NOMBRE_PRODUCTO VARCHAR(55) NOT NULL,
+        PRECIO_PRODUCTO INT NOT NULL,
+        CANTIDAD INT NOT NULL,
+        PRIMARY KEY(ID_PRODUCTO)
+    );
+
+---
+
+Ya tenemos 3 tablas maestras, ahora vamos a crear una tabla intermedia que hace una union. Debemos pensar en un nombre que sea unico, que no se pueda repetir, tenemos que bautizarla de una forma que no interfiera con el futuro de desarrollo para que sea sostenible. **No podemos repetir nombres!** Y a su vez debemos llegar a una identificación exacta.
+
+*   Se tiene que empezar a documentar el código en este momento, se puede hacer por medio de #COMENTARIO
+
+A esta tabla, generalmente las nombran como la UNION del nombre de las dos tablas que se van a unir. Por ende si tenemos VENTAS y PRODUCTOS, puede ser **VENPRO**.
+
+**¿Por qué creamos esta tabla?:** Porque nos interesa realizar la union de dos tablas diferentes.
+
+> No entendí, ¿Cual es el funcionamiento de esta tabla en el mundo real? - Respaldos.
+
+**¿Qué datos necesitamos de esta tabla?**
+
+* Como será la union: necesitamos la copia de venta, la copia de pro
+
+* Esta tabla puede tener PK si lo amerita.
+
+* Debemos recordar la estructura de una FK copiando el atributo, y agregando una referencia.
+
+Por ejemplo:
+
+    CREATE TABLE VENPRO(
+        COPIA_PRODUCTO INT NOT NULL,
+        COPIA_VENTA INT NOT NULL,
+        FOREIGN KEY (COPIA_PRODUCTO) REFERENCES PRODUCTO(ID_PRODUCTO),
+        FOREIGN KEY (COPIA_VENTA) REFERENCES VENTA(ID_VENTA)
+    );
+
+---
+
+Una vez creamos las 3 tablas principales y la intermedia, vamos a exportarla. Esta en las funciones de arriba.
+
+* Es importante tener en cuenta: ¿Sabes eliminar una BD? ¿Sabes exportarla e importarla?
+
+---
+
+**ALTER**
+
+* Para cambiar el nombre de una tabla es ALTER TABLE nombreAnterior RENAME nombreNuevo;
+
+* Si me equivoque y me toca borrar la FK, cuando se une una tabla con otra tabla y esto no corresponde.
+
+**DROP**
+
+DROP DATABASE nombredelatabla;
+
+DROP TABLE table_name;
+
+Para eliminar la BD: TRUNCATE TABLE table_name;
+
+---
+
+De ahora en adelante continua entonces DML
+
+Si entonces todo es estable y vamos a empezar con un lenguaje de manipulación de datos, esto quiere decir que vamos a insertar datos
+
+> Se debe tener cuidado donde se esta seleccionado, para editar esto se debe hacer en las tablas:
+
+    INSERT INTO `cliente`(`DOCUMENTO`, `NOMBRE_COMPLETO`, `CORREO`) VALUES ('[value-1]','[value-2]','[value-3]')
+
+Si entonces deseamos **MOSTRAR DATOS**
+
+Esto es donde nosotros más vamos a estar, para realizar consultas
+
+    SELECT * FROM Customers;
+
+    SELECT CustomerName, City FROM Customer;
+
+---
+
+El DELETE se usa para eliminar registros existentes
+
+    DELECT FROM Customers; (NOUUUUUUUUUUUUUUUUUUUUUUUUUUU)      
+
+Es importante definir qué se va a borrar de forma especifica:
+
+    DELECT FROM Customers WHERE CustomerName='Alfreds Futterkiste'
+
+---
+
+Por otro lado si se va a actualizar
+
+    UPDATE Customers
+    SET ContactName = 'Alfred Schidt', City='Frankfurt'
+    Where CustomerID = 1;
+
+---
+
+**Llave Compuesta**
+
+Se define una clave compuesta cuando ningún campo por si sólo cumple.
+
+Lo más común es un parqueadero. En un parqueadero un registro no puede repetirse, digamos... Si tenemos una PK no podrá ser entonces no se podrá repetir, pero y si ¿El carro vuelve al parqueadero? Para esto entonces, se debe ingresar otra llave. Siendo asi PK la placa y PK el TIME
+
+> Entonces en un parqueadero una horallegada puede ser PK.
+
+Entonces el sistema puede dejar 4 PK, pero por normalización no esta tan bien.
+
+---
+
+A continuación vamos entonces con el ejercicio:
+
+Se nos muestra un Modelo Relacional y surgen unas preguntas
+
+¿Cual es la primera tabla que se debe crear?
+
+1. ¿Cuales son las llaves maestras?
+
+> Sigue luego, la que tienen FK pero entre más pocas van primero.
+
+2. ¿Cual tiene más llaves foraneas?
+
+> Si tienen muchas, son intermedias y por ende van en la ultima jerarquia de creación.
+
+Entonces:
+
+Tenemos varias tablas, la primera que realizamos es CLIENTE, voy a hacerlo con la misma BD. Por ende le haré unas modificaciones de acuerdo a lo que se aprendió.
+
+Debe haber una tabla cliente, en la que mi BD actualmente tiene realice un DROP TABLE CLIENTE;
+
+y entonces escribí:
+
+    CREATE TABLE CLIENTE(
+        ID_CLIENTE INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        NOMBRE VARCHAR(50) NOT NULL,
+        APELLIDO VARCHAR(50) NOT NULL,
+        DIRECCION VARCHAR(150) NOT NULL,
+        FECHA_NACIMIENTO DATETIME NOT NULL,
+        TELEFONO INT NOT NULL,
+        EMAIL VARCHAR(50) NOT NULL
+    );
+
+Luego entonces otra tabla Maestra MODO_PAGO 
+
+    CREATE TABLE MODO_PAGO(
+        NUMERO_PAGO INT NOT NULL PRIMARY KEY,
+        NOMBRE_PAGO VARCHAR(50) NOT NULL,
+        OTROS_DETALLES VARCHAR(50) NOT NULL
+    );
+
+Luego sigo con FACTURA que contiene FK de CLIENTE y MODO_PAGO
+
+    CREATE TABLE FACTURA(
+        NUM_FACTURA INT NOT NULL PRIMARY KEY,
+        ID_CLIENTE INT NOT NULL,
+        FECHA DATE NOT NULL,
+        NUMERO_PAGO INT NOT NULL,
+        FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE(ID_CLIENTE),
+        FOREIGN KEY (NUMERO_PAGO) REFERENCES MODO_PAGO(NUMERO_PAGO)
+    );
+
+---
+
+**Operadores Aritmeticos**
+
+Hay diferentes operadores,
+
+los operadores relacionales
+
+hay operadores que se usan para las consultas, por ejemplo
+
+    SELECT * FROM Producs 
+    WHERE Price = 18
+
+* = - Quiere decir IGUAL 
+
+* <> - No Igual - SELECT * FROM Products WHERE price <> 18;
+
+---
+
+**Valores Inválidos**
+
+Valores que estan malos, y no se representaran de forma correcta
+
+* Un valor es inválido por tener un tipo de dato incorrecto por estar fuera de rango. Esto incluye espacios. 
+
+* Se presenta el concepto de truncar.
+
+* Un numero entero puede generar problemas por espacio si se cuenta como numero y por eso muchas veces se deja como varchar-
+
+* La fecha - Si el formato no esta bien todo va a aparecer como 0
+
+---
+
+**Valores NULL**
+
+NULL es que no podemos decir si existe o no existe. Como si es desconocido.
+
+En donde 0/empty string - Null: Reconozco su existencia y no se define que si estuvo o no estuvo pues no se sabe. Un valor NULL es diferene a un 0.
+
+Si estoy insertando datos.
+
+    INSERT INTO LIBROS (TITULO, AUTOR, EDITORIAL, PRECIO)
+    VALUES('ELBAFH' 'AKIRA', 'TOEIA' 'PLANEAT' 'NULL')
+
+Los datos que esten nulos se van a ignorar y despues podrian actualizarse.
+
+    SELECT * FROM LIBROS
+    WHERE PRECIO IS NULL;
+
+> Busqueda de libros que se desconoce el precio
+
+    SELECT * FROM LIBROS
+    WHERE PRECIO = 0;
+
+No va a aparecer nada.
+
+---
+
+**Campos Calculados**
+
+Con los datos para operaciones matematicas, empezamos a jugar con eso: En donde por ejemplo si tengo una tabla de libros la cual contiene precio, cantidad. Y me interesa entonces verificar su valor dependiendo de la cantidad de libros totales y su precio unitario (Se representa como una columna aparte.)
+
+Este numero no se guarda sino que se encuentra como una operación aritmetica temporal.
+
+    # En caso de querer comparar precios con precios con descuento
+    SELECT TITULO, PRECOI, PRECIO*01, PRECIO-(PRECIO*0.1)
+    
+---
+
+Se pide Transcribir y ejecutar el SCRIPT
+
+> Cuando se va a agregar nombre a un campo, es buena practica agregar las iniciales y luego su atributo como: de la tabla producto los elementos pro_id, pro_nombre
+
+    CREATE TABLE PRODUCTO(
+        PRO_ID INT AUTO_INCREMENT,
+        PRO_NOMBRE VARCHAR(20) NOT NULL,
+        PRO_PRECIO INT NOT NULL CHECK (PRO_PRECIO>=1),
+        PRO_CANTIDAD INT NOT NULL CHECK(PRO_CANTIDAD>=0),
+
+        # Tynyblob guarda una dirección que se consulta y representa el archivo multimedia
+
+        PRO_FOTO TINYBLOB,
+        PRO_DESCRIPCION VARCHAR(20),
+        PRIMARY KEY(PRO_ID)
+    );
+
+> CHECK es una restricción que verifica la condición que esta dentro de sus parametros.
+
+    INSERT INTO PRODUCTO (PRO_NOMBRE, PRO_PRECIO, PRO_CANTIDAD, PRO_FOTO, PRO_DESCRIPCION)
+    VALUES 
+    ('Silla Deco', 250000, 7, null, 'Mesa Noche 45x45' ),
+
+    # Si el numero esta negativo, no se puede permitir
+    ('Mesa Auxiliar', 310000, 1, null, 'Para la Sala' ),
+    ('Mesa Auxiliar 2', 350000, 0, null, 'Para la Sala' );
+
+> No es obligatorio agregar foto, descripción.
+
+Una vez hecho este código se pueden hacer las consultas:
+
+    SELECT * FROM PRODUCTO
+    WHERE PRO_FOTO IS NOT NULL;
+
+    SELECT * FROM PRODUCTO
+    WHERE PRO_DESCRIPCION = '';
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+##
