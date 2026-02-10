@@ -106,4 +106,298 @@ Le recomiento un monton revisar los siguentes editores de código:
 
 * Bloc de notas (De toda la vida.)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Diseño de Interfaces
+
+Las ilustraciones es uno de los recursos más usados en el diseño clasico. Existen ilustraciones **Low Poly** que es como si fuera una combinación entre 2D y 3D, existen ilustraciones vectoriales por temas de procesamiento.
+
+Nosotros tambien podemos animar con CSS y JavaScript.
+
+Hay textos como imágenes. Se debe tener mucho cuidado con el efecto sierra para no tener problemas de diseño.
+
+Existen Familias Tipográficas. 
+
+Un logotipo es un distintvo o embela formado por letras, abreviaturas. Los logotipos siempre van a evolucionar, pero manteniendo su esencia.
+
+<img src="https://resizer.glanacion.com/resizer/v2/el-rediseno-del-logo-de-mercado-libre-que-VH5TOCQDFND5ZD4QXD2TJAJ3LY.jpg?auth=5f47a0e38a99b5612eeb5994b348e0390f2df683be541edec2b01d9fe7514fa3&width=780&height=519&quality=70&smart=true">
+
+*Imagen Tomada De: https://www.lanacion.com.ar/economia/mercado-libre-la-historia-detras-del-cambio-nid2344748/*
+
+---
+
+Existe la teoria del color: ¿Qué sensaciones nos dan los siguentes colores? 
+
+El cambio de colores sucede cuando quieren cambiar la personalidad de la empresa. 
+
+¿Qué quiero representar?
+
+Hay colores cálidos o positivs: Nos dan la sensación de más proximidad que los frios. Aparentan mayor tamaño y volumen y se relacionan con la luz el sol.
+
+> Tu no irias a una funeraria de color rojo y amarillo.
+
+Hay colores frios.
+
+¿Qué vi de primeras? Esto se revisa mucho más fuerte en el diseño por los botones.
+
+Rojo - Peligro
+
+Verde - Sigue
+
+**Lecturas Recomendadas:**
+
+* https://color.adobe.com/es/
+
+* https://htmlcolorcodes.com/
+
+El ojo se cansa y por eso existe la vista nocturna.
+
+---
+
+**Identidad Visual**
+
+Empieza por una idea de qué colores quiero, qué formas quiero, qué palabras quiero.
+
+En empresas como skype y netflix tienen logos para mostrar como no debe mostrarse su empresa para respetar la esenccia que quieren dar.
+
+Hay unas cualidades de la identidad visual: El nombre debe ser muy facil de recordar.
+
+Hay que procuprar que sea diferente a los otros y que no se parezca. Es muy recomendable pensar entonces en spotify y si similitud en un logo relacionado con wifi.
+
+O es de pensar, la fama que tiene la empresa de Apple como para mirar la manzana mordida y no pensar en una manzana sino en la empresa.
+
+En Starbucks Coffe proomocionaron tanto para uno relacionarlo. Pues si le quito las letras, es dificil diferenciar q
+
+CocaCola tiene una esencia tan fuerte que incluso cambiando el lenguaje se puede identificar.
+
+* Logotipo
+
+* Isotipo
+
+* Imagotipo
+
+* Isologo
+
+Es importante entender qué eslogan tienes? Como just do it de nike, o think diferent de apple.
+
+---
+
+Es muy importante verificar la tipografía y establecer cuando puede estar en negrilla o en cursiva.
+
+Los logos salen a partir de figuras geometricas
+
+---
+
+Microinteracciones: ¿Qué opciones tengo? La aplicación resalta para que el usuario identifique que va a suceder algo, todo por medio de ilminación.
+
+Existen espacios vacios en donde una pagina no tiene que llevar tanta información porque asi mismo se ignora, sólo esta realmente... No deben interactuar con eso.
+
+* El rendimiento en la página es algo que se mide.
+
+Existe el Moodboard: Se trata de una serie de imagenes para inspirar - Colores pinricpales, tiop de letra, serie de logos, serie de imagenes.
+
+Hay que comprender el problema.
+
+En el diseño de experiencia de usuario: Se define cuando se inicio sesion, cuando se cerro sesion.
+
+No se deben tomar decisiones con base en preferencias personales.
+
+Hay que usar metodologias UX para ser ojetivos.
+
+---
+
+¿Cómo se sentira el usuario al usar mi interfaz?
+
+Uno muchas veces desinstala una aplicación porque no la entiende, porque contiene muchos anuncios.
+
+---
+
+Diseñar para las condiciones y casos extremos
+
+Como diseño para condiciones de sordera, visión.
+
+---
+
+¿Cual es el público objetivo? 
+
+Si mi página fuera para personas de tercera edad, tiene que ser letra muy grande.
+
+---
+
+Hay que hablar con los usuarios: La única forma de saber si estoy haciendo las cosas bien es preguntarle a una persona ¿Qué opinion tienen las personas? 
+
+No podemos quedarnos solamente con la opinion del instructor, necesitamos hablar con otras personas.
+
+Aunque uno tambien puede descargarse una aplicación similar para hacer de usuario.
+
+---
+
+**Generar Experiencias Memorables**
+
+Hay que revisar el flujo de las pantallas. ¿Qué necesitamos para navegar nuestra aplicación? 
+
+Entre menos clicks mejor, entre menos scroll mejor, entre menos páginas de navgación mejor.
+
+Es decir que para una página se hace un diagrama de flujo en donde se determina para donde se va, en donde se devuelve, el nombre de cada una de las interfaces o paginas de nuestro programa.
+
+En las empresas tambien revisan un mapa de emociones pues revisan cuales son los momentos más felices, calmados y cuales son los más estresantes en cieto servicio o producto. Como por ejemplo: ¿Cual es el mapa de sentimientos de un cliente de una aerolinea?
+
+¿Cual es el momento de mayor estres? 
+
+---
+
+**Sesión De Walktruogh**
+
+Se hace un bosquejo y se le pide a una persona que interactue y si pregunta, ya esta mal el diseño.
+
+---
+
+No voy a empezar a hacer código sin sentido, por eso primero se definen la serie de cosas mencionadas anteriormente.
+
+Una experiencia mecanica es como cuando inicias sesión en facebook en donde no tenemos que pensar para iniciar sesión.
+
+Para todo este camino nos acompaña un diseñador gráfico.
+
+Hay una arquitectura de la información: La busqueda de los mejores diseños para la presentación de la información y su comprensión pues entre más grande es la información más dificil de navegarla. 
+
+La usabilidad estudia que el usuario pueda interactuar con el sistema él sólo. Por ende encuentra facilmente la información.
+
+---
+
+UX no es lo mismo que UI
+
+* UI: Las cosas que pongo en la interfaces como los inputs, tools, bottons. Siendo asi elementos que el usuario va a manipular.
+
+* UX: Satisfacción al cliente (Emociones), Site Mapping, Data Analytics. ¿Al usuario le gusta?, Colaboración entre usuarios.
+
+> Qué tanto estudio de UX hubo para la creación de fc, ig y los algoritmos de social media?
+
+De ahora en adelante, en toda este documento el enfoque será el estudio de estos dos elementos: UX & UI
+
+> Entonces en un portafolio, tambien este tipo de elementos
+
+---
+
+Se pide investigar los términos de los siguentes elementos:
+
+Controles de Input:
+
+Lectura Recomendada - MDN Inputs: https://developer.mozilla.org/es/docs/Web/HTML/Reference/Elements/input
+
+* Botones
+
+* Campos de Texto
+
+* Checkboxes
+
+* Radio Buttons
+
+* Listas Drop Down: https://es.wikipedia.org/wiki/Lista_desplegable
+
+* Switches: https://dribbble.com/tags/toggle_switch
+
+Componentes de Navegación:
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Kde_breadcrumb_nav.png/250px-Kde_breadcrumb_nav.png">
+
+* breadcrumbs: https://en.wikipedia.org/wiki/Breadcrumb_navigation
+
+* sliders: https://www.justinmind.com/web-design/slider: https://es.wikipedia.org/wiki/Paginaci%C3%B3n_de_memoria
+
+* Paginación: 
+
+* tags:palabra clave que permite hacer filtros
+
+* iconos: Puede evitar esribir
+
+Comopenentes de Información - Para comunicarse con el usuario:
+
+* tooltips (ayuda): https://en.wikipedia.org/wiki/Tooltip
+
+* iconos
+
+* barras de progreso
+
+* notificaciones: https://aprenderuxui.com/notificaciones-ux-ui/aprender/uidesign/
+
+* cajas de mensaje
+
+* modals: https://medium.com/design-bootcamp/ux-blueprint-09-modal-and-non-modal-components-in-ui-design-why-they-matter-75e6ffb62946
+
+---
+
+Esta el requerimiento no funcional de usabilidad: Debemos ser amigables on el usuario, facil de usar, facil de aprender - En donde en 3 minutos ya aprendes totalmente el sistemas.
+
+Debe haber una reducción de carga cognitiva, debe ser muy simple. Como en un formulario no ponerlo todo completo sino por partes o secciones para que sea más sencillo.
+
+Existen atributos de usabilidad como tiempo de respuesta, accesibilidad,
+
+---
+
+* para los ususarios con bajas capacidades podemos hacer un sistema mas intuitivo para ellos 
+
+* La accesibilidad viene desde el código. Como poner que un parrafo es lang="es"
+
+Hay un nicho de mercado que dan dinero por click en un anuncio y hay diferentes problemas de accesibilidad con la saturación de anuncios.
+
+* La incrustación/Embebido - En la misma vista se carga todo - En donde no hay scroll si no facilidad para ingresar a otros elementos de la page.
+
+* Hay demasiados temas para audivision y accesibilidad en donde se le permite a todo tipo de población usar la interfaz.
+
+---
+
+Para mirar temas para accesibilidad aplicado en empresas es recomendable mirar: https://www.paralympic.org/es
+
+* ISO 9126
+
+* W3C
+
+---
+
+Conceptos de FRAMEWORK y FRONTEND
+
+Frontend la parte visual de producir con HTML, CSS, JS
+
+> Temas de motor de SEO
+
+Un framework es un marco de trabajo con cierta normas establecidas por parte del consorcio. 
+
+* DJANGO: https://www.djangoproject.com/
+
+* LARAVEL: https://laravel.com/
+
+> Hay que determinar la compatibilidad entre los navegadores que interpretan mi código. por ciertas variacionea que pueden haber. O asi era en el pasado.
+
+
+
+---
+
+* Bloc de notas (De toda la vida.)
+
 a
