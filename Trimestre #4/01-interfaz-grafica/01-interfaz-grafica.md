@@ -24,7 +24,9 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 ## Tabla de Contenido
 
-1. [Introducción](#introduccion)
+[1. Introducción](#introduccion)
+
+[2. Estructura HTML y CSS](#estructura-html-y-css)
 
 
 
@@ -396,8 +398,346 @@ Un framework es un marco de trabajo con cierta normas establecidas por parte del
 
 
 
+
+
+
+
+
+
+
+
+
+
 ---
 
-* Bloc de notas (De toda la vida.)
 
-a
+
+
+
+
+
+
+
+
+
+
+
+## Estructura HTML y CSS
+
+> Clase del 11/02/26
+
+HTML (HyperText Markup Language) es el lenguaje encargado de definir la estructura de una página web. Cuando hablamos de estructura nos referimos a cómo se organizan, jerarquizan y relacionan los elementos dentro del documento.
+
+Una página HTML funciona como un árbol jerárquico llamado DOM (Document Object Model), donde existen relaciones entre:
+
+* Elementos padre
+
+* Elementos hijo
+
+* Elementos hermanos
+
+Cada etiqueta forma parte de una estructura anidada que determina cómo el navegador interpreta el contenido.
+
+Estructura básica de un documento HTML
+
+Todo documento HTML debe contener una base estructural obligatoria:
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mi página</title>
+    </head>
+    <body>
+        Contenido visible
+    </body>
+    </html>
+
+
+Explicación estructural:
+
+    <!DOCTYPE html> → Indica que el documento usa HTML5.
+
+    <html> → Elemento raíz del documento.
+
+    <head> → Contiene metadatos e información no visible.
+
+    <body> → Contiene todo el contenido visible en pantalla.
+
+HTML Semántico
+
+El HTML semántico consiste en usar etiquetas que describen el significado del contenido, no solo su apariencia visual.
+
+El uso correcto de etiquetas semánticas mejora:
+
+* SEO
+
+* Accesibilidad
+
+* Organización del código
+
+* Mantenimiento del proyecto
+
+Etiquetas importantes:
+
+    <header> → Encabezado de la página o sección
+
+    <nav> → Contiene enlaces de navegación
+
+    <article> → Contenido independiente
+
+    <section> → Agrupa contenido relacionado
+
+    <footer> → Pie de página
+
+    <aside> → Contenido complementario
+
+Ejemplo:
+
+    <header>
+        <h1>Mi Blog</h1>
+    </header>
+
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Contacto</a>
+    </nav>
+
+    <article>
+        <h2>Artículo principal</h2>
+        <p>Contenido del artículo...</p>
+    </article>
+
+
+Elementos Padre e Hijo
+
+Los elementos HTML se organizan jerárquicamente.
+
+    <div>
+        <p>Hola mundo</p>
+    </div>
+
+
+    <div> → Elemento padre
+
+    <p> → Elemento hijo
+
+Si un elemento está dentro de otro, automáticamente se convierte en su hijo.
+
+Esta jerarquía es importante porque:
+
+* CSS aplica estilos según la relación estructural.
+
+* JavaScript manipula elementos a través del DOM.
+
+* Existe herencia de propiedades en CSS.
+
+Atributos en HTML
+
+Los atributos proporcionan información adicional a las etiquetas y se colocan en la etiqueta de apertura.
+
+Sintaxis:
+
+    <etiqueta atributo="valor">Contenido</etiqueta>
+
+
+Ejemplos:
+
+    <a href="https://google.com">Ir a Google</a>
+    <img src="imagen.jpg" alt="Imagen descriptiva">
+    <input type="text" placeholder="Escribe tu nombre">
+
+
+Atributos comunes:
+
+* id → Identificador único
+
+* class → Agrupa elementos
+
+* href → Define enlaces
+
+* src → Ruta de recursos
+
+* alt → Texto alternativo
+
+* type → Tipo de input
+
+* name → Identificador en formularios
+
+* id y class son fundamentales para la selección en CSS y JavaScript.
+
+Metadatos
+
+Los metadatos son información sobre el documento que no es visible en la página, pero sí es relevante para el navegador y motores de búsqueda.
+
+Se ubican dentro del **head**.
+
+Ejemplo:
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Página de ejemplo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+Funciones:
+
+charset → Define codificación del documento
+
+description → Mejora el SEO
+
+viewport → Permite diseño responsive
+
+author → Define autor del documento
+
+El meta viewport es clave para el diseño adaptable en dispositivos móviles.
+
+Elementos Inline y Block
+
+La diferencia entre inline y block afecta directamente el comportamiento visual del documento.
+
+Elementos Block:
+
+* Ocupan todo el ancho disponible
+
+* Generan salto de línea
+
+* Se apilan verticalmente
+
+Ejemplos:
+
+    <div>
+
+    <p>
+
+    <h1> a <h6>
+
+    <section>
+
+    <article>
+
+    <header>
+
+    <footer>
+
+    <ul>
+
+    <ol>
+
+    <li>
+
+Elementos Inline:
+
+No ocupan todo el ancho
+
+No generan salto de línea
+
+Se mantienen en la misma línea si hay espacio
+
+Lista vista en clase:
+
+* a
+
+* abbr
+
+* br
+
+* cite
+
+* code
+
+* em
+
+* i
+
+* img
+
+* input
+
+label
+
+* s
+
+* select
+
+* span
+
+* strong
+
+* sub
+
+* sup
+
+* textarea
+
+* u
+
+* var
+
+Ejemplo:
+
+    <p>Este es un <strong>texto importante</strong> dentro de un párrafo.</p>
+
+
+    <strong> es inline y no genera salto de línea.
+
+Relación entre HTML y CSS
+
+HTML define la estructura.
+CSS define la presentación visual.
+
+Ejemplo:
+
+    p {
+        color: blue;
+    }
+
+    #principal {
+        background: gray;
+    }
+
+    .contenedor {
+        padding: 20px;
+    }
+
+
+Si la estructura HTML está mal organizada:
+
+* El CSS será difícil de mantener
+
+* El diseño será inconsistente
+
+* El proyecto perderá escalabilidad
+
+* Una buena estructura es la base de cualquier desarrollo web profesional.
+
+---
+
+Entonces, todos estos temas son importantes. Recomiendo totalmente leer la documentación que se encuentra MDN para leer cada uno de los atributos. Recomiendo totalmente leer uno por uno y utilizarlo en algún proyecto para realmente entenderlo:
+
+* HTML by MDN: https://developer.mozilla.org/en-US/docs/Web/HTML
+
+---
+
+**Combinación de HTML con CSS y JS**
+
+Combinaciones de eventos de raton entre un button HTML y una acción en JS si quiero que ocurra algo.
+
+Selectores para la identificación de elementos HTML para su estilos en CSS o para incorporarle funciones en JS
+
+---
+
+Seudoelementos y eventos en CSS y JS
+
+accesskey="letra"
+
+onkeydown
+
+onkeyup
+
+onkeypress
+
+---
+
+Se explican las rutas relativas, rutas absolutas
+
+se hace un ejercicio de incorporar anclas con ambos tipos de rutas
