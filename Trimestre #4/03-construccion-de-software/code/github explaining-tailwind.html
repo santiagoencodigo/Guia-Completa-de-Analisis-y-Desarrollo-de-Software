@@ -1,0 +1,385 @@
+<!-- A continuación este código NO ES MIO, es una explicación y HTML brindado por la instructora.  -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explicación de Git y Quiz Interactivo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#2C3E50',
+                            blue: '#3498DB',
+                            light: '#ECF0F1',
+                            success: '#27AE60',
+                            error: '#E74C3C',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #2C3E50;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .custom-radio:checked + label {
+            border-color: #3498DB;
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #e2e8f0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #1e293b;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-body leading-relaxed">
+
+    <!-- Header -->
+    <header class="relative overflow-hidden bg-brand-navy pt-16 pb-24 px-6 text-center">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+            </svg>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="font-display text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
+                Explicación de Git <span class="text-brand-blue">y Quiz</span>
+            </h1>
+            <p class="text-brand-light text-lg md:text-xl max-w-2xl mx-auto font-light">
+                Domina el sistema de control de versiones líder en la industria con nuestra guía interactiva y pon a prueba tus conocimientos.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 -mt-12 mb-20 relative z-20">
+        
+        <!-- Explanation Section -->
+        <section class="glass-card rounded-3xl p-8 md:p-12 shadow-glass mb-16 fade-in">
+            <div class="prose prose-slate max-w-none">
+                <div class="flex items-center space-x-3 mb-8">
+                    <span class="bg-brand-blue/10 text-brand-blue p-3 rounded-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </span>
+                    <h2 class="font-display text-3xl font-bold text-brand-navy m-0">Guía Básica de Git</h2>
+                </div>
+
+                <p class="text-lg text-slate-600 mb-8 border-l-4 border-brand-blue pl-6 italic">
+                    Git es un sistema de control de versiones distribuido que permite rastrear cambios en archivos y coordinar el trabajo entre múltiples personas en un proyecto. Esta guía cubre los primeros pasos con Git en un repositorio local.
+                </p>
+
+                <div class="space-y-12">
+                    <!-- Installation -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-brand-navy mb-4">1. Instalación de Git</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <p class="font-semibold text-brand-navy mb-2">Windows</p>
+                                <a href="https://git-scm.com/download/win" target="_blank" class="text-brand-blue hover:underline text-sm">Descargar instalador desde git-scm.com</a>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <p class="font-semibold text-brand-navy mb-2">macOS</p>
+                                <code class="text-xs block mb-1">xcode-select --install</code>
+                                <code class="text-xs block">brew install git</code>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <p class="font-semibold text-brand-navy mb-2">Linux (Debian/Ubuntu)</p>
+                                <code class="text-xs block">sudo apt update && sudo apt install git</code>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                                <p class="font-semibold text-brand-navy mb-2">Verificación</p>
+                                <code class="text-xs block">git --version</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Init -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-brand-navy mb-4">2. Creación de un Repositorio (<code>git init</code>)</h3>
+                        <p class="mb-4 text-slate-600">Un repositorio Git almacena el historial de cambios de un proyecto.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                            <li>Crear carpeta: <code>mkdir mi_proyecto</code>, <code>cd mi_proyecto</code>.</li>
+                            <li>Inicializar repositorio: <code>git init</code>.</li>
+                        </ol>
+                        <div class="mt-4 p-4 bg-blue-50 text-blue-800 rounded-xl text-sm border border-blue-100">
+                            <strong>Nota:</strong> Esto crea una subcarpeta oculta <code>.git</code> que contiene los archivos necesarios para Git.
+                        </div>
+                    </div>
+
+                    <!-- Add -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-brand-navy mb-4">3. Adición de Archivos (<code>git add</code>)</h3>
+                        <p class="mb-4 text-slate-600">Git requiere que se "preparen" los archivos antes de confirmarlos en el staging area.</p>
+                        <div class="code-block">
+                            # Crear archivos de ejemplo<br>
+                            echo "¡Hola, mundo!" > index.html<br>
+                            echo "body { color: blue; }" > style.css
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700 mt-4">
+                            <li>Añadir archivo específico: <code>git add index.html</code></li>
+                            <li>Añadir todo: <code>git add .</code></li>
+                            <li>Verificar estado: <code>git status</code></li>
+                        </ul>
+                    </div>
+
+                    <!-- Commit -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-brand-navy mb-4">4. Confirmación de Cambios (<code>git commit</code>)</h3>
+                        <p class="mb-4 text-slate-600">Un "commit" es una instantánea del proyecto. Es vital incluir un mensaje descriptivo.</p>
+                        <div class="code-block">
+                            git commit -m "Confirmación inicial del proyecto: se añade index.html y style.css"
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500 italic">La bandera -m permite añadir el mensaje directamente.</p>
+                    </div>
+
+                    <!-- Checkout -->
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-brand-navy mb-4">5. Navegación por el Historial (<code>git checkout</code>)</h3>
+                        <p class="mb-4 text-slate-600">Git permite viajar en el tiempo a estados anteriores del proyecto.</p>
+                        <ol class="list-decimal list-inside space-y-3 text-slate-700">
+                            <li>Visualizar historial: <code>git log</code></li>
+                            <li>Navegar a un commit: <code>git checkout [hash]</code> (ej. <code>a1b2c3d</code>)</li>
+                            <li>Volver a la rama principal: <code>git checkout main</code></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="space-y-10 fade-in" style="animation-delay: 0.2s;">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-4xl font-extrabold text-brand-navy mb-2">Quiz Interactivo</h2>
+                <p class="text-slate-500">Demuestra lo que has aprendido sobre Git</p>
+            </div>
+
+            <!-- Questions Container -->
+            <div id="quiz-container" class="space-y-8">
+                <!-- Question 1 -->
+                <div class="quiz-card glass-card rounded-3xl p-8 shadow-glass transition-all duration-300" data-correct="2">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">Pregunta 1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-6">Según la guía, ¿qué es Git?</h3>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="q1" id="q1o0" value="0" class="hidden custom-radio">
+                            <label for="q1o0" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Un editor de texto avanzado para programadores.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q1" id="q1o1" value="1" class="hidden custom-radio">
+                            <label for="q1o1" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Un sistema operativo para gestionar proyectos en la nube.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q1" id="q1o2" value="2" class="hidden custom-radio">
+                            <label for="q1o2" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Un sistema de control de versiones distribuido que permite rastrear cambios y coordinar el trabajo.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q1" id="q1o3" value="3" class="hidden custom-radio">
+                            <label for="q1o3" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Una base de datos para almacenar archivos de un proyecto.</label>
+                        </div>
+                    </div>
+                    <button onclick="checkAnswer(this)" class="mt-8 w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-blue transition-colors transform active:scale-[0.98]">Verificar Respuesta</button>
+                    <div class="feedback hidden mt-6 p-4 rounded-xl font-semibold text-center"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-card glass-card rounded-3xl p-8 shadow-glass transition-all duration-300" data-correct="2">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">Pregunta 2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-6">¿Cuál es el comando utilizado para inicializar un nuevo repositorio Git en una carpeta de proyecto?</h3>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="q2" id="q2o0" value="0" class="hidden custom-radio">
+                            <label for="q2o0" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git create</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q2" id="q2o1" value="1" class="hidden custom-radio">
+                            <label for="q2o1" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git start</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q2" id="q2o2" value="2" class="hidden custom-radio">
+                            <label for="q2o2" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git init</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q2" id="q2o3" value="3" class="hidden custom-radio">
+                            <label for="q2o3" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git setup</code></label>
+                        </div>
+                    </div>
+                    <button onclick="checkAnswer(this)" class="mt-8 w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-blue transition-colors transform active:scale-[0.98]">Verificar Respuesta</button>
+                    <div class="feedback hidden mt-6 p-4 rounded-xl font-semibold text-center"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-card glass-card rounded-3xl p-8 shadow-glass transition-all duration-300" data-correct="2">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">Pregunta 3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-6">¿Qué función tiene el comando <code>git add</code> en Git?</h3>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="q3" id="q3o0" value="0" class="hidden custom-radio">
+                            <label for="q3o0" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Eliminar archivos del repositorio.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q3" id="q3o1" value="1" class="hidden custom-radio">
+                            <label for="q3o1" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Descargar archivos de un repositorio remoto.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q3" id="q3o2" value="2" class="hidden custom-radio">
+                            <label for="q3o2" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Preparar archivos para la próxima confirmación, colocándolos en el área de preparación.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q3" id="q3o3" value="3" class="hidden custom-radio">
+                            <label for="q3o3" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Visualizar el historial de commits.</label>
+                        </div>
+                    </div>
+                    <button onclick="checkAnswer(this)" class="mt-8 w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-blue transition-colors transform active:scale-[0.98]">Verificar Respuesta</button>
+                    <div class="feedback hidden mt-6 p-4 rounded-xl font-semibold text-center"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="quiz-card glass-card rounded-3xl p-8 shadow-glass transition-all duration-300" data-correct="2">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">Pregunta 4</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-6">¿Qué es un "commit" en Git y qué es fundamental que lo acompañe?</h3>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="q4" id="q4o0" value="0" class="hidden custom-radio">
+                            <label for="q4o0" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Es un comando para deshacer cambios, que requiere la confirmación del usuario.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q4" id="q4o1" value="1" class="hidden custom-radio">
+                            <label for="q4o1" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Es una copia de seguridad automática de todo el proyecto sin necesidad de mensaje.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q4" id="q4o2" value="2" class="hidden custom-radio">
+                            <label for="q4o2" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Es una instantánea del estado del proyecto en un momento específico, que requiere un mensaje descriptivo.</label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q4" id="q4o3" value="3" class="hidden custom-radio">
+                            <label for="q4o3" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700">Es la instalación de un nuevo componente en el proyecto, acompañado de su licencia.</label>
+                        </div>
+                    </div>
+                    <button onclick="checkAnswer(this)" class="mt-8 w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-blue transition-colors transform active:scale-[0.98]">Verificar Respuesta</button>
+                    <div class="feedback hidden mt-6 p-4 rounded-xl font-semibold text-center"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="quiz-card glass-card rounded-3xl p-8 shadow-glass transition-all duration-300" data-correct="2">
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-brand-blue bg-brand-blue/10 px-3 py-1 rounded-full">Pregunta 5</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-6">Después de navegar a un commit anterior con <code>git checkout [hash]</code>, ¿cuál es el comando para regresar al estado más reciente del proyecto?</h3>
+                    <div class="space-y-3">
+                        <div class="relative">
+                            <input type="radio" name="q5" id="q5o0" value="0" class="hidden custom-radio">
+                            <label for="q5o0" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git reset latest</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q5" id="q5o1" value="1" class="hidden custom-radio">
+                            <label for="q5o1" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git restore current</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q5" id="q5o2" value="2" class="hidden custom-radio">
+                            <label for="q5o2" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git checkout main</code></label>
+                        </div>
+                        <div class="relative">
+                            <input type="radio" name="q5" id="q5o3" value="3" class="hidden custom-radio">
+                            <label for="q5o3" class="block p-4 rounded-xl border-2 border-slate-100 cursor-pointer hover:border-brand-blue/30 transition-all text-slate-700"><code>git back home</code></label>
+                        </div>
+                    </div>
+                    <button onclick="checkAnswer(this)" class="mt-8 w-full bg-brand-navy text-white font-bold py-4 rounded-xl hover:bg-brand-blue transition-colors transform active:scale-[0.98]">Verificar Respuesta</button>
+                    <div class="feedback hidden mt-6 p-4 rounded-xl font-semibold text-center"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function checkAnswer(button) {
+            const card = button.closest('.quiz-card');
+            const selected = card.querySelector('input[type="radio"]:checked');
+            const feedback = card.querySelector('.feedback');
+            const correctAnswerIndex = card.getAttribute('data-correct');
+            const labels = card.querySelectorAll('label');
+
+            if (!selected) {
+                feedback.textContent = "Por favor, selecciona una respuesta.";
+                feedback.className = "feedback mt-6 p-4 rounded-xl font-semibold text-center bg-yellow-100 text-yellow-800";
+                feedback.classList.remove('hidden');
+                return;
+            }
+
+            const isCorrect = selected.value === correctAnswerIndex;
+            const correctAnswerText = labels[correctAnswerIndex].textContent;
+
+            // Disable further selection and button
+            card.querySelectorAll('input').forEach(input => input.disabled = true);
+            button.disabled = true;
+            button.classList.add('opacity-50', 'cursor-not-allowed');
+
+            if (isCorrect) {
+                feedback.textContent = "¡Correcto!";
+                feedback.className = "feedback mt-6 p-4 rounded-xl font-semibold text-center bg-green-100 text-brand-success";
+                labels[selected.value].classList.add('border-brand-success', 'bg-green-50');
+            } else {
+                feedback.textContent = `Incorrecto, la respuesta es: ${correctAnswerText}`;
+                feedback.className = "feedback mt-6 p-4 rounded-xl font-semibold text-center bg-red-100 text-brand-error";
+                labels[selected.value].classList.add('border-brand-error', 'bg-red-50');
+                labels[correctAnswerIndex].classList.add('border-brand-success', 'bg-green-50');
+            }
+
+            feedback.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
