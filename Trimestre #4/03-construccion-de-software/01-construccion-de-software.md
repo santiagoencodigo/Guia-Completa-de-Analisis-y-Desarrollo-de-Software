@@ -429,3 +429,5 @@ Momento #2
 Empezamos a hablar de github y el cómo crear un repositorio y sus diferentes elementos: Crear repositorios, publicos, privados, lineas de comando
 
 Se habla de mirar la administración de credenciales en WINDOWS para quitar las cuentas y asi no tener problemas para subir con bash
+
+Esto es un TEST de trabajo.
