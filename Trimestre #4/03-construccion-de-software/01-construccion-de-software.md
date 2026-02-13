@@ -431,3 +431,13 @@ Empezamos a hablar de github y el cómo crear un repositorio y sus diferentes el
 Se habla de mirar la administración de credenciales en WINDOWS para quitar las cuentas y asi no tener problemas para subir con bash
 
 Esto es un TEST de trabajo.
+
+---
+
+Se pide realizar una infografía de cómo funciona git y 
+
+Se pide investigar desktop github
+
+Se pide realizar un documento en github para señalar un menú, ciertos simbolos, una guia rapida del git y github
+
+Se pide una guia para compartir un repositorio entre un grupo de trabajo
