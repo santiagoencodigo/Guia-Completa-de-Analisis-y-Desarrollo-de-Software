@@ -332,6 +332,100 @@ Se habla de la instalación de git. La navegación entre la terminal y línea de
 
 ## Git y Github
 
-git es lo local, se tiene que instalar.
+> Clase del 13/02/2026
 
-github ya es distribución
+**Planear actividades de construcción del Software de acuerdo con el diseño establecido**
+
+> Producción y compilación del contenido digital tomado de la Instructora Angelica Triana con sólo fines academicos. Mis apuntes son basados en las guias que ella crea y provee.
+
+* Debe reflexionar: ¿Entiende qué es git?, ¿Entiende qué es github?, ¿Entiende la relación entre git y github?, ¿Entiende qué es un repositorio?
+
+El head es simplemente un puntero o un indicador de posición. El cursor de lectura en un reproductor de musica, pues le dice a usted donde se encuentra en el "mapa". 
+
+Su función es decirte en qué commit (Punto de la historia) estás trabajando actualmente.
+
+Esto apunta a la rama en la que estas trabajando pues cuando haces un commit, el HEAD se mueve automáticamente hacia ese punto.
+
+* Existe el estado **Detached HEAD**: En donde si intentas moverte a un commit antiguo en lugar de a una rama, por lo que git va a mencionar el DETACHED HEAD que esto significa que no esta sujeto a una RAMA sino a un momento fijo en el pasado.
+
+---
+
+**¿Qué es el MAIN?**
+
+Antiguamente llamado MASTER es el nombre por defecto de la rama principal del proyecto. En una línea del tiempo esto significa la historia principal, es la rama que tiene el código limpio y listo para producción. Head es un puntero movil de posición  mientras que main es una referencia de punta que referencia al ultimo commit de esa línea de tiempo especifica.
+
+Cuando inicias un repo al escribir **GIT INIT** automaticamente se crea esta rama para tener un lugar inicial donde construir.
+
+> HEAD: Lugar exacto donde estan tus archivos en el tiempo presente.
+
+> MAIN: Serie cronologica de COMMITS que forman el proyecto (Versión que se lanza a producción)
+
+por medio de GIT LOG se puede identificar cuantos commit se han realizado.
+
+Lectura Recomendada - git log by git documentation: https://git-scm.com/docs/git-log
+
+<img src="https://imgs.search.brave.com/PF7otGsq8H5_4jYdExMLuHOJYkAWG0mL_CQHqLcpaB0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb2Rp/bmdub21hZHMuY29t/L2ltYWdlcy84ODMy/MDAyZi02NTBkLTQ0/MTQtMDA4Yi04NDFk/NTczNDg4MDAvcHVi/bGlj">
+
+*Imagen Tomada De: https://codingnomads.com/git-log*
+
+---
+
+**Flujo de trabajo en git**
+
+> El directorio local es una carpeta de nuestro PC en donde nosotros iniciamos el comando git init
+
+Tendremos nuestro working  directory, el lugar donde realizamos el git add, tenemos staging area que es donde tenemos pendiente los guardados y por ende se hace el git commit, tendremos un local repo, en donde si hacemos gitpush se sube al remote repo.
+
+En el remote repo, que sera en nuestro caso el repositorio den github, si pedimos git fetch, para traer todo. Entonces podemos revisar con git chekout o git merge.
+
+> El directorio remoto es un servidor externo.
+
+Todo el tiempo vamos a estar en este proceso.
+
+<img src="https://git-scm.com/book/es/v2/images/benevolent-dictator.png">
+
+*Imagen Tomada De: https://git-scm.com/book/es/v2/Git-en-entornos-distribuidos-Flujos-de-trabajo-distribuidos*
+
+Lectura Recomendada - comparing workflows by atlassian: https://www.atlassian.com/es/git/tutorials/comparing-workflows
+
+* q sirve para salir en tal caso de estar encerrado en alguna función de git
+
+* qw sirve para salir y guardar.
+
+> Línea de comandos: Una terminal es un programa cuyo objetivo principal es leer comandos y ejecutar otros programas.
+
+Instalación de Visual Studio: https://code.visualstudio.com/download 
+
+Se invita a usar la función de BASH TERMINAL en Visual Studio Code.
+
+Se invita a realizar el siguente taller:
+
+---
+
+Taller: 13/02/2026 - Exploración de Comandos GIT
+
+1. Se pide en una carpeta iniciar con git - git init
+
+2. Se pide revisarlo con git status
+
+3. Se pide crear un HTML con una estructura básica
+
+4. Agregar el commit por medio de git add y el nombre del archivo
+
+5. Limpiar la terminal por medio de clear
+
+6. Se pide con las flechas de arriba y abajo, mirar los diferentes 
+
+7. Se pide agregar un commit para hacer una "fotografia"
+
+8. Se pide realizar un cambio y eventualmente repetir el proceso de git add . y git commit
+
+---
+
+Momento #2 
+
+---
+
+Empezamos a hablar de github y el cómo crear un repositorio y sus diferentes elementos: Crear repositorios, publicos, privados, lineas de comando
+
+Se habla de mirar la administración de credenciales en WINDOWS para quitar las cuentas y asi no tener problemas para subir con bash
