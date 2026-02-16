@@ -30,6 +30,8 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [2. Bases de Datos](#bases-de-datos)
 
+[3. Consultas en Base de Datos](#consultas-en-base-de-datos)
+
 
 
 
@@ -996,4 +998,310 @@ Una vez hecho este código se pueden hacer las consultas:
 
 
 
-##
+## Consultas en Base de Datos
+
+> Clase del 16/02/2026
+
+> Anteriormente hubo una clase de explicación sobre las diferentes tipos de consultas que se podian realizar.
+
+**Estudio de Caso: Veterinaria**
+
+Se nos presenta una situación de un proceso de diseño a construcción, por lo que se mira diferentes trabajos para la normalización de una BD y por ende MER (Modelo Entidad Relación), Grafo Relacional, Especificación de tipos de datos, MR (Modelo Relacional con el SGBD)
+
+> El objetivo de esta actividad es la construcción con SQL
+
+Entonces se pide realizar código SQL a partir de un modelo relacional y por ende:
+
+```sql
+
+    --  Creación de Base de Datos
+    CREATE DATABASE VETERINARIA;
+
+        -- Comando para usar la BD y editarla.
+        USE VETERINARIA;
+
+    -- Creación de Tablas (Tabla Maestra)
+    CREATE TABLE CLIENTE (
+        CEDULA VARCHAR(25) PRIMARY KEY,
+        NOMBRES VARCHAR (50) NOT NULL,
+        APELLIDOS VARCHAR (50) NOT NULL,
+        DIRECCION VARCHAR (255) NOT NULL,
+        TELEFONO VARCHAR (15) NOT NULL
+    );
+    
+    -- Creación de Tabla Maestra
+    CREATE TABLE PRODUCTO (
+        CODIGOBARRAS BIGINT(20) PRIMARY KEY,
+        NOMBRE VARCHAR(25) NOT NULL,
+        MARCA VARCHAR(25) NOT NULL,
+        PRECIO INT(11) NOT NULL
+    );
+
+        -- Creación de Tablas (Contienen FK)
+        CREATE TABLE VENTA (
+            ID_VENTA INT(11) PRIMARY KEY,
+            COPIACEDULAVENTA VARCHAR(25) NOT NULL,
+            CODIGOBARRAS BIGINT(20) NOT NULL,
+
+            -- Es muy importante verificar los parentesis.
+            FOREIGN KEY (COPIACEDULAVENTA) REFERENCES CLIENTE (CEDULA),
+            FOREIGN KEY (CODIGOBARRAS) REFERENCES PRODUCTO (CODIGOBARRAS)
+        );
+
+    CREATE TABLE VACUNA (
+        CODIGOVACUNA VARCHAR(50) PRIMARY KEY,
+        NOMBREVACUNA VARCHAR(50) NOT NULL,
+        DOSIS TINYINT(4) NOT NULL,
+        ENFERMEDADTRATADA VARCHAR(100) NOT NULL
+    );
+
+    CREATE TABLE MASCOTA (
+        CODIGOMASCOTA INT(11) PRIMARY KEY,
+        NOMBREMASCOTA VARCHAR(25) NOT NULL,
+        TIPOMASCOTA VARCHAR(25) NOT NULL,
+        RAZA VARCHAR(25) NOT NULL,
+        GENERO ENUM('MACHO','HEMBRA','N/A'),
+        COPIACEDULACLIENTE VARCHAR(25) NOT NULL,
+        FOREIGN KEY (COPIACEDULACLIENTE) REFERENCES CLIENTE (CEDULA)
+    );
+
+        -- Tabla Intermedia
+        CREATE TABLE APLICACION (
+            COPIACODIGOMASCOTA INT(11) NOT NULL,
+            COPIACODIGOVACUNA VARCHAR(50) NOT NULL,
+            FOREIGN KEY (COPIACODIGOMASCOTA) REFERENCES MASCOTA(CODIGOMASCOTA),
+            FOREIGN KEY (COPIACODIGOVACUNA)  REFERENCES VACUNA(CODIGOVACUNA)
+        );
+
+```
+
+> Me agrada bastante practicar con esto, aprendí entonces a realizar un nuevo elemento en: GENERO ENUM('MACHO','HEMBRA','N/A')
+
+**Pasamos a una nueva sección de práctica: Sentencias SQL**
+
+1. Una vez creada la base de datos, se pide insertar por lo menos 5 registros en cada tabla y relacionar algunos registros.
+
+2. Consultar cada una de las tablas
+
+3. Modificar un registro de la tabla mascota
+
+4. Eliminar un registro de la tabla mascota
+
+> Ahora me surge una nueva pregunta, ¿Donde inserto los nuevos registros?
+
+```sql
+    -- Cliente solo contiene primary key por lo que será el primero en tener registros
+        INSERT INTO CLIENTE (CEDULA, NOMBRES, APELLIDOS, DIRECCION, TELEFONO)
+        VALUES
+        ('12334567890', 'Santiago', 'Hernandez', 'CR 77 e', '1414141414'),
+        ('22334567890', 'Samuel', 'Perez', 'CR 78 a', '1212121212'),
+        ('32334567890', 'Calamardo', 'Ochoa', 'CR 79 b', '1111111111'),
+        ('42334567890', 'Cristian', 'Sanchez', 'CR 80 c', '1616161616'),
+        ('52334567890', 'Luisa', 'Hernandez', 'CR 81 d', '1818181818');
+
+
+    -- Luego sigue producto por ser tambien tabla maestra.
+        INSERT INTO PRODUCTO (CODIGOBARRAS, NOMBRE, MARCA, PRECIO)
+        VALUES
+        (555551, 'Portatil', 'HP', 2000000),
+        (555552, 'Mouse', 'Logitech', 80000),
+        (555553, 'Teclado', 'Genius', 120000),
+        (555554, 'Monitor', 'Samsung', 750000),
+        (555555, 'Impresora', 'Epson', 650000);
+
+
+            -- Una vez creada las tablas CLIENTE y PRODUCTO, pasamos con VENTAS. Pero como es Intermediaria la dejaré comentada.
+                -- INSERT INTO VENTA (ID_VENTA, COPIACEDULAVENTA, CODIGOBARRAS)
+                -- VALUES
+                -- (1, '12334567890', 555551),
+                -- (2, '22334567890', 555552),
+                -- (3, '32334567890', 555553),
+                -- (4, '42334567890', 555554),
+                -- (5, '52334567890', 555555);
+
+
+    -- Ahora surgimos con VACUNA: Estos registros se los pedí a chatgpt con datos reales.
+        INSERT INTO VACUNA (CODIGOVACUNA, NOMBREVACUNA, DOSIS, ENFERMEDADTRATADA)
+        VALUES
+        ('VAC001', 'BCG', 1, 'Tuberculosis'),
+        ('VAC002', 'Hepatitis B', 3, 'Hepatitis B'),
+        ('VAC003', 'Pentavalente', 3, 'Difteria, Tétanos, Tosferina, Hepatitis B, Haemophilus influenzae tipo b'),
+        ('VAC004', 'Polio (IPV)', 4, 'Poliomielitis'),
+        ('VAC005', 'SRP', 2, 'Sarampión, Rubéola y Paperas'),
+        ('VAC006', 'Influenza', 1, 'Influenza estacional'),
+        ('VAC007', 'Varicela', 2, 'Varicela'),
+        ('VAC008', 'COVID-19', 2, 'COVID-19'),
+        ('VAC009', 'Neumococo', 3, 'Infecciones por neumococo'),
+        ('VAC010', 'Rotavirus', 2, 'Gastroenteritis por rotavirus');
+
+
+    -- Continuamos con Mascota
+        INSERT INTO MASCOTA
+        (CODIGOMASCOTA, NOMBREMASCOTA, TIPOMASCOTA, RAZA, GENERO, COPIACEDULACLIENTE)
+        VALUES
+        (1, 'Max', 'Perro', 'Labrador', 'MACHO', '12334567890'),
+        (2, 'Luna', 'Gato', 'Siames', 'HEMBRA', '22334567890'),
+        (3, 'Rocky', 'Perro', 'Bulldog', 'MACHO', '32334567890'),
+        (4, 'Mia', 'Gato', 'Persa', 'HEMBRA', '42334567890'),
+        (5, 'Toby', 'Perro', 'Poodle', 'MACHO', '52334567890'),
+        (6, 'Nala', 'Perro', 'Pastor Aleman', 'HEMBRA', '12334567890'),
+        (7, 'Simba', 'Gato', 'Mestizo', 'MACHO', '22334567890'),
+        (8, 'Kira', 'Conejo', 'Cabeza de Leon', 'HEMBRA', '32334567890'),
+        (9, 'Thor', 'Perro', 'Rottweiler', 'MACHO', '42334567890'),
+        (10, 'Coco', 'Ave', 'Canario', 'N/A', '52334567890');
+```
+
+Ahora a continuación voy a consultar cada una de las tablas por lo que:
+
+* select * from cliente
+
+* select * from producto
+
+* select * from vacuna
+
+* select * from mascota
+
+Al hacer esto, me parece interesante que puedo editar, eliminar y copiar desde la interfaz de XAMPP.
+
+A continuación voy a modificar un registro de la tabla mascota.
+
+```sql
+
+    -- Si quiero modificar un sólo campo.
+    UPDATE MASCOTA
+    SET RAZA = 'Golden Retriever'
+    WHERE CODIGOMASCOTA = 1;
+
+```
+
+y para eliminar una tabla:
+
+```sql
+    DELETE FROM MASCOTA
+    WHERE CODIGOMASCOTA = 1;
+```
+
+Y entonces se pide realizar las siguentes consultas:
+
+5. Mostrar los productos que sean igual o mayores en el precio a 2000
+
+```sql
+    SELECT *
+    FROM PRODUCTO
+    WHERE PRECIO >= 2000;
+```
+
+6. Hacer una consulta que utilice un apodo –alias
+
+```sql
+    SELECT 
+        NOMBRE AS Producto,
+        MARCA AS Marca_Comercial,
+        PRECIO AS Precio_Unitario
+    FROM PRODUCTO;
+```
+
+7. Una consulta que sume el total de los precios de todos los productos
+
+```sql
+    -- para eso se usa la función de agregación SUM().
+    SELECT SUM(PRECIO) AS Total_Precios
+    FROM PRODUCTO;
+```
+
+8. Una consulta que ordene de forma descendente los apellidos de los
+clientes
+
+```sql
+    SELECT *
+    FROM CLIENTE
+    ORDER BY APELLIDOS DESC;
+```
+
+9. Una consulta que muestre que mascotas tienen los clientes
+
+> Esta todavia no la entiendo del todo, por lo que debo entender.
+
+Reflexione: Los c.(CAMPO) como por ejemplo c.NOMBRES, c.APELLIDOS es porque directamente se define en FROM CLIENTE c que CLIENTE es c. Eso quiere decir que su selección dice "Tome de la entidad CLIENTE, el campo NOMBRES"
+
+```sql
+    SELECT
+        -- CLIENTE -> NOMBRES
+        c.NOMBRES,
+        c.APELLIDOS,
+        COUNT(m.CODIGOMASCOTA) AS Cantidad_Mascotas
+    FROM CLIENTE c
+    LEFT JOIN MASCOTA m
+        ON c.CEDULA = m.COPIACEDULACLIENTE
+    GROUP BY c.CEDULA, c.NOMBRES, c.APELLIDOS;
+```
+
+10. Una consulta que muestre que vacunas tiene una mascota
+
+```sql
+    SELECT NOMBREVACUNA, ENFERMEDADTRATADA
+        FROM VACUNA
+        WHERE CODIGOVACUNA IN (
+            SELECT COPIACODIGOVACUNA
+            FROM APLICACION
+            WHERE COPIACODIGOMASCOTA = 1
+    );
+```
+
+11. Una consulta que muestre las mascotas que empiecen con la letra C.
+
+```sql
+    SELECT *
+    FROM MASCOTA
+    WHERE NOMBREMASCOTA LIKE 'C%';
+```
+
+12. Una consulta que agrupe cuantas vacunas tiene cada mascota.
+
+```sql
+    SELECT 
+        NOMBREMASCOTA,
+        (
+            SELECT COUNT(*)
+            FROM APLICACION a
+            WHERE a.COPIACODIGOMASCOTA = m.CODIGOMASCOTA
+        ) AS Cantidad_Vacunas
+    FROM MASCOTA m;
+```
+
+13. Una consulta que muestre el calculo del 3% de descuento en un producto seleccionado en la consulta.
+
+```sql
+    SELECT 
+        NOMBRE,
+        PRECIO,
+        (PRECIO * 0.03) AS Descuento_3_Por_Ciento,
+        (PRECIO - (PRECIO * 0.03)) AS Precio_Con_Descuento
+    FROM PRODUCTO
+    -- WHERE CODIGOBARRAS = 555551;
+```
+
+14. Una consulta que muestre la consulta de que productos han comprado los clientes.
+
+```sql
+    SELECT NOMBRE, MARCA, PRECIO
+    FROM PRODUCTO
+    WHERE CODIGOBARRAS IN (
+        SELECT CODIGOBARRAS
+        FROM VENTA
+    );
+```
+
+15. Una consulta que muestre cuantas mascotas tiene un cliente y solo muestre a los que tengan igual o mayor a 2 mascotas.
+
+```sql
+    SELECT 
+    NOMBRES,
+    APELLIDOS,
+    (SELECT COUNT(*)
+    FROM MASCOTA m
+    WHERE m.COPIACEDULACLIENTE = c.CEDULA) AS Cantidad_Mascotas
+    FROM CLIENTE c;
+```
+
+---
