@@ -28,6 +28,8 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 [2. Estructura HTML y CSS](#estructura-html-y-css)
 
+[3. Elementos HTML]
+
 
 
 
@@ -741,3 +743,166 @@ onkeypress
 Se explican las rutas relativas, rutas absolutas
 
 se hace un ejercicio de incorporar anclas con ambos tipos de rutas
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Elementos HTML
+
+Hay una configuración avanzada del HTML, dentro del head y por ende no lo ve el usuario. Esto se realiza para temas de SEO y busqueda en los motores search.
+
+Los elementos **meta**, **base** forman parte del head de un documento y cumplen funciones especificas de metadatos, realizan configuración sobre el comportamiento de la web.
+
+```html
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <!-- META CHARSET: Define la codificación de caracteres como UTF-8 para soportar acentos y símbolos especiales -->
+        <meta charset="UTF-8">
+
+        <!-- META VIEWPORT: Controla cómo se escala y visualiza la página en dispositivos móviles -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- META AUTHOR: Especifica el nombre del creador o responsable del documento -->
+        <meta name="author" content="Santiagoencodigo">
+
+        <!-- META KEYWORDS: Lista de términos clave relacionados con el contenido (obsoleto para SEO actual) -->
+        <meta name="keywords" content="HTML, metadatos, desarrollo web, tutorial">
+
+        <!-- META DESCRIPTION: Proporciona un resumen breve que aparece en los resultados de búsqueda -->
+        <meta name="description" content="Guía completa sobre elementos META y BASE en HTML para desarrollo web profesional">
+
+        <!-- BASE HAREF: Establece la URL base para todas las rutas relativas del documento -->
+        <base href="https://mirepositorio.com/">
+
+        <!-- META HTTP-EQUIV: Simula cabeceras HTTP, en este caso para redirigir después de 5 segundos -->
+        <meta http-equiv="refresh" content="5; url=https://ejemplo.com/nueva-pagina">
+
+        <!-- Título visible en la pestaña del navegador -->
+        <title>Ejemplo de Elementos META y BASE</title>
+    </head>
+    <body>
+        <h1>Demostración de Elementos META y BASE</h1>
+        
+        <p>Este documento contiene ejemplos comentados de los principales elementos 
+        <code>&lt;meta&gt;</code> y <code>&lt;base&gt;</code> en HTML.</p>
+        
+        <p>Nota: El elemento <code>&lt;base&gt;</code> configurado arriba hace que 
+        todas las rutas relativas (como <code>imagenes/logo.png</code>) apunten a 
+        <code>https://mirepositorio.com/imagenes/logo.png</code>.</p>
+    </body>
+    </html>
+```
+
+---
+
+**Etiquetas de Imagenes**
+
+Es un elemento estandar para insertar contenido visual en un documento HTML.
+
+```html
+    <img src="ruta/de/la/imagen.jpg" alt="descripción de la imagen">
+```
+
+<img src="https://imgs.search.brave.com/QG1oRzhPt6IEK_o0vB22hCZX5AJSUQvsB7Otb63_qKI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuaHRtbGdvb2Rp/ZXMuY29tL3VwbG9h/ZHMvMjAyMi8wNi9o/dG1sLWltZy1oZWln/aHQtd2lkdGgtYXR0/cmlidXRlcy5wbmc">
+
+Tiene diferentes atributos como src, alt, width, height, loading, title y demás. Toda esta información se encuentra en img in HTML by MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img
+
+*Imagen Tomada De: https://www.htmlgoodies.com/html/html-img-tag/*
+
+---
+
+**Etiquetas Vacias**
+
+Tambien llamadas elementos vacios o elementos nulos son aquellas que no pueden contener contenido contextual ni contenido anidado dentro de si y carecen de etiqueta de cerrado. 
+
+```html
+    <br>        <!-- Salto de línea -->
+    <hr>        <!-- Línea divisoria horizontal -->
+    <img>       <!-- Imagen (vista anteriormente) -->
+    <input>     <!-- Campo de formulario -->
+    <meta>      <!-- Metadatos del documento -->
+    <link>      <!-- Enlace a recursos externos (CSS, iconos) -->
+```
+
+generalmente este tipo de etiquetas sirven como interruptor. (Ejecutan una función en especifica)
+
+---
+
+**Etiquetas para tablas table, td, tr**
+
+Permiten organizar el contenido de forma bidiomensional (Filas y Columnas) siendo especialmente utilizadas para datos relacionales y comparativos.
+
+```html
+    <table>
+        <tr>
+            <td>Celda 1</td>
+            <td>Celda 2</td>
+        </tr>
+        <tr>
+            <td>Celda 3</td>
+            <td>Celda 4</td>
+        </tr>
+    </table>
+```
+
+A continuación un ejemplo de una tabla:
+
+```html
+    <table>
+        <caption>Informe de Ventas 2024</caption>  <!-- Título de la tabla -->
+        <thead>                                      <!-- Encabezado -->
+            <tr>
+                <th>Producto</th>                    <!-- Table Header (celda de encabezado) -->
+                <th>Cantidad</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>                                      <!-- Cuerpo de la tabla -->
+            <tr>
+                <td>Laptop</td>
+                <td>15</td>
+                <td>$12,500</td>
+            </tr>
+            <tr>
+                <td>Mouse</td>
+                <td>30</td>
+                <td>$450</td>
+            </tr>
+        </tbody>
+        <tfoot>                                      <!-- Pie de tabla (totales) -->
+            <tr>
+                <td colspan="2">Total productos</td> <!-- colspan: combina celdas -->
+                <td>45</td>
+            </tr>
+        </tfoot>
+    </table>
+```
+
+Se pide realizar 2 documentos HTML. Uno para un restaurante delicias gourmet y otro para un cv
+
+
+---
