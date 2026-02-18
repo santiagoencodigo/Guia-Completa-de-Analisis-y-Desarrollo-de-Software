@@ -28,7 +28,9 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 [2. Estructura HTML y CSS](#estructura-html-y-css)
 
-[3. Elementos HTML]
+[3. Elementos HTML](#elementos-html)
+
+[4. Formularios (Labels e Inputs)](#formularios-labels-e-inputs)
 
 
 
@@ -905,4 +907,191 @@ A continuación un ejemplo de una tabla:
 Se pide realizar 2 documentos HTML. Uno para un restaurante delicias gourmet y otro para un cv
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Formularios (Labels e Inputs)
+
+> Clase del 18/02/2026
+
+En esta sección se documenta la estructura básica de un formulario de inicio de sesión (Login) utilizando **HTML**.
+
+Un formulario permite capturar información del usuario para enviarla a un servidor y procesarla.
+
+---
+
+# ¿Qué es un formulario?
+
+Un formulario en HTML se crea con la etiqueta:
+
+```html
+<form></form>
+```
+
+Su función es recopilar datos del usuario mediante campos como:
+
+```html
+    <input>
+
+    <label>
+
+    <button>
+
+    <select>
+
+    <textarea>
+```
+
+En el caso de un login, normalmente se solicita:
+
+* Usuario o correo electrónico
+
+* Contraseña
+
+Label e Input
+
+```html
+<label> 
+```
+
+La etiqueta **label** se utiliza para describir un campo de entrada.
+Mejora la accesibilidad y permite que al hacer clic en el texto, se active el campo correspondiente.
+
+Se conecta con el atributo for, que debe coincidir con el id del input.
+
+Ejemplo:
+
+```html
+<label for="usuario">Usuario:</label>
+```
+
+---
+
+**input**
+
+La etiqueta **input** permite al usuario ingresar datos.
+
+Algunos tipos importantes:
+
+* type="text" → Texto normal
+
+* type="password" → Oculta caracteres
+
+* type="email" → Valida formato de correo
+
+* type="submit" → Envía el formulario
+
+Ejemplo:
+
+```html
+    <input type="text" id="usuario" name="usuario">
+```
+
+A continuación Código HTML – Formulario Login
+
+```html
+    <!DOCTYPE html>
+    <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <title>Login</title>
+        </head>
+        <body>
+
+            <h2>Iniciar Sesión</h2>
+
+            <form name="formLogin" method="POST" action="procesar.php">
+                
+                <label for="usuario">Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+                
+                <br><br>
+                
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <br><br>
+                
+                <input type="submit" value="Ingresar">
+            </form>
+        </body>
+    </html>
+```
+   
+Atributos importantes del form
+
+* name: Identifica el formulario. Se usa principalmente para manipularlo con JavaScript.
+
+Ejemplo:
+
+```html
+    <form name="formLogin">
+```
+
+* method: Define cómo se enviarán los datos. Puede ser: GET → Envía datos en la URL (visible). POST → Envía datos de forma más segura (no visible en la URL). (En un login se recomienda usar POST.)0
+
+Ejemplo:
+
+```php
+method="POST"
+```
+
+* action: Indica a qué archivo o ruta se enviarán los datos para ser procesados.
+
+Ejemplo:
+
+```php
+action="procesar.php
+```
+
+Esto significa que los datos serán enviados al archivo procesar.php.
+
+---
+
+**Atributos importantes del input**
+
+* type → Tipo de dato.
+
+* id → Identificador único (conecta con el label).
+
+* name → Nombre del campo (clave que recibe el servidor).
+
+* required → Campo obligatorio.
+
+* placeholder → Texto de ayuda dentro del input.
+
+Ejemplo con placeholder:
+
+```html
+    <input type="text" name="usuario" placeholder="Ingrese su usuario" required>
+```
+
+Para los diferentes tipos de inputs le recomiendo la lectura: https://developer.mozilla.org/es/docs/Learn_web_development/Extensions/Forms/HTML5_input_types
+
+> Se pide que realicemos cada uno de los formularios correspondientes para nuestro proyecto.
+
+---
+
