@@ -32,6 +32,8 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [3. Consultas en Base de Datos](#consultas-en-base-de-datos)
 
+[4. Introducción a INNER JOIN, LEFT JOIN, RIGHT JOIN](#introducción-a-inner-join-left-join-right-join)
+
 
 
 
@@ -1303,5 +1305,237 @@ Reflexione: Los c.(CAMPO) como por ejemplo c.NOMBRES, c.APELLIDOS es porque dire
     WHERE m.COPIACEDULACLIENTE = c.CEDULA) AS Cantidad_Mascotas
     FROM CLIENTE c;
 ```
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+## Introducción a INNER JOIN, LEFT JOIN, RIGHT JOIN
+
+> Clase del 19/02/2026
+
+Explicación del JOIN y sus diferentes aspectos.
+
+Se pide insertar el siguente código:
+
+```sql
+    -- El atributo if not exists es muy funcional si tenemos un backup, pero ya hay ciertas tablas para no tener errores.
+    create database if not exists lugar;
+
+    create table if not exists Regiones(
+        idRegion int(2) primary key,
+        Region varchar(20) not null);
+
+    create table if not exists Provincias(
+        idProvincia int(2) primary key,
+        Provincia varchar(20) not null,
+        idRegion int(2) not null,
+        foreign key (idRegion) references Regiones(idRegion));
+
+    create table if not exists Comunas(
+        idComuna int(2) primary key,
+        Comuna varchar(20) not null,
+        idProvincia int(2) not null,
+        foreign key (idProvincia) references Provincias(idProvincia));
+```
+
+Datos:
+
+```sql
+    insert into Regiones (idRegion, Region)
+    values (1, 'Andina'),(2, 'Pacifica'),(3,'Caribe');
+
+    insert into Provincias(idProvincia, Provincia,
+    idRegion) values (1, 'Cundinamarca', 1), (2,'Choco',2),(3,'Antioquia',1); 
+
+    insert into Comunas(idComuna, Comuna, idProvincia)
+    values (1,'Bogotá',1),(2,'Medellín',3),(3, 'Facatativa',1);
+```
+
+Consultas:
+
+```sql
+    select Regiones.idRegion, Region, Provincia, Comuna
+    from ((Provincias
+    inner join Regiones on 
+    Provincias.idRegion=Regiones.idRegion)
+    inner join Comunas on 
+    Comunas.idProvincia=Provincias.idProvincia); 
+    
+    select Regiones.idRegion, Region, Provincia, Comuna
+    from ((Provincias
+    left join regiones on 
+    Provincias.idRegion=Regiones.idRegion)
+
+    left join Comunas on 
+    Comunas.idProvincia=Provincias.idProvincia); 
+
+    select Regiones.idRegion, Region, Provincia, Comuna
+    from ((regiones
+    left join Provincias on 
+    Provincias.idRegion=Regiones.idRegion)
+    left join Comunas on 
+    Comunas.idProvincia=Provincias.idProvincia);
+```
+
+---
+
+Teniendo en cuenta el siguente código:
+
+    ```sql
+    create database Hospital_SMH;
+
+    use Hospital_SMH;
+
+    create table paciente(
+    num_historial char(3) not null,
+    nombre_paciente varchar(50) not null,
+    primary key(num_historial)
+    );
+
+    insert into paciente(num_historial,nombre_paciente)
+    values('p20','Juan Marín'),('p40','Luisa Peralta'),('p22','Andrés López');
+
+    create table medico(
+    cod_identificacion int not null,
+    nombre_medico varchar(50) not null,
+    primary key(cod_identificacion)
+    );
+
+    insert into medico(cod_identificacion,nombre_medico)
+    values (123,'Andrea Luna'),(456,'Eli Salinas'),(890,'Andrés M. Cruz');
+
+    select * from medico;
+
+    create table ingreso(
+    num_ingreso int auto_increment not null,
+    fechayhora datetime not null,
+    pac_ingreso char(3) not null,
+    med_ingreso int not null,
+    primary key(num_ingreso),
+    foreign key (pac_ingreso) references paciente(num_historial),
+    foreign key(med_ingreso) references medico(cod_identificacion)
+    );
+
+    insert into ingreso(fechayhora,pac_ingreso,med_ingreso)
+    values ('2023-12-04 10:40:00','p40',456);
+
+    insert into ingreso(fechayhora,pac_ingreso,med_ingreso)
+    values ('2023-12-04 10:50:00','p40',123);
+
+    insert into ingreso(fechayhora,pac_ingreso,med_ingreso)
+    values ('2023-12-04 10:40:00','p20',123);
+
+    select * from ingreso;
+```
+
+Luego se pide realizar una serie de consultas para practicar el concepto de JOINs:
+
+1. Un right join entre las tablas medico e ingreso, donde la tabla de la derecha es médico.
+
+```sql
+    -- RIGHT JOIN
+    SELECT * FROM
+    INGRESO
+    RIGHT JOIN MEDICO
+    ON INGRESO.med_ingreso = MEDICO.cod_identificacion;
+```
+
+2. Un left join entre las tablas paciente e ingreso, donde la tabla de la izquierda es paciente.
+
+```sql
+    -- LEFT JOIN
+    SELECT * FROM
+    PACIENTE
+    LEFT JOIN INGRESO
+    ON PACIENTE.num_historial = INGRESO.pac_ingreso;
+```
+
+3. Un inner join entre las tres tablas.
+
+```sql
+    -- INNER JOIN
+    SELECT * FROM
+    PACIENTE
+    INNER JOIN INGRESO
+    ON PACIENTE.num_historial = INGRESO.pac_ingreso
+    INNER JOIN MEDICO ON INGRESO.med_ingreso=medico.cod_identificacion
+```
+
+> ¿Realmente entiendes qué es un INNER JOIN, LEFT JOIN, RIGHT JOIN?
+
+> ¿Si entendió los temas de Group by, Order By, count, Operaciones matemáticas en BD?
+
+**Lecturas Recomendadas:**
+
+* Qué es INNER JOIN by IONOS: https://www.ionos.com/es-us/digitalguide/hosting/cuestiones-tecnicas/inner-join/
+
+* INNER JOIN, LEFT JOIN, RIGHT JOIN by Microsoft: https://support.microsoft.com/es-es/topic/operaciones-left-join-right-join-ebb18b36-7976-4c6e-9ea1-c701e9f7f5fb
+
+Primero debo revisar el código que tengo. Es agradable mirar como en XAMPP, una vez terminado cada **;** en tu código puedes observar como finaliza una **consulta** y te muestra un resultado si has consultado por algo en especifico.
+
+---
+
+**Existen otros JOIN**
+
+> Clausula LIMIT para limitar registros
+
+En SQL existen diferentes formas de combinar tablas además del JOIN tradicional con ON. A continuación se describen algunos tipos:
+
+**JOIN UTILIZANDO USING:** La cláusula USING se utiliza cuando las columnas que relacionan tienen ambas tablas que tienen el mismo nombre.
+
+**NATURAL JOIN:** Une automáticamente las tablas usando las columnas  que tengan el mismo nombre en ambas tablas. (Es de cuidado porque une todas las tablas que tengan el mismo nombre.)
+
+**CROSS JOIN:** Realiza un plano cartesiano combinando todos los registros de la primera tabla
+
+> Se menciona un examen/cuestionario para la siguente semana el cual es calificable: Tube 1 respuesta incorrecta - Confundiendo left con right.
+
+---
+
+Se pide seguir las instrucciones de la instructora
+
+```sql
+    -- Se pide crear una base de datos
+    CREATE DATABASE Practica_19feb26;
+
+    USE Practica_19feb26;
+```
+
+Se pide crear un EXCEL con los campos documento, nombreCliente, Direccion    
+
+Se pide ingresar por lo menos tres registos
+
+Se pide que una vez se tengan diferentes registros en una tabla al momento de guardar el excel debe ser con CSV y entonces se explica la función de importar de XAMPP siendo asi este archivo CSV.
+
+¿Qué pasa si mi tabla depende de otra tabla? 
+
+```sql
+CREATE TABLE PEDIDOS (
+	ID_PEDIDO INT PRIMARY KEY,
+    NOMBRE_ENCARGADO VARCHAR(20) NOT NULL,
+    CLIENTE INT NOT NULL,
+    FOREING KEY (COPIA_CLIENTE) REFERENCES CLIENTE(DOCUMENTO)   
+);
+```
+
+> Se recomienda mucho repasar
 
 ---
