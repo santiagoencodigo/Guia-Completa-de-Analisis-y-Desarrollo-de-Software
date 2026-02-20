@@ -19,6 +19,8 @@ A continuación mis apuntes y/o documentación de los temas vistos en Construcci
 
 [3. Git y Github](#git-y-github)
 
+[4. Comandos de Git](#comandos-de-git)
+
 
 
 
@@ -441,3 +443,159 @@ Se pide investigar desktop github
 Se pide realizar un documento en github para señalar un menú, ciertos simbolos, una guia rapida del git y github
 
 Se pide una guia para compartir un repositorio entre un grupo de trabajo
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Comandos de Git
+
+En esta sección se describen los comandos fundamentales de **Git**, utilizados para la configuración inicial y el control de versiones en un proyecto de software.
+
+Git es un sistema de control de versiones que permite registrar cambios en archivos, trabajar en equipo y mantener un historial del desarrollo.
+
+Antes de comenzar a trabajar con Git, es necesario configurar el nombre y el correo electrónico del usuario. Esta información quedará registrada en cada commit.
+
+```bash
+git config --global --list
+```
+
+Muestra la configuración global actual de Git, incluyendo:
+
+- Nombre de usuario  
+- Correo electrónico  
+- Editor por defecto  
+- Otras configuraciones activas  
+
+---
+
+Permite definir el nombre que aparecerá como autor de los commits.
+
+```bash
+git config --global user.name "Tu Nombre"
+```
+
+Ejemplo:
+
+```bash
+git config --global user.name "Juan Perez"
+```
+
+---
+
+Configurar correo electrónico
+
+```bash
+git config --global user.email "correo@ejemplo.com"
+```
+
+Define el correo asociado a los commits realizados.
+
+Ejemplo:
+
+```bash
+git config --global user.email "juan@email.com"
+```
+
+---
+
+**Concepto de repositorio local**
+
+Un repositorio **local** es el proyecto almacenado en tu computador.
+
+Cuando ejecutas:
+
+```bash
+git init
+```
+
+Se crea un repositorio Git en la carpeta actual.  
+A partir de ese momento, Git comenzará a rastrear los cambios realizados en los archivos.
+
+---
+
+Comando `add`
+
+```bash
+git add .
+```
+
+Este comando agrega todos los archivos modificados al área de preparación (**staging area**).
+
+* El punto `.` significa: Agregar todos los archivos de la carpeta actual.
+
+El área de preparación es un paso intermedio antes de confirmar los cambios con un commit.
+
+---
+
+Comando `commit`
+
+```bash
+git commit -m "Mensaje descriptivo del cambio"
+```
+
+El commit guarda oficialmente los cambios en el historial del proyecto.
+
+- `-m` permite agregar un mensaje descriptivo.
+- Cada commit representa un punto de guardado del proyecto.
+- Permite volver a versiones anteriores si es necesario.
+
+Ejemplo:
+
+```bash
+git commit -m "Se agrega formulario de login"
+```
+
+---
+
+Flujo básico de trabajo en Git
+
+1. Modificar archivos.
+2. Agregar cambios:
+   ```bash
+   git add .
+   ```
+3. Confirmar cambios:
+   ```bash
+   git commit -m "Descripción del cambio"
+   ```
+
+Este proceso permite llevar un control ordenado del desarrollo del software.
+
+---
+
+Los comandos básicos de Git permiten:
+
+- Configurar la identidad del desarrollador.
+- Crear un repositorio local.
+- Preparar archivos para seguimiento.
+- Guardar versiones del proyecto mediante commits.
+- Mantener un historial organizado del desarrollo.
+
+---
+
+git clone
+
+git log
+
+git log --oneline
+
+git fetch
+
+git pull
