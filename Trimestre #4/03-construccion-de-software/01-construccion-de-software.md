@@ -466,6 +466,8 @@ Se pide una guia para compartir un repositorio entre un grupo de trabajo
 
 ## Comandos de Git
 
+> Clases del 20/02/26
+
 En esta sección se describen los comandos fundamentales de **Git**, utilizados para la configuración inicial y el control de versiones en un proyecto de software.
 
 Git es un sistema de control de versiones que permite registrar cambios en archivos, trabajar en equipo y mantener un historial del desarrollo.
@@ -588,14 +590,190 @@ Los comandos básicos de Git permiten:
 - Guardar versiones del proyecto mediante commits.
 - Mantener un historial organizado del desarrollo.
 
+> Ya despues se inserta "git push" y se subira el cambio una vez definido el git remote add y la rama en la que se va a subir.
+
 ---
 
-git clone
+**git clone**
 
+**Concepto**
+
+El comando `git clone` se utiliza para **copiar un repositorio remoto** a tu máquina local.  
+Al clonar un repositorio, Git descarga todo el historial de commits, ramas y configuraciones necesarias para trabajar con el proyecto.
+
+Es el primer paso cuando deseas comenzar a trabajar en un proyecto existente alojado en un servidor como GitHub.
+
+**¿Qué hace internamente?**
+
+- Crea una carpeta con el nombre del repositorio  
+- Descarga todos los archivos  
+- Copia el historial completo de versiones  
+- Configura automáticamente el repositorio remoto como `origin`  
+
+**Ejemplo:**
+
+```bash
+git clone https://github.com/usuario/proyecto.git
+```
+
+---
+
+**git log**
+
+**Concepto**
+
+El comando `git log` muestra el **historial completo de commits** realizados en el repositorio.
+
+Permite visualizar información detallada como:
+
+- ID del commit (hash)  
+- Autor  
+- Fecha  
+- Mensaje del commit  
+
+Es una herramienta fundamental para revisar cambios históricos del proyecto.
+
+**Ejemplo:**
+
+```bash
 git log
+```
 
+---
+
+**git log --oneline**
+
+El comando `git log --oneline` muestra el historial de commits en una **versión resumida y compacta**.
+
+En lugar de mostrar todos los detalles, presenta:
+
+- Hash corto del commit  
+- Mensaje del commit en una sola línea  
+
+Es útil cuando se desea una vista rápida y clara del historial.
+
+**Ejemplo:**
+
+```bash
 git log --oneline
+```
 
-git fetch
+---
 
-git pull
+**git fetch**
+
+El comando `git fetch` descarga los cambios del repositorio remoto **sin fusionarlos automáticamente** con la rama actual.
+
+Permite actualizar la información del repositorio remoto para luego revisar los cambios antes de integrarlos manualmente.
+
+**Diferencia clave:**
+
+- `fetch` → Descarga cambios  
+- No modifica tu rama actual automáticamente  
+
+**Ejemplo:**
+
+```bash
+    git fetch origin
+```
+
+---
+
+**git pull**
+
+**Concepto**
+
+El comando `git pull` se utiliza para **descargar y fusionar automáticamente** los cambios del repositorio remoto con tu rama actual.
+
+Internamente ejecuta:
+
+```bash
+    git fetch
+    git merge
+```
+
+Es decir, primero obtiene los cambios y luego los integra en tu rama activa.
+
+**Ejemplo:**
+
+```bash
+    git pull origin main
+```
+
+---
+
+Algunos pequeños detalles para resumir:
+
+> Es interesante que se pueden hacer diferentes cambios en otras ramas.
+
+* git branch: Determina cuantas ramas tienes en tu repo
+
+* git merge main primeraRama: Une en main el contenido de una RAMA.
+
+* Clonar proyectos (`clone`)  
+
+* Revisar historial (`log`)  
+
+* Obtener cambios sin aplicar (`fetch`)  
+
+* Sincronizar completamente (`pull`)  
+
+<img src="https://www.freecodecamp.org/espanol/news/content/images/size/w2000/2021/01/Ekran-Resmi-2020-01-12-21.59.37-1-.png">
+
+*Imagen Tomada De: https://www.freecodecamp.org/espanol/news/10-comandos-de-git-que-todo-desarrollador-deberia-saber/*
+
+---
+
+<!-- Inserto esta imagen debido a que quiero tener un "Descanso Visual" -->
+
+**Trabajo a Desarrollar**
+
+Se pide realizar un trabajo en donde se debe hacer uso al frente de la instructora de los comandos: git init, git add, git commit, git pull, git push, git clone, git branch, git checkout, git merge, git tag.
+
+> A continación mi solución para esta actividad
+
+1. Se crea la carpeta en el computador mediante la terminal a traves del comando `mkdir [nombre-del-proyecto]` y se ingresa a esta carpeta mediante `cd [nombre-del-proyecto]`.
+
+2. Se inicia el repositorio local mediante `git init` 
+
+3. Se hace una verificación mediante `git status`
+
+4. Se crea un archivo de prueba a traves de la terminal mediante el comando `touch [nombre-del-archivo.extension]`.
+
+5. Se agregan los archivos mediante `git add .`
+
+6. Se hace una verificación mediante `git status`
+
+7. Se agrega un commit mediante `git commit -m "Ejemplo de un Commit."`
+
+8. Se crea entonces una nueva RAMA/BRANCH mediante `git branch [nombre-de-la-nueva-rama]`
+
+9. Se verifican que ramas existen en el repositorio local mediante `git branch`
+
+10. Cambiamos del MAIN hacia la rama nueva que creamos y por ende `git checkout [nombre-de-la-nueva-rama]`
+
+11. Una vez seleccionada la rama, podemos crear otro archivo siendo asi `touch [nombre-del-segundo-archivo.extension]`
+
+12. Seguimos la secuencia `git add .` y nombramos nuestro commit `git commit -m "Se agrega un nuevo archivo a la rama [nombre-del-segundo-archivo.extension]"`
+
+13. Y entonces volvemos a la rama principal mediante `git checkout main` o master, si es el caso.
+
+14. Fucionaremos entonces nuestra rama con el main mediante `git merge [nombre-del-segundo-archivo.extension]` pasando asi los archivos de la otra rama hacia el main.
+
+15. Vamos a crear un nuevo tag (Un nuevo release) siendo una etiqueta de versión y por ende: `git tag v1.0`
+
+16. Observamos nuestros tags mediante `git tag`
+
+17. Subimos entonces a un repositorio creando en un repositorio de github y agregando mediante `git remote add origin https://github.com/usuario/repositorio.git`
+
+18. Creamos una nueva carpeta en la que clonamos mediante `git init`, despues un `git clone https://github.com/usuario/repositorio.git`, hacemos un cambio y agregamos con ``git add .`, y `git commit -m "commit"` subiendo con `git push`
+
+19. Desde la carpeta inicial ya usamos `git fetch` `git pull` y listo, siento yo que asi habremos solucionado.
+
+> Para mi esto es una solución con un uso bueno de la terminal.
+
+<img src="https://lignux.com/wp-content/uploads/2013/12/terminal-ls-01-300x215.png">
+
+*Imagen Tomada De: https://lignux.com/uso-basico-de-la-terminal-parte-i/*
+
+---
