@@ -34,6 +34,8 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [4. Introducción a INNER JOIN, LEFT JOIN, RIGHT JOIN](#introducción-a-inner-join-left-join-right-join)
 
+[5. Importación de Archivos CSV - Taller: Biblioteca SQL](#importación-de-archivos-csv---taller-biblioteca-sql)
+
 
 
 
@@ -1537,5 +1539,420 @@ CREATE TABLE PEDIDOS (
 ```
 
 > Se recomienda mucho repasar
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+## Importación de Archivos CSV - Taller: Biblioteca SQL
+
+> Clase del 23/02/26
+
+Se pide insertar el siguente código SQL:
+
+```sql
+    CREATE DATABASE 23FebreroDB;
+
+    USE 23FebreroDB;
+
+    CREATE TABLE SOLICITUD (
+        ID INT(11) NOT NULL,
+        FECHA DATE NOT NULL,
+        TIPOSOLICITUD ENUM('QUEJA', 'FELICITACION', 'RECLAMO') NOT NULL,
+        PRIMARY KEY (ID)
+    );
+```
+
+Y entonces se pide abrir un documento EXCEL con los titulos id, fecha, solicitud con registros insertados. Se comenta que en EXCEL una vez se inserta fechas hay un choque entre formatos por lo que hay que cambiarle el formato de la celda de las fechas. (Debe ser YYYY-MM-DD)
+
+* El formato de exportación es CSV UTF-8
+
+Y se pide guardar el archivo EXCEL como CSV y se pide importarlo en Xampp. (Antes de importarlo, debe estar seleccionada la tabla en la que vamos a insertar los datos y antes de importarlo se debe especificar que estan separados por ;)
+
+Video Recomendado: https://www.youtube.com/watch?v=mObLsAU6Cr4
+
+---
+
+<imgs src="https://dev.mysql.com/img/banners/MySQLInstallerBannerV5.png">
+
+Lectura Recomendada y Descarga de Workbench: https://www.mysql.com/products/workbench/
+
+Se pide realizar un trabajo de forma individual siendo un modelo relacional hecho con MYSQL WORKBENCH explicandose:
+
+* Las llaves doradas son PK
+
+* Los rombos color azul celeste con NOT NULL
+
+* Los rombos de color rojo con FK
+
+Por lo que por medio de la SGBD debemos crear la BD.
+
+> Por esta ocasión pensaba usar workbench para el trabajo, pero por temas de contraseña de administrador no se puede debido a que este trabajo y estos apuntes los realizos en los dispositivos de las instalacioens que generalmente a uno le ofrecen al momento de estudiar en los ambientes de aprendizaje.
+
+Documento Practica 1. Biblioteca en MYSQL
+
+```sql
+    -- Lo normal es crear la BD
+    CREATE DATABASE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    -- Importante usarla despues para no tener problemas con las siguentes consultas
+    USE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    -- Creación de Tablas Maestras
+
+        CREATE TABLE TABLA_SOCIO (
+            SOC_NUMERO INT(11) PRIMARY KEY,
+            SOC_NOMBRE VARCHAR(45) NOT NULL,
+            SOC_APELLIDO VARCHAR(45) NOT NULL,
+            SOC_DIRECCION VARCHAR(255) NOT NULL,
+            SOC_TELEFONO VARCHAR(10) NOT NULL
+        );
+
+        CREATE TABLE TABLA_LIBRO (
+            LIB_ISBN BIGINT(20) PRIMARY KEY,
+            LIB_TITULO VARCHAR(255) NOT NULL,
+            LIB_GENERO VARCHAR(20) NOT NULL,
+            LIB_NUM_PAGINAS INT(11) NOT NULL, 
+            LIB_DIAS_PRESTAMO TINYINT(4)
+        );
+
+            -- Teniendo estas dos tablas ya se puede crear:
+
+            CREATE TABLE TABLA_PRESTAMO (
+                PRES_ID VARCHAR(20) PRIMARY KEY,
+                PRES_FECHA_PRESTAMO DATE NOT NULL,
+                PRES_FECHA_DEVOLUCION DATE NOT NULL,
+
+                -- FK
+                SOC_COPIA_NUMERO INT(11) NOT NULL,
+                LIB_COPIA_ISBN BIGINT(20) NOT NULL,
+
+                FOREIGN KEY (SOC_COPIA_NUMERO) REFERENCES TABLA_SOCIO (SOC_NUMERO),
+                FOREIGN KEY (LIB_COPIA_ISBN) REFERENCES TABLA_LIBRO (LIB_ISBN)                
+            );
+
+        -- Ultima Tabla Maestra
+
+        CREATE TABLE TABLA_AUTOR (
+            AUT_CODIGO INT(11) PRIMARY KEY,
+            AUT_APELLIDO VARCHAR(45) NOT NULL,
+            AUT_NACIMIENTO DATE NOT NULL,
+            AUT_MUERTE DATE NOT NULL
+        );
+
+            -- Ultima Tabla Intermedia
+
+            CREATE TABLE TABLA_TIPOAUTORES (
+                -- FK
+                COPIA_ISBN BIGINT(20) NOT NULL,
+                COPIA_AUTOR INT(11) NOT NULL,
+                 
+                --  ATRIBUTO PROPIO DE ESTA TABLA
+                TIPO_AUTOR VARCHAR(20) NOT NULL,
+
+                    -- Definición de FK
+
+                    FOREIGN KEY (COPIA_ISBN) REFERENCES TABLA_LIBRO (LIB_ISBN),
+                    FOREIGN KEY (COPIA_AUTOR) REFERENCES TABLA_AUTOR (AUT_CODIGO)
+            );
+
+```
+
+> En esta práctica aprendí a tener más cuidado con el uso de las , por cada atributo o campo nuevo que ingrese en una tabla y por otro lado, tener cuidado con escribir bien la sintaxis al CREATE TABLE.
+
+> Me gusta bastante tambien mirar el modo diseñador.
+
+> Debo repasar la cardinalidad y ¿Qué significa realmente uno a muchos, uno a uno, muchos a muchos?
+
+Ya entonces, le pedí a CHATGPT que realizará los registros. Personalmente no le dedico tiempo porque considero que es muy mecanico y realmente no aprenderia mucho ya sabiendo la estructura para insertar datos.
+
+**Registros - Tabla Socios**
+
+```sql
+    INSERT INTO TABLA_SOCIO 
+    (SOC_NUMERO, SOC_NOMBRE, SOC_APELLIDO, SOC_DIRECCION, SOC_TELEFONO) 
+    VALUES
+    (1, 'Ana', 'Ruiz', 'Calle Primavera 123, Ciudad Jardin, Barcelona', '912345678'),
+    (2, 'Andrés Felipe', 'Galindo Luna', 'Avenida del Sol 456, Pueblo Nuevo, Madrid', '2123456789'),
+    (3, 'Juan', 'González', 'Calle Principal 789, Villa Flores, Valencia', '2012345678'),
+    (4, 'María', 'Rodríguez', 'Carrera del Río 321, El Pueblo, Sevilla', '3012345678'),
+    (5, 'Pedro', 'Martínez', 'Calle del Bosque 654, Los Pinos, Málaga', '1234567812'),
+    (6, 'Ana', 'López', 'Avenida Central 987, Villa Hermosa, Bilbao', '6123456781'),
+    (7, 'Carlos', 'Sánchez', 'Calle de la Luna 234, El Prado, Alicante', '1123456781'),
+    (8, 'Laura', 'Ramírez', 'Carrera del Mar 567, Playa Azul, Palma de Mallorca', '1312345678'),
+    (9, 'Luis', 'Hernández', 'Avenida de la Montaña 890, Monte Verde, Granada', '6101234567'),
+    (10, 'Andrea', 'García', 'Calle del Sol 432, La Colina, Zaragoza', '1112345678'),
+    (11, 'Alejandro', 'Torres', 'Carrera del Oeste 765, Ciudad Nueva, Murcia', '4951234567'),
+    (12, 'Sofía', 'Morales', 'Avenida del Mar 098, Costa Brava, Gijón', '5512345678');
+```
+
+Realice lo mismo, pero con GEMINI (Considero que me dio una respuesta mucho más rápida, tube cuidado con el contexto del código SQL que le envie.)
+
+**Registros - Tabla Libro**
+
+```sql
+    USE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    INSERT INTO TABLA_LIBRO (LIB_ISBN, LIB_TITULO, LIB_GENERO, LIB_NUM_PAGINAS, LIB_DIAS_PRESTAMO) VALUES
+    (1234567890, 'El Sueño de los Susurros', 'novela', 275, 7),
+    (9876543210, 'El Laberinto de los Recuerdos', 'cuento', 412, 7),
+    (2468135790, 'La Melodía de la Oscuridad', 'romance', 189, 7),
+    (1357924680, 'El Jardín de las Mariposas Perdidas', 'novela', 536, 7),
+    (8642097531, 'El Reloj de Arena Infinito', 'novela', 321, 7),
+    (9517530862, 'Las Crónicas del Eco Silencioso', 'fantasía', 448, 7),
+    (3141592653, 'El Secreto de las Estrellas Olvidadas', 'Misterio', 203, 7),
+    (2718281828, 'El Bosque de los Suspiros', 'novela', 387, 2),
+    (8888888888, 'La Ciudad de los Susurros', 'Misterio', 274, 1),
+    (5555555555, 'La Última Llave del Destino', 'cuento', 503, 7),
+    (9999999999, 'El Enigma de los Espejos Rotos', 'romance', 156, 7),
+    (7777777777, 'El Misterio de la Luna Plateada', 'Misterio', 422, 7);
+```
+
+> Al usar GEMINI es necesario tener que especificar que realice el código SQL sino realiza una imagen.
+
+**Registros - Tabla Prestamo**
+
+```sql
+    USE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    INSERT INTO TABLA_PRESTAMO (PRES_ID, PRES_FECHA_PRESTAMO, PRES_FECHA_DEVOLUCION, SOC_COPIA_NUMERO, LIB_COPIA_ISBN) VALUES
+    ('pres1', '2023-01-15', '2023-01-20', 1, 1234567890),
+    ('pres2', '2023-02-03', '2023-02-04', 2, 9999999999),
+    ('pres3', '2023-04-09', '2023-04-11', 6, 2718281828),
+    ('pres4', '2023-06-14', '2023-06-15', 9, 8888888888),
+    ('pres5', '2023-07-02', '2023-07-09', 10, 5555555555),
+    ('pres6', '2023-08-19', '2023-08-26', 12, 5555555555),
+    ('pres7', '2023-10-24', '2023-10-27', 3, 1357924680),
+    ('pres8', '2023-11-11', '2023-11-12', 4, 9999999999),
+    ('pres9', '2023-12-29', '2023-12-30', 8, 5555555555);
+```
+
+**Registros - Tabla Autor**
+
+```sql
+    USE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    INSERT INTO TABLA_AUTOR (AUT_CODIGO, AUT_APELLIDO, AUT_NACIMIENTO, AUT_MUERTE) VALUES
+    (123, 'Taylor', '1980-04-15', NULL),
+    (456, 'García', '1978-09-27', '2021-12-09'),
+    (789, 'Rodríguez', '1985-12-10', NULL),
+    (234, 'Medina', '1977-06-21', '2005-09-12'),
+    (567, 'Davis', '1983-03-04', '2010-03-28'),
+    (890, 'Brown', '1982-11-17', NULL),
+    (345, 'Wilson', '1975-08-29', NULL),
+    (678, 'Silva', '1986-02-02', NULL),
+    (901, 'Soto', '1979-05-13', '2015-11-05'),
+    (432, 'Miller', '1981-10-26', NULL),
+    (765, 'López', '1976-07-08', NULL),
+    (98, 'Smith', '1974-12-21', '2018-07-21');
+```
+
+> Es chevere que el XAMPP de la advertencia de que no sea nula.
+
+**Registros - Tabla Tipo Autor**
+
+```sql
+    USE BIBLIOTECA_SANTIAGOENCODIGO;
+
+    INSERT INTO TABLA_TIPOAUTORES (COPIA_ISBN, COPIA_AUTOR, TIPO_AUTOR) VALUES
+    (1357924680, 123, 'Traductor'),
+    (1234567890, 123, 'Autor'),
+    (1234567890, 456, 'Coautor'),
+    (2718281828, 789, 'Traductor'),
+    (8888888888, 234, 'Autor'),
+    (2468135790, 234, 'Autor'),
+    (9876543210, 567, 'Autor'),
+    (1234567890, 890, 'Autor'),
+    (8642097531, 345, 'Autor'),
+    (8888888888, 345, 'Coautor'),
+    (5555555555, 678, 'Autor'),
+    (3141592653, 901, 'Autor'),
+    (9517530862, 432, 'Autor'),
+    (7777777777, 765, 'Autor'),
+    (9999999999, 98, 'Autor');
+```
+
+De esta forma ya tenemos todos nuestros registros entonces. Se recomienda entonces hacer una selección general de cada una de las tablas.
+
+Y ahora entonces, se pide realizar la siguente consulta:
+
+> Me alegra ahora mirar este código y entenderlo, saber que lo ejecutaré en la consulta y va a funcionar.
+
+> Interesante como se utilizan los apodos para esto.    
+
+```sql
+    SELECT AUT_APELLIDO, LIB_ISBN, LIB_TITULO, TIPO_AUTOR
+    FROM TABLA_AUTOR A, TABLA_LIBRO L, TABLA_TIPOAUTORES T
+    WHERE T.COPIA_AUTOR=AUT_CODIGO AND T.COPIA_ISBN = L.LIB_ISBN
+```
+
+Me parece muy agradable cómo se pueden juntar diferentes tablas. Y entonces es interesante tambien mirar por medio del WHERE la conexión entre la PK y la FK pues se comparan igualdades. Y entonces lo relaciono directamente con la situación real de una empresa, en donde muy probablemente esta consulta tendrá un apodo para no tener que escribir este código como tal.
+
+Se pide desarrollar entonces una serie de scripts.
+
+> Me parece interesante como practica lo siguente.
+
+> De ahora en adelante, le recomiendo totalmente: PROHIBIDO TRANSCRIBIR, busque entender el por qué cada palabra en la sintaxis de SQL por cada QUERY que se realice.
+
+1. Modifique el registro 765 de la tabla autor y agréguele una fecha de muerte.
+
+Es interesante el comando `SHOW COLUMNS FROM TABLA_AUTOR;` para mirar qué tablas hay y cómo estan escritas o compuestas.
+
+```sql
+    -- Se dice donde será el cambio, ¿En qué tabla?
+    UPDATE TABLA_AUTOR  
+    -- ¿Cual es el campo que vamos a actualizar?
+    SET AUT_MUERTE = '2020-05-10'
+    -- ¿Donde vamos a hacer el cambio?
+    WHERE AUT_CODIGO = 765;
+```
+
+2. Elimine el registro pres9 de la tabla préstamos.
+
+```sql
+    -- ¿Donde será el cambio?
+    DELETE FROM TABLA_PRESTAMO
+    WHERE PRES_ID = 'pres9';
+```
+
+3. Realice un query que consulte todos los autores que hayan fallecido.
+
+Recordemos que una QUERY es una consulta, por otro lado en nuestros registros o lo tenemos en 0000-00-00 o directamente la fecha de muerte por lo que podemos asignar la consulta que nos seleccione las que sea diferente a ese valor y por ende:
+
+```sql
+    SELECT * FROM TABLA_AUTOR
+    WHERE AUT_MUERTE <> '0000-00-00';
+```
+
+4. Realice una consulta donde utilice un LIKE y busque los libros que tienen la palabra “susurros”.
+
+> Se entiende realmente qué quiere decir LIKE en SQL?
+
+Recordemos que LIKE se utiliza especialmente para busquedas de texto especificas y por ende:
+
+```sql
+    SELECT * FROM TABLA_LIBRO
+    -- Me parece interesante que la busqueda es antes y despues que se busca susurros por el % al inicio y al final.
+    WHERE LIB_TITULO LIKE '%susurros%';
+
+```
+
+5. Realice una consulta que utilice un BETWEEN que encuentre los autores que nacieron entre 1970-01-01 y 1979-01-01.
+
+> ¿Realmente entiende qué hace BETWEEN en SQL?
+
+Recordemos que BETWEEN es para tener un rango de busqueda
+
+```sql
+    SELECT * FROM TABLA_AUTOR
+    -- Entonces se utiliza la condicional AND y el BETWEEN para poder tener entonces un rango, en un ambiente empresarial me gustaria verlo.
+    WHERE AUT_NACIMIENTO BETWEEN '1970-01-01' AND '1979-01-01'
+```
+
+6. Realice una consulta donde utilice las tablas necesarias que permitan mostrar que socios tienen préstamos -sin uso de join
+
+> Recordemos entonces que tenemos una tabla de prestamos con FK de los socios/clientes y de los libros con su codigo ISBN.
+
+Si no usamos JOIN, entonces debemos usar IN o EXISTS para esto.
+
+```sql
+    -- Un lugar para comparar.
+    SELECT * FROM TABLA_SOCIO 
+    
+    -- Es como buscar "Estas PK concuerdan con estas FK?"
+    WHERE SOC_NUMERO IN (
+        SELECT SOC_COPIA_NUMERO FROM TABLA_PRESTAMO
+    );
+```
+
+
+7. Realice una consulta donde se muestre el siguiente resultado:
+
+> Tuve que hacer un esfuerzo buscando cada una de las PK Y FK, pero al mirar el de prestamos todo cambio.
+
+```sql
+    SELECT LIB_TITULO, SOC_NOMBRE, PRES_FECHA_PRESTAMO, PRES_FECHA_DEVOLUCION
+    FROM TABLA_LIBRO L, TABLA_SOCIO S, TABLA_PRESTAMO P
+    WHERE S.SOC_NUMERO = P.SOC_COPIA_NUMERO AND L.LIB_ISBN = P.LIB_COPIA_ISBN;
+```
+
+8. Realice una consulta donde utilice las tablas necesarias que permitan mostrar que autores tienen libros en calidad de ‘traductor’- sin uso de JOIN
+
+Anteriormente habia realizado estas consultas mirando de acuerdo a lo que realizaba CHATGPT, despues aqui ya teniendo idea, lo intenté.
+
+Primer Resultado (No funcionó): 
+
+```sql
+    SELECT * TABLA_TIPOAUTORES WHERE TIPO_AUTOR 'TRADUCTOR', AUTOR_APELLIDO
+    FROM TABLA_TIPOAUTORES T, TABLA_AUTOR A
+    WHERE T.COPIA_AUTOR = A.AUT_CODIGO
+```
+
+Se debia implementar IN para esta consulta en donde:
+
+```sql
+    SELECT * FROM TABLA_AUTOR
+    -- Comparamos la PK con la FK
+    WHERE AUT_CODIGO IN (
+        SELECT COPIA_AUTOR
+        FROM TABLA_TIPOAUTORES
+        -- Se le agrega su condición
+        WHERE TIPO_AUTOR = 'Traductor'
+    );
+```
+
+9. Realizar una consulta donde utilice las tablas necesarias que permitan mostrar que socios tienen préstamos y los ordene por apellido de forma descendente – use JOIN
+
+> ¿Entiende realmente qué es un JOIN?: YO, actualmente no realmente. Pero siento que es muy similar a la solución del punto 7
+
+> La solución de este punto sin INNER JOIN se encuentra en el punto 6.
+
+```sql
+    -- Se usa DISTINCT para tener diferentes valores
+    SELECT DISTINCT S.SOC_NUMERO, S.SOC_NOMBRE, S.SOC_APELLIDO
+    -- Es importante definir el APODO
+    FROM TABLA_SOCIO S
+    -- Uso de INNER JOIN para mirar cuales concuerdan (pk - fk).
+    INNER JOIN TABLA_PRESTAMO P
+        ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO
+    -- Ahora solo falta definir el ORDEN:
+    ORDER BY S.SOC_APELLIDO DESC;
+```
+
+10. Realice un LEFT JOIN, entre las tablas préstamo y socio, donde la tabla de la izquierda es socio.
+
+> Entiende realmente qué quiere decir un LEFT JOIN en SQL?
+
+> Reflexione ¿Para qué es esta consulta?: Aparecen todos los registros de la tabla de la izquierda (SOCIO), en donde los prestamos si existen y si no tienen prestamos estos van a aparecer como NULL
+
+> Para hacer este código para esta query, realmente se me dificulta.
+
+```sql
+    -- La selección
+    SELECT S.SOC_NUMERO, S.SOC_NOMBRE. S.SOC_APELLIDO, P.PRES_ID
+        -- Interesante mirar los APODOS por cada tabla.
+    FROM TABLA_SOCIO S
+    LEFT JOIN TABLA_PRESTAMO P
+        -- Comparación entre PK y FK
+        ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO;
+```
 
 ---
