@@ -32,6 +32,10 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 [4. Formularios (Labels e Inputs)](#formularios-labels-e-inputs)
 
+[4. Atributos para Formularios]()
+
+[5. CSS - Cascading Style Sheets]()
+
 
 
 
@@ -1095,3 +1099,176 @@ Para los diferentes tipos de inputs le recomiendo la lectura: https://developer.
 
 ---
 
+
+# Atributos para Formularios
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+# CSS - Cascading Style Sheets
+
+CSS (Cascading Style Sheets) es el lenguaje utilizado para definir la apariencia y el diseño visual de un documento HTML. Permite separar la estructura (HTML) de la presentación (colores, tamaños, márgenes, posiciones, etc.).
+
+CSS funciona mediante reglas que indican **qué elementos** se van a modificar y **cómo** se van a mostrar.
+
+---
+
+**¿Qué significa "Cascading"?**
+
+"Cascada" significa que los estilos se aplican siguiendo un orden de prioridad. Si varias reglas afectan al mismo elemento, CSS decide cuál aplicar según:
+
+- Especificidad del selector
+- Orden en el código
+- Uso de `!important` (no recomendado abusar de él)
+
+---
+
+**Estructura básica de una regla CSS**
+
+Una regla CSS está compuesta por:
+
+- Selector
+- Propiedad
+- Valor
+
+Ejemplo:
+
+```css
+p {
+  color: blue;
+  font-size: 16px;
+}
+```
+
+En este ejemplo:
+
+- `p` es el **selector**
+- `color` y `font-size` son **propiedades**
+- `blue` y `16px` son **valores**
+
+---
+
+**Selectores**
+
+Los selectores permiten elegir los elementos HTML a los que se aplicarán los estilos.
+
+Selector por etiqueta:
+
+```css
+h1 {
+  color: red;
+}
+
+Selector por clase:
+
+```css
+.tarjeta {
+  background-color: lightgray;
+  padding: 10px;
+}
+```
+
+Selector por id:
+
+```css
+#principal {
+  border: 2px solid black;
+}
+
+Selector universal:
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+}
+```
+
+Selector descendente:
+
+```css
+div p {
+  color: green;
+} 
+```
+
+**Unidades de longitud en CSS**
+
+CSS utiliza diferentes unidades de medida para definir tamaños, márgenes, espacios y tipografías. Estas se dividen en:
+
+- Unidades absolutas
+- Unidades relativas
+
+---
+
+**Unidades absolutas**
+
+Las unidades absolutas tienen un tamaño fijo y no dependen del contexto o del tamaño del elemento padre.
+
+Principales unidades absolutas:
+
+- `px` → píxeles
+- `cm` → centímetros
+- `mm` → milímetros
+- `in` → pulgadas
+- `pt` → puntos
+- `pc` → picas
+
+Ejemplo:
+
+```css
+.caja-absoluta {
+  width: 300px;
+  height: 150px;
+  margin: 20px;
+  border: 2px solid black;
+}
+```
+
+```css
+.texto-absoluto {
+  font-size: 16px;
+}
+```
+
+```css
+.documento-impresion {
+  width: 10cm;
+  height: 5cm;
+}
+```
+
+contenedores padre, contenedores hijo
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+        
