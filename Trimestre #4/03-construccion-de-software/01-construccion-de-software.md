@@ -776,4 +776,92 @@ Se pide realizar un trabajo en donde se debe hacer uso al frente de la instructo
 
 *Imagen Tomada De: https://lignux.com/uso-basico-de-la-terminal-parte-i/*
 
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Eliminaciones
+
+git revert: En este caso se va a deshacer el último commit que esta en HEAD.
+
+Revisa por medio de git log --oneline
+
+git reset: Se recomienda no usar ya que reescribe la historia.
+
+* git reset --hard borra absolutamente todo
+
+* git reset --soft elimina el commit 
+
+---
+
+**git remote**
+
+> Lo usamos para vincular nuestro repositorio de github a nuestro repositorio local.
+
+* Usar solo git remote muestra hacia que rama del repositorio en github estamos dirigidos
+
+* Usar git remote -v muestra los repositorios a los que esta vinculado.
+
+* Para eliminar una URL remota podemos usar `git remote rm origin`
+
+Para eliminar un repositorio local y que no tenga un .git como archivo: rm -rf .git
+
+---
+
+¿Cómo cambiar el nombre de un commit?
+
+git commit --amend -m "Nuevo Mensaje"
+
+---
+
+git config
+
+git config --global -l
+
+git config --global user.name "nombreusuariogithub"
+
+git config --global user.name "nombrecorreo@gmail.com"
+
+---
+
+git clean
+
+git clean --dry run: Revisa archivos que no tengan seguimiento
+
+git clean -f: Elimina los archivos listados sin seguimiento
+
+---
+
+Actividad de la Sesión: Consulta
+
+Investigar: Qué es un FORK
+
+**Se recomiendan las lecturas:**
+
+* Documentación de GitHub - ¿Qué es un Fork?: https://docs-github-com.translate.goog/es/get-started/quickstart/fork-a-repo?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp
+
+> Y si hicieramos un FORK a MYSQL, GIMP, VLC, BITCOIN y demás elementos de código abierto. ¿Qué sucederia? Serviria para apuntar        
+
 ---
