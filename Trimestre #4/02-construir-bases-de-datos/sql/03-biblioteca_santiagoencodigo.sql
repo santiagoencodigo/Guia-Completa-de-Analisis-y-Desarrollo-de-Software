@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 23-02-2026 a las 16:53:05
+-- Servidor: 127.0.0.1:3307
+-- Tiempo de generación: 02-03-2026 a las 17:30:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,121 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `biblioteca_santiagoencodigo`
 --
+
+CREATE DATABASE biblioteca_santiagoencodigo;
+
+USE biblioteca_santiagoencodigo;
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ACTUALIZAR_DATOS_SOCIO` (IN `P_SOC_NUMERO` INT, IN `P_SOC_NUEVA_DIRECCION` VARCHAR(255), IN `P_SOC_NUEVO_TELEFONO` VARCHAR(10))   BEGIN 
+        UPDATE TABLA_SOCIO
+        SET  
+            SOC_DIRECCION = P_SOC_NUEVA_DIRECCION,
+            SOC_TELEFONO = P_SOC_NUEVO_TELEFONO
+        WHERE SOC_NUMERO = P_SOC_NUMERO;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BUSCAR_LIBRO_POR_NOMBRE` (IN `P_TITULO` VARCHAR(255))   BEGIN
+        SELECT LIB_ISBN, LIB_TITULO, LIB_GENERO, LIB_NUM_PAGINAS
+        FROM TABLA_LIBRO
+        -- Los % deben ir en comillas.
+        WHERE LIB_TITULO LIKE CONCAT('%', P_TITULO, '%');
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ELIMINAR_LIBRO` (IN `P_LIB_ISBN` BIGINT)   BEGIN 
+        -- Con esto verificamos si el libro tiene prestamos asociados.
+        IF NOT EXISTS (
+            SELECT 1
+            FROM TABLA_PRESTAMO
+            WHERE LIB_COPIA_ISBN = P_LIB_ISBN
+        ) THEN 
+            DELETE FROM TABLA_LIBRO
+            WHERE LIB_ISBN = P_LIB_ISBN;
+        -- END IF contiene ; al final.
+        END IF;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_LIBRO_EN_PRESTAMO` ()   BEGIN  
+        SELECT L.LIB_ISBN, L.LIB_TITULO, S.SOC_NUMERO, S.SOC_NOMBRE, S.SOC_APELLIDO, P.PRES_ID
+
+        FROM TABLA_PRESTAMO P
+        INNER JOIN TABLA_LIBRO L
+            ON L.LIB_ISBN = P.LIB_COPIA_ISBN
+        INNER JOIN TABLA_SOCIO S
+            ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO
+        ORDER BY S.SOC_APELLIDO;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_LISTA_AUTORES` ()   SELECT AUT_CODIGO, AUT_APELLIDO
+    FROM TABLA_AUTOR
+    ORDER BY AUT_APELLIDO DESC$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_SOCIOS_PRESTAMOS` ()   BEGIN
+        SELECT S.SOC_NUMERO, S.SOC_NOMBRE, S.SOC_APELLIDO, P.PRES_ID
+        FROM TABLA_SOCIO S
+        LEFT JOIN TABLA_PRESTAMO P
+            ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO
+        ORDER BY S.SOC_APELLIDO;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TIPO_AUTOR` (`VARIABLE` VARCHAR(20))   SELECT AUT_APELLIDO AS 'Autor', TIPO_AUTOR
+        FROM TABLA_AUTOR
+        INNER JOIN TABLA_TIPOAUTORES
+        ON AUT_CODIGO = COPIA_AUTOR
+        WHERE TIPO_AUTOR = VARIABLE$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_LIBRO` (`C1_ISBN` BIGINT(20), `C2_TITULO` VARCHAR(255), `C3_GENERO` VARCHAR(20), `C4_PAGINAS` INT(11), `C5_DIASPRES` TINYINT(4))   INSERT INTO TABLA_LIBRO (LIB_ISBN, LIB_TITULO, LIB_GENERO, LIB_NUM_PAGINAS, LIB_DIAS_PRESTAMO)
+
+        VALUES (C1_ISBN, C2_TITULO, C3_GENERO, C4_PAGINAS, C5_DIASPRES)$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `INSERT_SOCIO` (`P_SOC_NUMERO` INT(11), `P_SOC_NOMBRE` VARCHAR(45), `P_SOC_APELLIDO` VARCHAR(45), `P_SOC_DIRECCION` VARCHAR(255), `P_SOC_TELEFONO` VARCHAR(10))   BEGIN
+        INSERT INTO TABLA_SOCIO (
+            SOC_NUMERO,
+            SOC_NOMBRE,
+            SOC_APELLIDO,
+            SOC_DIRECCION,
+            SOC_TELEFONO
+        )
+
+        VALUES (
+            P_SOC_NUMERO,
+            P_SOC_NOMBRE,
+            P_SOC_APELLIDO,
+            P_SOC_DIRECCION,
+            P_SOC_TELEFONO
+        );
+    END$$
+
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `CONTAR_SOCIOS` () RETURNS INT(11) DETERMINISTIC BEGIN 
+        -- Nuestra variable | Guardará el valor de los socios
+        DECLARE TOTAL INT;
+
+        SELECT COUNT(*)
+        INTO TOTAL 
+        FROM TABLA_SOCIO;
+
+        RETURN TOTAL;
+    END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `DIAS_EN_PRESTAMO` (`P_LIB_ISBN` BIGINT) RETURNS INT(11) DETERMINISTIC BEGIN 
+        DECLARE DIAS INT;
+
+        SELECT DATEDIFF(CURDATE(), PRES_FECHA_PRESTAMO)
+        INTO DIAS
+        FROM TABLA_PRESTAMO
+        WHERE LIB_COPIA_ISBN = P_LIB_ISBN
+        LIMIT 1;
+
+        RETURN DIAS;
+    END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -140,9 +255,10 @@ INSERT INTO `tabla_socio` (`SOC_NUMERO`, `SOC_NOMBRE`, `SOC_APELLIDO`, `SOC_DIRE
 (7, 'Carlos', 'Sánchez', 'Calle de la Luna 234, El Prado, Alicante', '1123456781'),
 (8, 'Laura', 'Ramírez', 'Carrera del Mar 567, Playa Azul, Palma de Mallorca', '1312345678'),
 (9, 'Luis', 'Hernández', 'Avenida de la Montaña 890, Monte Verde, Granada', '6101234567'),
-(10, 'Andrea', 'García', 'Calle del Sol 432, La Colina, Zaragoza', '1112345678'),
+(10, 'Andrea', 'García', 'Avenida Bosa - Las Margaritas', '43144314'),
 (11, 'Alejandro', 'Torres', 'Carrera del Oeste 765, Ciudad Nueva, Murcia', '4951234567'),
-(12, 'Sofía', 'Morales', 'Avenida del Mar 098, Costa Brava, Gijón', '5512345678');
+(12, 'Sofía', 'Morales', 'Avenida del Mar 098, Costa Brava, Gijón', '5512345678'),
+(13, 'Cristian', 'Ruiz', 'Calle San Bernardino, Ciudad Jardin, Bogotá', '912342638');
 
 -- --------------------------------------------------------
 

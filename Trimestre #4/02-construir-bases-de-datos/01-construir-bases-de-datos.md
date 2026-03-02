@@ -36,6 +36,10 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [5. Importación de Archivos CSV - Taller: Biblioteca SQL](#importación-de-archivos-csv---taller-biblioteca-sql)
 
+[6. Procedimientos, Funciones, Triggers](#procedimientos-funciones-triggers)
+
+[7. Procedimientos y Funciones Aplicadas en Biblioteca BD](#procedimientos-y-funciones-aplicadas-en-biblioteca-bd)
+
 
 
 
@@ -1955,4 +1959,703 @@ Se debia implementar IN para esta consulta en donde:
         ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO;
 ```
 
+
+
+
+
+
+
+
+
+
 ---
+
+
+
+
+
+
+
+
+
+
+## Procedimientos, Funciones, Triggers
+
+> Clase del 02/03/2026
+
+* DML
+
+* DCL
+
+* DDL
+
+* Consulta de Datos
+
+* Productos Cartesiano: INNER JOIN, LEFT JOIN, RIGHT JOIN
+
+* Funciones de Agregado: SUM, MIN, MAX, AVG, COUNT
+
+* Clausulas:
+
+**Lenguaje Transaccional SQL**: son miniprogramas porque es algo especifico que se hacen por medio de funciones, triggers, procedimientos almacenados. En donde hay registros, borrados, consultas y demás procedimientos que pueden ser con parametros o sin parametros en donde depende si necesito esos datos o no.
+Existe parametros de entrada y de salida como: IN, IN-OUT, OUT
+
+Funciones: Siempre deben retornar y esta compuesto por sentencias SQL
+
+Triggers: Los disparadores se ejecutan sin necesidad de llamarlos (Como un programa en segundo plano) en donde puede auditar [hacerle seguimiento a los datos | Historial], no hace seguimiento a las consultas, pero sí a todo lo que hace un cambio.
+
+---
+
+**Procedimiento Almacenado**
+
+Esto consume memoria, por ende necesitamos que sea algo que el usuario siempre utilice porque si empezamos a crear un procedimiento por cada consulta esto puede ser muy pesado.
+
+No hay problema si tenemos pocos registros o pocas tablas, pero si tenemos miles de millones.
+
+```sql
+    USE CITAS;
+
+    -- Se informa que se debe crear el procedimiento
+    CREATE PROCEDURE LISTAPACIENTES()
+    SELECT PAC_ID, PAC_NOM, PAC_FECHANACIMIENTO
+    FROM PACIENTES;
+
+    -- Invocar Procedimiento
+    CALL LISTAPACIENTES()
+```
+
+---
+
+**Función**
+
+```sql
+    create trigger auditoria_modificacionpacientes before update on pacientes
+
+    for each row 
+    -- cada vez que se ejecute el update
+    insert into auditoria_pacientes #tabla creadra para la auditoria
+    (audi_nombreAnterior,audi_apellidoAnterior,audi_FechaAnterior,
+    audi_generoAnterior,audi_nombreNuevo,audi_apellidoNuevo,
+    audi_fechaNueva,audi_pacIdentificacion,audi_accion)
+    values
+    /*Todos los campos de la tabla auditada "pacientes" llevan la palabra old,
+    para conservar los datos iniciales*/
+    /*Todos los campos de la tabla auditada "pacientes" llevan la palabra new,
+    para guardar los nuevos datos*/
+    (old.pacNombres,old.pacApellidos,old.pacFechaNacimiento,old.pacGenero,
+    new.pacNombres,new.pacApellidos,new.pacFechaNacimiento,new.pacGenero,
+    now(),current_user(),new.pacIdentificacion,'Actualización');
+```
+
+---
+
+**Procedimientos Almacenados**
+
+Depende de qué gestor uses, pero en phpmyadmin DELIMITER$$, pero en WORKBENCH es DELIMITER//
+
+```sql
+    -- Cambiamos el delimitador y lo llamamos desde el inicio
+
+    -- Se usa el signo pesos
+    DELIMITER $$ 
+    CREATE PROCEDURE get_customer() 
+    
+    -- minuscula, que hace, y 
+    -- el nombre de la tabla de la cual se obtiene los datos y 
+    -- finaliza con paréntesis
+    BEGIN
+        SELECT * FROM CUSTOMER; /*el begin y el end
+        significa que esta sentencia hace parte del procedure,
+        dejar el delimitador ;*/
+
+    END $$
+    DELIMITER ;
+    -- y lo dejamos como estaba antes con ;
+    -- estos cambios son para mysql, en sql server no se hace.
+
+    -- forma de ejecutar el store procedure
+    call sakila.get_customer();
+    -- si estamos dentro de la base de datos solo call
+    get_customer();
+```
+
+Otro ejemplo de un Procedimiento Almanceado:
+
+```sql
+    -- ejemplo
+    -- cambiamos el delimitador y lo llamamos desde el inicio
+    DELIMITER $$ 
+    -- se usa el signo pesos
+    CREATE PROCEDURE get_customer() 
+    -- minuscula, que hace, y 
+    -- el nombre de la tabla de la cual se obtiene los datos y 
+    -- finaliza con paréntesis
+    BEGIN
+        SELECT * FROM CUSTOMER; 
+        /*el begin y el end
+        significa que esta sentencia hace parte del procedure,
+        dejar el delimitador ;*/
+    END $$
+    DELIMITER ;
+    -- y lo dejamos como estaba antes con ;
+    -- estos cambios son para mysql, en sql server no se hace.
+
+    -- forma de ejecutar el store procedure
+    call sakila.get_customer();
+    -- Si estamos dentro de la base de datos solo call
+    get_customer();
+```
+
+Vamos a mirar otro ejemplo por ende creamos una BD:
+
+```sql
+    CREATE DATABASE VENTAS;
+    USE VENTAS;
+
+    CREATE TABLE CLIENTES (
+        ID_CLIENTE INT NOT NULL AUTO_INCREMENT,
+        NOMBRE_CLIENTE VARCHAR(20) NOT NULL,
+        TELEFONO_CLIENTE BIGINT NOT NULL,
+        CORREO_CLIENTE VARCHAR(255) NOT NULL,
+        PRIMARY KEY(ID_CLIENTE)
+    );
+
+    INSERT INTO CLIENTE (ID_CLIENTE, NOMBRE_CLIENTE, TELEFONO_CLIENTE, CORREO_CLIENTE)
+    VALUES 
+    (1, 'Ana García', '555-0101', 'ana.garcia@email.com'),
+    (2, 'Carlos López', '555-0202', 'carlos.lopez@email.com'),
+    (3, 'María Rodríguez', '555-0303', 'maria.rod@email.com'),
+    (4, 'Juan Pérez', '555-0404', 'juan.perez@email.com'),
+    (5, 'Elena Beltrán', '555-0505', 'elena.b@email.com');
+```
+
+Digamos que yo siempre llamo a los clientes y por ende necesito su nombre y numero celular. Será una consulta sencilla
+
+> Esto ya no se puede poner en servidores gratuitos porque ya cobran.
+
+```sql
+    CREATE PROCEDURE LISTA_CLIENTES()
+    SELECT NOMBRE_CLIENTE, TELEFONO_CLIENTE
+    FROM CLIENTES;
+```
+
+Para llamar al procedimiento podemos usar:
+
+```sql
+    CALL LISTA_CLIENTES();
+```
+
+Se menciona que ahora vamos a hacer uso de IN para el parametro NOM siendo asi un procedimiento que usa datos de entrada
+
+```sql
+    CREATE PROCEDURE GET_NOMBRE_CLIENTE(IN NOM VARCHAR(20))
+    SELECT * FROM CLIENTES
+    WHERE NOMBRE_CLIENTE = NOM;
+
+    -- LLamamos a nuestro procedimiento
+
+    CALL GET_NOMBRE_CLIENTE('Elena Beltrán')
+```
+
+> Existen tambien parametros por defecto.
+
+**Procedimiento de salida**
+
+Un ejemplo:
+
+```sql
+    CREATE PROCEDURE contarProductosPorEstado(
+        IN nombre_estado VARCHAR(25),
+
+        -- Numero es la variable que me dirá qué productos estan disponibles
+        OUT numero INT)
+    -- COUNT va a contar
+    SELECT count(id)
+
+    -- Guarda el valor en la variable numero
+    INTO numero
+    FROM productos
+    WHERE estado = nombre_estado;
+```
+
+Aplicado a nuestra BD:
+
+```sql
+    CREATE PROCEDURE GET_CONTAR_NOMBRE(IN NOM VARCHAR(20), OUT CUENTA INT)
+    SELECT COUNT(NOMBRE_CLIENTE)
+    INTO CUENTA
+    FROM CLIENTES    
+    WHERE NOMBRE_CLIENTE = NOM;
+
+    -- LLamamos a nuestro procedimiento
+
+    CALL GET_CONTAR_NOMBRE  ('Elena Beltrán', @CUENTA);
+    SELECT @NOMBRE AS 'Cantidad Nombres Seleccionados'
+```
+
+Siendo esto variables de salida, muy util en temas de inventarios de salida.
+
+**Variables de Usuario | @**
+
+Solo estan activas mientras mi sesión este activa y podré usar esa variable mientras siga. Estas nos permiten almacenar un valor
+
+```sql
+    -- # 1. Declaramos la variable y llamamos al procedimiento
+    -- # Usamos el procedimiento de la imagen 3 que tiene un parámetro OUT
+    CALL contarProductosPorEstado('activo', @total_activos);
+
+    -- # 2. Consultamos el valor almacenado en la variable de usuario
+    SELECT @total_activos AS 'Total de Productos Activos';
+
+    -- # Ejemplo de uso de variable de usuario en una operación simple
+    SET @descuento = 0.10;
+    SELECT nombre_cliente, (precio * @descuento) AS ahorro 
+    FROM CLIENTE;
+```
+
+Ahora para temas más de inventario:
+
+```sql
+    DELIMITER $$
+    CREATE PROCEDURE venderProducto(
+        INOUT beneficio FLOAT,
+        IN id_producto INT)
+    BEGIN
+        -- SELECT @incremento_precio = precio
+        SELECT precio INTO @incremento_precio
+        FROM productos
+        WHERE id = id_producto;
+        SET beneficio = beneficio + @incremento_precio;
+    END $$
+    DELIMITER ;
+
+    -- # Ejemplo de ejecución con variables de usuario:
+    SET @beneficio=0;
+
+    -- #beneficio=0 id=1 beneficio sería 0+8=8
+    CALL venderProducto(@beneficio,1); 
+    --  #beneficio=8 id=2 beneficio sería 8+1.5=9.5
+    CALL venderProducto(@beneficio,2);
+    --  #beneficio=9.5 id=2 beneficio sería 9.5+1.5=11
+    CALL venderProducto(@beneficio,2);
+
+    -- Selección del Beneficio total
+    SELECT @beneficio;
+    SELECT @incremento_precio;
+```
+
+---
+
+Se comparte el siguente código para revisar:
+
+```sql
+    CREATE TABLE if NOT EXISTS productos (
+        id INT NOT NULL AUTO_INCREMENT,
+        nombre VARCHAR(20) NOT NULL,
+        estado VARCHAR(20) NOT NULL DEFAULT 'disponible',
+        precio FLOAT NOT NULL DEFAULT 0.0,
+        PRIMARY KEY(id)
+    );
+    INSERT INTO productos (nombre, estado, precio) 
+    VALUES 
+    ('Producto A','disponible', 8), ('Producto B', 'disponible', 1.5),('Producto C', 'agotado', 80);
+    CREATE PROCEDURE obtenerProductosPorEstado(IN nombre_estado VARCHAR(255))
+        SELECT * 
+        FROM productos
+        WHERE estado = nombre_estado;
+    CALL obtenerProductosPorEstado('disponible');
+    DELIMITER $$
+    CREATE PROCEDURE contarProductosPorEstado(
+        IN nombre_estado VARCHAR(25),
+        OUT numero INT)
+    BEGIN
+        SELECT count(id) 
+        INTO numero
+        FROM productos
+        WHERE estado = nombre_estado;
+    END$$
+    DELIMITER ;
+    CALL contarProductosPorEstado('disponible',@numero);
+    SELECT @numero AS disponibles;
+```
+
+y se pide hacer el siguente procedimiento:
+
+```sql
+    DELIMITER $$
+    CREATE PROCEDURE venderProducto(
+        INOUT beneficio FLOAT,
+        IN id_producto INT)
+    BEGIN
+        #SELECT @incremento_precio = precio
+        SELECT precio INTO @incremento_precio
+        FROM productos
+        WHERE id = id_producto;
+        SET beneficio = beneficio + @incremento_precio;
+    END $$
+    DELIMITER ;
+
+    -- Ejemplo de ejecución:
+    SET @beneficio=0;
+
+    CALL venderProducto(@beneficio,1); #beneficio=0 id=1 beneficio sería 0+8=8
+    CALL venderProducto(@beneficio,2); #beneficio=8 id=2 beneficio sería 8+1.5=9.5
+    CALL venderProducto(@beneficio,2); #beneficio=9.5 id=2 beneficio sería 9.5+1.5=11
+
+    SELECT @beneficio;
+    SELECT @incremento_precio;
+```
+
+**A continuación un procedimiento para sumar**
+
+```sql
+    DROP PROCEDURE IF EXISTS pa_sumar;
+    DELIMITER $$
+    CREATE PROCEDURE pa_sumar(
+        IN V1 INT,
+        IN V2 INT)
+        BEGIN
+            DECLARE suma INT;
+            SET suma=V1+V2;/*para modificar una variable utilizamos la palabra set 
+    set suma=V1+V2; */
+            SELECT suma;
+        END$$
+    DELIMITER ;
+
+    CALL pa_sumar(1,5);
+```
+
+---
+
+Se pide insertar:
+
+```sql
+    SELECT CONCAT('Ma', 'ria', 'DB');
+    SELECT CONCAT(nombre, estado);
+    SELECT SUBSTRING('Knowledgebase', 3, 7);
+    SELECT UPPER("SQL Tutorial is FUN!");
+
+    -- La respuesta es 4 elevado a la 2.
+    SELECT POW(4, 2);
+
+    SELECT ROUND(135.375, 2);
+```
+
+```sql  
+    SET lc_time_names = 'es_ES'; #quede en el españo 
+    SELECT DATE_FORMAT('1997-10-04 22:23:00', '%d %M %Y') AS 'Nuevo formato';
+
+    -- Para mirar diferencia entre días
+    SELECT DATEDIFF('2007-12-31 23:59:59','2007-12-30');
+```
+
+---
+
+En convenciones se comenta que es necesario al escribir en SQL:
+
+* fn_nombre: Si es una función
+
+* proc_nombre: Si es un procedimiento
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Procedimientos y Funciones Aplicadas en Biblioteca BD
+
+Ahora iremos a el codigo de la biblioteca para poner en practica lo aprendido:
+
+* Para ingresar a este código, puede observar: [03-biblioteca_santiagoencodigo.sql](https://github.com/santiagoencodigo/Guia-Completa-de-Analisis-y-Desarrollo-de-Software/blob/main/Trimestre%20%234/02-construir-bases-de-datos/sql/03-biblioteca_santiagoencodigo.sql)
+
+**Procedimientos Almacenados:**
+
+```sql
+    -- Procedimiento sin parametros con una consulta
+    DROP PROCEDURE IF EXISTS GET_LISTA_AUTORES;
+    CREATE PROCEDURE GET_LISTA_AUTORES()
+    SELECT AUT_CODIGO, AUT_APELLIDO
+    FROM TABLA_AUTOR
+    ORDER BY AUT_APELLIDO DESC;
+
+    CALL GET_LISTA_AUTORES();
+
+    -- Procedimiento con parametro de entrada IN con consulta JOIN
+    DROP PROCEDURE IF EXISTS GET_TIPO_AUTOR;
+
+    CREATE PROCEDURE GET_TIPO_AUTOR(VARIABLE VARCHAR(20))
+        SELECT AUT_APELLIDO AS 'Autor', TIPO_AUTOR
+        FROM TABLA_AUTOR
+        INNER JOIN TABLA_TIPOAUTORES
+        ON AUT_CODIGO = COPIA_AUTOR
+        WHERE TIPO_AUTOR = VARIABLE;
+
+    CALL GET_TIPO_AUTOR('Traductor');
+
+    -- Procedimiento para Insertar
+    DROP PROCEDURE IF EXISTS INSERT_LIBRO;
+
+    CREATE PROCEDURE INSERT_LIBRO(C1_ISBN BIGINT(20), C2_TITULO VARCHAR(255), C3_GENERO VARCHAR(20), C4_PAGINAS INT(11), C5_DIASPRES TINYINT(4))
+    
+        INSERT INTO TABLA_LIBRO (LIB_ISBN, LIB_TITULO, LIB_GENERO, LIB_NUM_PAGINAS, LIB_DIAS_PRESTAMO)
+
+        VALUES (C1_ISBN, C2_TITULO, C3_GENERO, C4_PAGINAS, C5_DIASPRES);
+
+    CALL INSERT_LIBRO(9788426721006,'sql','ingenieria',384,15);
+
+    SELECT * FROM TABLA_LIBRO;
+```
+
+Se pide entonces:
+
+1. Hacer un procedimiento con un LEFT JOIN entre las tablas socio y préstamo,
+donde la prioridad es la tabla socio.
+
+> Debo estudiar este tema, porque realmente no podría solucionarlo.
+
+```sql
+    -- Es buena practica eliminar si existe.
+    DROP PROCEDURE IF EXISTS GET_SOCIOS_PRESTAMOS;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE GET_SOCIOS_PRESTAMOS()
+    BEGIN
+        SELECT S.SOC_NUMERO, S.SOC_NOMBRE, S.SOC_APELLIDO, P.PRES_ID
+        FROM TABLA_SOCIO S
+        LEFT JOIN TABLA_PRESTAMO P
+            ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO
+        ORDER BY S.SOC_APELLIDO;
+    END $$
+
+    -- Es importante que halla un espacio entre DELIMITER y ;
+    DELIMITER ;
+
+    -- Ejecución del Procedimiento para observar el LEFT JOIN
+
+    CALL GET_SOCIOS_PRESTAMOS();
+```
+
+2. Hacer procedimiento para listar los libros que están en préstamo con su
+correspondiente socio con un INNER JOIN
+
+> Debo estudiar este tema, porque tampoco podria solucionarlo... Aunque tengo idea pues entiendo que estoy escribiendo. Pero no podría escribirlo de la nada, me falta práctica
+
+```sql
+    DROP PROCEDURE IF EXISTS GET_LIBRO_EN_PRESTAMO;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE GET_LIBRO_EN_PRESTAMO()
+    BEGIN  
+        SELECT L.LIB_ISBN, L.LIB_TITULO, S.SOC_NUMERO, S.SOC_NOMBRE, S.SOC_APELLIDO, P.PRES_ID
+
+        FROM TABLA_PRESTAMO P
+        INNER JOIN TABLA_LIBRO L
+            ON L.LIB_ISBN = P.LIB_COPIA_ISBN
+        INNER JOIN TABLA_SOCIO S
+            ON S.SOC_NUMERO = P.SOC_COPIA_NUMERO
+        ORDER BY S.SOC_APELLIDO;
+    END $$
+
+    DELIMITER ;
+
+    CALL GET_LIBRO_EN_PRESTAMO();
+
+```
+
+3. Hacer un procedimiento para insertar un socio
+
+```sql
+    DROP PROCEDURE IF EXISTS INSERT_SOCIO;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE INSERT_SOCIO(
+        P_SOC_NUMERO int(11),
+        P_SOC_NOMBRE varchar(45),
+        P_SOC_APELLIDO varchar(45),
+        P_SOC_DIRECCION varchar(255),
+        P_SOC_TELEFONO varchar(10)
+    )
+
+    BEGIN
+        INSERT INTO TABLA_SOCIO (
+            SOC_NUMERO,
+            SOC_NOMBRE,
+            SOC_APELLIDO,
+            SOC_DIRECCION,
+            SOC_TELEFONO
+        )
+
+        VALUES (
+            P_SOC_NUMERO,
+            P_SOC_NOMBRE,
+            P_SOC_APELLIDO,
+            P_SOC_DIRECCION,
+            P_SOC_TELEFONO
+        );
+    END $$
+
+    DELIMITER ;
+
+    CALL INSERT_SOCIO(13, 'Cristian', 'Ruiz', 'Calle San Bernardino, Ciudad Jardin, Bogotá', '912342638');
+
+```
+
+4. Hacer un procedimiento para buscar por nombre del libro.
+
+```sql
+    DROP PROCEDURE IF EXISTS BUSCAR_LIBRO_POR_NOMBRE;
+
+    DELIMITER $$
+    CREATE PROCEDURE BUSCAR_LIBRO_POR_NOMBRE ( 
+        IN P_TITULO VARCHAR(255))
+    BEGIN
+        SELECT LIB_ISBN, LIB_TITULO, LIB_GENERO, LIB_NUM_PAGINAS
+        FROM TABLA_LIBRO
+        -- Los % deben ir en comillas.
+        WHERE LIB_TITULO LIKE CONCAT('%', P_TITULO, '%');
+    END $$
+
+    DELIMITER ;
+
+    CALL BUSCAR_LIBRO_POR_NOMBRE('sql');
+```
+
+5. Hacer un procedimiento para actualizar el teléfono y dirección de un socio.
+
+> Para estos es bueno pensar en ¿Qué debe hacer?
+
+```sql
+    DROP PROCEDURE IF EXISTS ACTUALIZAR_DATOS_SOCIO;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE  ACTUALIZAR_DATOS_SOCIO(
+        IN P_SOC_NUMERO INT,
+        IN P_SOC_NUEVA_DIRECCION VARCHAR(255),
+        IN P_SOC_NUEVO_TELEFONO VARCHAR(10)
+    )
+
+    BEGIN 
+        UPDATE TABLA_SOCIO
+        SET  
+            SOC_DIRECCION = P_SOC_NUEVA_DIRECCION,
+            SOC_TELEFONO = P_SOC_NUEVO_TELEFONO
+        WHERE SOC_NUMERO = P_SOC_NUMERO;
+    END $$
+
+    DELIMITER ;
+
+    CALL ACTUALIZAR_DATOS_SOCIO(10, 'Avenida Bosa - Las Margaritas', 43144314)
+
+```
+
+6. Hacer un procedimiento para eliminar un libro (cuidado: no debe tener
+dependencias)
+
+> No se puede eliminar si está relacionado en TABLA_PRESTAMO.
+
+```sql
+    DROP PROCEDURE IF EXISTS ELIMINAR_LIBRO;
+
+    DELIMITER $$
+
+    CREATE PROCEDURE ELIMINAR_LIBRO(
+        IN P_LIB_ISBN BIGINT 
+    )
+    BEGIN 
+        -- Con esto verificamos si el libro tiene prestamos asociados.
+        IF NOT EXISTS (
+            SELECT 1
+            FROM TABLA_PRESTAMO
+            WHERE LIB_COPIA_ISBN = P_LIB_ISBN
+        ) THEN 
+            DELETE FROM TABLA_LIBRO
+            WHERE LIB_ISBN = P_LIB_ISBN;
+        -- END IF contiene ; al final.
+        END IF;
+    END $$
+
+    DELIMITER ;
+
+    CALL ELIMINAR_LIBRO(9788426721006);
+```
+
+7. Hacer una función que devuelva cuantos socios hay registrados.
+
+> Ya una función usa RETURN
+
+```sql
+    DROP FUNCTION IF EXISTS CONTAR_SOCIOS;
+
+    DELIMITER $$
+    
+    CREATE FUNCTION CONTAR_SOCIOS()
+
+    -- Se especifica que retorne un número
+    RETURNS INT DETERMINISTIC
+    BEGIN 
+        -- Nuestra variable | Guardará el valor de los socios
+        DECLARE TOTAL INT;
+
+        SELECT COUNT(*)
+        INTO TOTAL 
+        FROM TABLA_SOCIO;
+
+        RETURN TOTAL;
+    END $$
+    
+    DELIMITER ;
+
+    SELECT CONTAR_SOCIOS() AS TOTAL_SOCIOS;
+```
+
+8. Hacer una función que devuelve cuantos días ha estado en préstamo ese
+libro. Parámetros (idlibro), usar la función integrada DATEDIFF.
+
+```sql
+    DROP FUNCTION IF EXISTS DIAS_EN_PRESTAMO;
+
+    DELIMITER $$
+
+    CREATE FUNCTION DIAS_EN_PRESTAMO(
+        P_LIB_ISBN BIGINT
+    )
+    -- RETURNS solo se usa para definir el tipo de dato
+    RETURNS INT DETERMINISTIC
+
+    BEGIN 
+        DECLARE DIAS INT;
+
+        SELECT DATEDIFF(CURDATE(), PRES_FECHA_PRESTAMO)
+        INTO DIAS
+        FROM TABLA_PRESTAMO
+        WHERE LIB_COPIA_ISBN = P_LIB_ISBN
+        LIMIT 1;
+
+        RETURN DIAS;
+    END $$
+
+    DELIMITER ;
+
+    SELECT DIAS_EN_PRESTAMO(7777777777) AS DIAS;
+```
+
