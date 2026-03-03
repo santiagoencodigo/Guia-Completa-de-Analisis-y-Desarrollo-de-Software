@@ -32,9 +32,11 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 [4. Formularios (Labels e Inputs)](#formularios-labels-e-inputs)
 
-[4. Atributos para Formularios]()
+[4. Atributos para Formularios](#atributos-para-formularios)
 
-[5. CSS - Cascading Style Sheets]()
+[5. CSS - Cascading Style Sheets](#css---cascading-style-sheets)
+
+[6. Maquetación](#maquetación-en-css)
 
 
 
@@ -1122,7 +1124,7 @@ Para los diferentes tipos de inputs le recomiendo la lectura: https://developer.
 
 
 
-# CSS - Cascading Style Sheets
+## CSS - Cascading Style Sheets
 
 CSS (Cascading Style Sheets) es el lenguaje utilizado para definir la apariencia y el diseño visual de un documento HTML. Permite separar la estructura (HTML) de la presentación (colores, tamaños, márgenes, posiciones, etc.).
 
@@ -1262,12 +1264,187 @@ contenedores padre, contenedores hijo
 
 
 
+
+
+
+
+
 ---
 
 
 
 
 
+
+
+
+
+
+
+## Maquetación en CSS
+
+La **maquetación** en CSS consiste en organizar y distribuir los elementos dentro de una página web. Define cómo se posicionan, cómo ocupan espacio y cómo interactúan entre sí dentro del diseño.
+
+La base de la maquetación tradicional en CSS se construye a partir del **modelo de caja** y técnicas de posicionamiento como `relative` y `float`.
+
+---
+
+**Modelo de caja**
+
+Todos los elementos en CSS se representan como una caja rectangular. Este modelo está compuesto por:
+
+- Content (contenido)
+- Padding (relleno interno)
+- Border (borde)
+- Margin (margen externo)
+
+Ejemplo:
+
+```css
+.caja {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  border: 5px solid black;
+  margin: 15px;
+}
+```
+
+Orden del modelo de caja (de adentro hacia afuera):
+
+* Contenido
+
+* Padding
+
+* Border
+
+* Margin
+
+Propiedad útil relacionada:
+
+```css
+* {
+  box-sizing: border-box;
+}
+```
+
+box-sizing: border-box; hace que el width y height incluyan padding y border dentro del tamaño total del elemento.
+
+Posicionamiento relativo
+
+El posicionamiento relativo permite mover un elemento respecto a su posición original sin sacarlo del flujo normal del documento.
+
+Se utiliza con:
+
+* position: relative;
+
+* top
+
+* bottom
+
+* left
+
+* right
+
+Ejemplo:
+
+```css
+.elemento {
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+```
+
+Características:
+
+* Mantiene su espacio original.
+
+* Se desplaza visualmente.
+
+* Sirve como referencia para elementos con position: absolute.
+
+* Posicionamiento flotante (Float)
+
+La propiedad float se utiliza para hacer que un elemento flote a la izquierda o derecha, permitiendo que otros elementos (como texto) lo rodeen.
+
+Fue muy usada para maquetación antes de Flexbox y Grid.
+
+Sintaxis:
+
+`float: valor;`
+
+**Características del float**
+
+* Saca al elemento parcialmente del flujo normal.
+
+* Permite que otros elementos se ajusten a su alrededor.
+
+* Requiere limpieza con clear en algunos casos.
+
+Float: none
+
+Es el valor por defecto. El elemento no flota.
+
+```css
+.caja {
+  float: none;
+}
+```
+
+`Float: left`
+
+El elemento se alinea a la izquierda y el contenido fluye a su derecha.
+
+```css
+.imagen {
+  float: left;
+  margin-right: 10px;
+}
+```
+
+`Float: right`
+
+El elemento se alinea a la derecha y el contenido fluye a su izquierda.
+
+```css
+.imagen {
+  float: right;
+  margin-left: 10px;
+}
+```
+
+* Clear (corrección de flotado)
+
+Se utiliza para evitar que otros elementos se vean afectados por el float.
+
+Valores comunes:
+
+* clear: left;
+
+* clear: right;
+
+* clear: both;
+
+Ejemplo:
+
+```css
+.footer {
+  clear: both;
+}
+```
+
+* clear: both; evita que el elemento se coloque al lado de elementos flotantes anteriores.
+
+**Conclusión**
+
+El modelo de caja es la base de toda maquetación en CSS.
+
+position: relative; permite mover elementos sin romper el flujo.
+
+float fue una técnica clave para diseño en columnas.
+
+Actualmente se recomienda usar Flexbox o Grid para maquetación moderna, pero entender float es importante para mantener proyectos antiguos.
 
 
 
