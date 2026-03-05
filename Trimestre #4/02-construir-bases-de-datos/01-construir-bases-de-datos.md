@@ -40,6 +40,8 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [7. Procedimientos y Funciones Aplicadas en Biblioteca BD](#procedimientos-y-funciones-aplicadas-en-biblioteca-bd)
 
+[8. Triggers]()
+
 
 
 
@@ -2659,3 +2661,404 @@ libro. Parámetros (idlibro), usar la función integrada DATEDIFF.
     SELECT DIAS_EN_PRESTAMO(7777777777) AS DIAS;
 ```
 
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Triggers
+
+> Clase del 5/03/2026
+
+Un uso común de los triggers es para la auditoria. Uno no deberia borrar los datos "Asi como asi", generalmente se pasa a otra tabla.
+
+Si retiras tu cuenta bancaria, el banco no te elimina sino que hace un backup de como estuvo la historia contigo y generalmente se retiene esta información en un periodo de 10 años dependiendo de las politicas de datos de la empresa.
+
+La auditoria crea una tabla nueva si o si.
+
+1. Primero se tiene que crear la tabla de respaldo.
+
+2. Despues se crea el trigger.
+
+> Podemos pensar de un trigger como el "Lo q    ue habia antes, lo que hay ahora."
+
+Se pide escribir el siguente código sql de un trigger de procedimiento.
+
+```sql
+
+    CREATE DATABASE Productos_santiagoencodigo;
+    USE Productos_santiagoencodigo;
+
+    CREATE TABLE Producto(
+        productoID INT PRIMARY KEY,
+        nombrePro VARCHAR(30) NOT NULL,
+        precioPro INT NOT NULL,
+        cantidadTotalPro INT NOT NULL);
+        
+    CREATE TABLE Entrada(
+        entradaID INT PRIMARY KEY,
+        fechaEntrada DATE NOT NULL,
+        cantidadEntrada INT NOT NULL,
+        productoID INT NOT NULL,
+        FOREIGN KEY (productoID) REFERENCES Producto(productoID));
+        
+    INSERT INTO Producto(productoID,nombrePro, precioPro, cantidadTotalPro)
+    VALUES (1,'Panela',200,0),(2,'Pastas doria familiar',3500,0);
+
+    DROP TRIGGER IF EXISTS entrada_producto;
+    DELIMITER $$
+        CREATE TRIGGER entrada_producto BEFORE INSERT
+        ON Entrada FOR EACH ROW
+        BEGIN
+            UPDATE Producto 
+            SET cantidadTotalPro=Producto.cantidadTotalPro+new.cantidadEntrada
+            WHERE new.productoID=Producto.productoID;
+        END$$
+    DELIMITER ;
+
+    INSERT INTO entrada(entradaID, fechaEntrada, cantidadEntrada, productoID) 
+    VALUES (001,'2020-10-06',10,1);
+
+    SELECT * FROM Producto;
+
+    -- detalle los cambios en la tabla producto
+    INSERT INTO entrada(entradaID, fechaEntrada, cantidadEntrada, productoID) 
+    VALUES (002,'2020-10-06',13,1);
+    INSERT INTO entrada(entradaID, fechaEntrada, cantidadEntrada, productoID) 
+    VALUES (003,'2020-10-06',50,2);
+    SELECT * FROM Producto;
+```
+
+Se nos pide volver a la base de datos de nuesrta biblioteca e insertar el nuevo trigger que servira de auditoria en la tabla socios sino quiero que se pierda nada.
+
+```sql
+    CREATE TABLE AUDI_SOCIO(
+        ID_AUDI INT(10) AUTO_INCREMENT,
+        SOC_NUMERO_AUDI INT(11),
+        SOC_NOMBRE_ANTERIOR VARCHAR(45),
+        SOC_APELLIDO_ANTERIOR VARCHAR(45),
+        SOC_DIRECCION_ANTERIOR VARCHAR(255),
+        SOC_TELEFONO_ANTERIOR VARCHAR(10),
+        
+        SOC_NOMBRE_NUEVO VARCHAR(45),
+        SOC_APELLIDO_NUEVO VARCHAR(45),
+        SOC_DIRECCION_NUEVO VARCHAR(255),
+        SOC_TELEFONO_NUEVO VARCHAR(10),
+
+        -- En qué fecha se modifico?
+        AUDI_FECHA_MODIFICACION DATETIME,
+
+        -- ¿Cual fue el usuario que modifico?
+        AUDI_USUARIO VARCHAR(10),
+
+        -- ¿Qué hizo el usuario?
+        AUDI_ACCION VARCHAR(45),
+        PRIMARY KEY(ID_AUDI)
+    );
+```
+
+Una vez teniendo esa tabla se pide escribir el trigger.
+
+```sql
+    DROP TRIGGER IF EXISTS SOCIOS_BEFORE_INSERT;
+
+    DELIMITER $$
+
+    CREATE TRIGGER SOCIOS_BEFORE_INSERT
+    BEFORE INSERT ON TABLA_SOCIO
+    FOR EACH ROW
+    BEGIN
+
+    INSERT INTO AUDI_SOCIO(
+
+        SOC_NUMERO_AUDI,
+
+        SOC_NOMBRE_NUEVO,
+        SOC_APELLIDO_NUEVO,
+        SOC_DIRECCION_NUEVO,
+        SOC_TELEFONO_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        NEW.SOC_NUMERO,
+        NEW.SOC_NOMBRE,
+        NEW.SOC_APELLIDO,
+        NEW.SOC_DIRECCION,
+        NEW.SOC_TELEFONO,
+
+        NOW(),
+        CURRENT_USER(),
+        'INSERT'
+
+    );
+
+    END $$
+
+    DELIMITER ;
+```
+
+Entonces si se actualiza, si se borra y demás acciones. Esto va a aparecer en una nueva tabla que mostrara tanto los viejos como los nuevos.
+
+Despues entonces se pide que hagamos un trigger por si se borran datos.
+
+```sql
+    DROP TRIGGER IF EXISTS SOCIOS_BEFORE_UPDATE;
+
+    DELIMITER $$
+
+    CREATE TRIGGER SOCIOS_BEFORE_UPDATE
+    BEFORE UPDATE ON TABLA_SOCIO
+    FOR EACH ROW
+    BEGIN
+
+    INSERT INTO AUDI_SOCIO(
+
+        SOC_NUMERO_AUDI,
+
+        SOC_NOMBRE_ANTERIOR,
+        SOC_APELLIDO_ANTERIOR,
+        SOC_DIRECCION_ANTERIOR,
+        SOC_TELEFONO_ANTERIOR,
+
+        SOC_NOMBRE_NUEVO,
+        SOC_APELLIDO_NUEVO,
+        SOC_DIRECCION_NUEVO,
+        SOC_TELEFONO_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        OLD.SOC_NUMERO,
+        OLD.SOC_NOMBRE,
+        OLD.SOC_APELLIDO,
+        OLD.SOC_DIRECCION,
+        OLD.SOC_TELEFONO,
+
+        NEW.SOC_NOMBRE,
+        NEW.SOC_APELLIDO,
+        NEW.SOC_DIRECCION,
+        NEW.SOC_TELEFONO,
+
+        NOW(),
+        CURRENT_USER(),
+        'UPDATE'
+
+    );
+
+    END $$
+
+    DELIMITER ;
+```
+
+```sql
+    -- ojo no se puede eliminar un registro que tenga FK
+    -- registros asociados a otras tablas
+    DELETE FROM tbl_socio
+    WHERE soc_numero=123456;
+
+    -- consultar tabla de auditoria
+    SELECT * FROM audi_socio;
+```
+
+---
+
+**Actividad de la Sesión, se pide generar los siguentes triggers:**
+
++ Un trigger de auditoria para un insert.
+
++ Un trigger de auditoria para un update.
+
++ Un trigger de auditoria para un delete en la tabla libro.
+
+Si queremos hacer esto, primero debemos crear nuestra tabla para auditorias:
+
+```sql
+    CREATE TABLE AUDI_LIBRO(
+        ID_AUDI INT AUTO_INCREMENT,
+
+        LIB_ISBN_AUDI BIGINT,
+
+        LIB_TITULO_ANTERIOR VARCHAR(255),
+        LIB_GENERO_ANTERIOR VARCHAR(50),
+        LIB_NUM_PAGINAS_ANTERIOR INT,
+
+        LIB_TITULO_NUEVO VARCHAR(255),
+        LIB_GENERO_NUEVO VARCHAR(50),
+        LIB_NUM_PAGINAS_NUEVO INT,
+
+        AUDI_FECHA_MODIFICACION DATETIME,
+        AUDI_USUARIO VARCHAR(50),
+        AUDI_ACCION VARCHAR(20),
+
+        PRIMARY KEY(ID_AUDI)
+    );
+```
+
+Y luego hay si se crea el Trigger de Auditoria para INSERT:
+
+```sql
+    DROP TRIGGER IF EXISTS LIBRO_BEFORE_INSERT;
+
+    DELIMITER $$
+
+    CREATE TRIGGER LIBRO_BEFORE_INSERT
+    BEFORE INSERT ON TABLA_LIBRO
+    FOR EACH ROW
+    BEGIN
+
+    INSERT INTO AUDI_LIBRO(
+
+        LIB_ISBN_AUDI,
+
+        LIB_TITULO_NUEVO,
+        LIB_GENERO_NUEVO,
+        LIB_NUM_PAGINAS_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        NEW.LIB_ISBN,
+        NEW.LIB_TITULO,
+        NEW.LIB_GENERO,
+        NEW.LIB_NUM_PAGINAS,
+
+        NOW(),
+        CURRENT_USER(),
+        'INSERT'
+
+    );
+
+    END $$
+
+    DELIMITER ;
+```
+
+Y entonces se crea el Trigger Auditoria Update:
+
+```sql
+    DROP TRIGGER IF EXISTS LIBRO_BEFORE_UPDATE;
+
+    DELIMITER $$
+
+    CREATE TRIGGER LIBRO_BEFORE_UPDATE
+    BEFORE UPDATE ON TABLA_LIBRO
+    FOR EACH ROW
+    BEGIN
+
+    INSERT INTO AUDI_LIBRO(
+
+        LIB_ISBN_AUDI,
+
+        LIB_TITULO_ANTERIOR,
+        LIB_GENERO_ANTERIOR,
+        LIB_NUM_PAGINAS_ANTERIOR,
+
+        LIB_TITULO_NUEVO,
+        LIB_GENERO_NUEVO,
+        LIB_NUM_PAGINAS_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        OLD.LIB_ISBN,
+
+        OLD.LIB_TITULO,
+        OLD.LIB_GENERO,
+        OLD.LIB_NUM_PAGINAS,
+
+        NEW.LIB_TITULO,
+        NEW.LIB_GENERO,
+        NEW.LIB_NUM_PAGINAS,
+
+        NOW(),
+        CURRENT_USER(),
+        'UPDATE'
+
+    );
+
+    END $$
+
+    DELIMITER ;
+```
+
+Y finalmente un trigger de auditoria para DELETE:
+
+```sql
+    DROP TRIGGER IF EXISTS LIBRO_BEFORE_DELETE;
+
+    DELIMITER $$
+
+    CREATE TRIGGER LIBRO_BEFORE_DELETE
+    BEFORE DELETE ON TABLA_LIBRO
+    FOR EACH ROW
+    BEGIN
+
+    INSERT INTO AUDI_LIBRO(
+
+        LIB_ISBN_AUDI,
+
+        LIB_TITULO_ANTERIOR,
+        LIB_GENERO_ANTERIOR,
+        LIB_NUM_PAGINAS_ANTERIOR,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        OLD.LIB_ISBN,
+        OLD.LIB_TITULO,
+        OLD.LIB_GENERO,
+        OLD.LIB_NUM_PAGINAS,
+
+        NOW(),
+        CURRENT_USER(),
+        'DELETE'
+
+    );
+
+    END $$
+
+    DELIMITER ;
+```
+
+---

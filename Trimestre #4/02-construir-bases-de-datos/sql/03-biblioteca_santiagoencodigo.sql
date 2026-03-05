@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 02-03-2026 a las 17:30:13
+-- Tiempo de generación: 05-03-2026 a las 17:33:44
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,10 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `biblioteca_santiagoencodigo`
 --
-
-CREATE DATABASE biblioteca_santiagoencodigo;
-
-USE biblioteca_santiagoencodigo;
 
 DELIMITER $$
 --
@@ -139,6 +135,55 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `audi_libro`
+--
+
+CREATE TABLE `audi_libro` (
+  `ID_AUDI` int(11) NOT NULL,
+  `LIB_ISBN_AUDI` bigint(20) DEFAULT NULL,
+  `LIB_TITULO_ANTERIOR` varchar(255) DEFAULT NULL,
+  `LIB_GENERO_ANTERIOR` varchar(50) DEFAULT NULL,
+  `LIB_NUM_PAGINAS_ANTERIOR` int(11) DEFAULT NULL,
+  `LIB_TITULO_NUEVO` varchar(255) DEFAULT NULL,
+  `LIB_GENERO_NUEVO` varchar(50) DEFAULT NULL,
+  `LIB_NUM_PAGINAS_NUEVO` int(11) DEFAULT NULL,
+  `AUDI_FECHA_MODIFICACION` datetime DEFAULT NULL,
+  `AUDI_USUARIO` varchar(50) DEFAULT NULL,
+  `AUDI_ACCION` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `audi_socio`
+--
+
+CREATE TABLE `audi_socio` (
+  `ID_AUDI` int(10) NOT NULL,
+  `SOC_NUMERO_AUDI` int(11) DEFAULT NULL,
+  `SOC_NOMBRE_ANTERIOR` varchar(45) DEFAULT NULL,
+  `SOC_APELLIDO_ANTERIOR` varchar(45) DEFAULT NULL,
+  `SOC_DIRECCION_ANTERIOR` varchar(255) DEFAULT NULL,
+  `SOC_TELEFONO_ANTERIOR` varchar(10) DEFAULT NULL,
+  `SOC_NOMBRE_NUEVO` varchar(45) DEFAULT NULL,
+  `SOC_APELLIDO_NUEVO` varchar(45) DEFAULT NULL,
+  `SOC_DIRECCION_NUEVO` varchar(255) DEFAULT NULL,
+  `SOC_TELEFONO_NUEVO` varchar(10) DEFAULT NULL,
+  `AUDI_FECHA_MODIFICACION` datetime DEFAULT NULL,
+  `AUDI_USUARIO` varchar(10) DEFAULT NULL,
+  `AUDI_ACCION` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `audi_socio`
+--
+
+INSERT INTO `audi_socio` (`ID_AUDI`, `SOC_NUMERO_AUDI`, `SOC_NOMBRE_ANTERIOR`, `SOC_APELLIDO_ANTERIOR`, `SOC_DIRECCION_ANTERIOR`, `SOC_TELEFONO_ANTERIOR`, `SOC_NOMBRE_NUEVO`, `SOC_APELLIDO_NUEVO`, `SOC_DIRECCION_NUEVO`, `SOC_TELEFONO_NUEVO`, `AUDI_FECHA_MODIFICACION`, `AUDI_USUARIO`, `AUDI_ACCION`) VALUES
+(1, 1, 'Ana', 'Ruiz', 'Calle Primavera 123, Ciudad Jardin, Barcelona', '912345678', 'Sofia', 'Ruiz', 'Calle Primavera 123, Ciudad Jardin, Barcelona', '912345678', '2026-03-05 07:28:29', 'root@local', 'Actualización');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tabla_autor`
 --
 
@@ -199,6 +244,52 @@ INSERT INTO `tabla_libro` (`LIB_ISBN`, `LIB_TITULO`, `LIB_GENERO`, `LIB_NUM_PAGI
 (9876543210, 'El Laberinto de los Recuerdos', 'cuento', 412, 7),
 (9999999999, 'El Enigma de los Espejos Rotos', 'romance', 156, 7);
 
+--
+-- Disparadores `tabla_libro`
+--
+DELIMITER $$
+CREATE TRIGGER `LIBRO_BEFORE_UPDATE` BEFORE UPDATE ON `tabla_libro` FOR EACH ROW BEGIN
+
+    INSERT INTO AUDI_LIBRO(
+
+        LIB_ISBN_AUDI,
+
+        LIB_TITULO_ANTERIOR,
+        LIB_GENERO_ANTERIOR,
+        LIB_NUM_PAGINAS_ANTERIOR,
+
+        LIB_TITULO_NUEVO,
+        LIB_GENERO_NUEVO,
+        LIB_NUM_PAGINAS_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        OLD.LIB_ISBN,
+
+        OLD.LIB_TITULO,
+        OLD.LIB_GENERO,
+        OLD.LIB_NUM_PAGINAS,
+
+        NEW.LIB_TITULO,
+        NEW.LIB_GENERO,
+        NEW.LIB_NUM_PAGINAS,
+
+        NOW(),
+        CURRENT_USER(),
+        'UPDATE'
+
+    );
+
+    END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -246,7 +337,7 @@ CREATE TABLE `tabla_socio` (
 --
 
 INSERT INTO `tabla_socio` (`SOC_NUMERO`, `SOC_NOMBRE`, `SOC_APELLIDO`, `SOC_DIRECCION`, `SOC_TELEFONO`) VALUES
-(1, 'Ana', 'Ruiz', 'Calle Primavera 123, Ciudad Jardin, Barcelona', '912345678'),
+(1, 'Sofia', 'Ruiz', 'Calle Primavera 123, Ciudad Jardin, Barcelona', '912345678'),
 (2, 'Andrés Felipe', 'Galindo Luna', 'Avenida del Sol 456, Pueblo Nuevo, Madrid', '2123456789'),
 (3, 'Juan', 'González', 'Calle Principal 789, Villa Flores, Valencia', '2012345678'),
 (4, 'María', 'Rodríguez', 'Carrera del Río 321, El Pueblo, Sevilla', '3012345678'),
@@ -259,6 +350,98 @@ INSERT INTO `tabla_socio` (`SOC_NUMERO`, `SOC_NOMBRE`, `SOC_APELLIDO`, `SOC_DIRE
 (11, 'Alejandro', 'Torres', 'Carrera del Oeste 765, Ciudad Nueva, Murcia', '4951234567'),
 (12, 'Sofía', 'Morales', 'Avenida del Mar 098, Costa Brava, Gijón', '5512345678'),
 (13, 'Cristian', 'Ruiz', 'Calle San Bernardino, Ciudad Jardin, Bogotá', '912342638');
+
+--
+-- Disparadores `tabla_socio`
+--
+DELIMITER $$
+CREATE TRIGGER `SOCIOS_AFTER_DELETE` AFTER DELETE ON `tabla_socio` FOR EACH ROW INSERT INTO AUDI_SOCIO(
+        SOC_NUMERO_AUDI,
+        SOC_NOMBRE_ANTERIOR,
+        SOC_APELLIDO_ANTERIOR,
+        SOC_DIRECCION_ANTERIOR,
+        SOC_TELEFONO_ANTERIOR,
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION)
+    VALUES(
+        OLD.SOC_NUMERO,
+        OLD.SOC_NOMBRE,
+        OLD.SOC_APELLIDO,
+        OLD.SOC_DIRECCION,
+        OLD.SOC_TELEFONO,
+        NOW(),
+        CURRENT_USER(),
+        'Registro eliminado')
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `SOCIOS_BEFORE_INSERT` BEFORE INSERT ON `tabla_socio` FOR EACH ROW BEGIN
+
+    INSERT INTO AUDI_SOCIO(
+
+        SOC_NUMERO_AUDI,
+
+        SOC_NOMBRE_NUEVO,
+        SOC_APELLIDO_NUEVO,
+        SOC_DIRECCION_NUEVO,
+        SOC_TELEFONO_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION
+
+    )
+
+    VALUES(
+
+        NEW.SOC_NUMERO,
+        NEW.SOC_NOMBRE,
+        NEW.SOC_APELLIDO,
+        NEW.SOC_DIRECCION,
+        NEW.SOC_TELEFONO,
+
+        NOW(),
+        CURRENT_USER(),
+        'INSERT'
+
+    );
+
+    END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `SOCIOS_BEFORE_UPDATE` BEFORE UPDATE ON `tabla_socio` FOR EACH ROW INSERT INTO AUDI_SOCIO(
+        SOC_NUMERO_AUDI,
+
+        SOC_NOMBRE_ANTERIOR,
+        SOC_APELLIDO_ANTERIOR,
+        SOC_DIRECCION_ANTERIOR,
+        SOC_TELEFONO_ANTERIOR,  
+
+        SOC_NOMBRE_NUEVO,
+        SOC_APELLIDO_NUEVO,
+        SOC_DIRECCION_NUEVO,
+        SOC_TELEFONO_NUEVO,
+
+        AUDI_FECHA_MODIFICACION,
+        AUDI_USUARIO,
+        AUDI_ACCION)
+    VALUES(
+        NEW.SOC_NUMERO,
+        OLD.SOC_NOMBRE,
+        OLD.SOC_APELLIDO,
+        OLD.SOC_DIRECCION,
+        OLD.SOC_TELEFONO,
+        NEW.SOC_NOMBRE,
+        NEW.SOC_APELLIDO,
+        NEW.SOC_DIRECCION,
+        NEW.SOC_TELEFONO,
+        NOW(),
+        CURRENT_USER(),
+        'Actualización')
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -298,6 +481,18 @@ INSERT INTO `tabla_tipoautores` (`COPIA_ISBN`, `COPIA_AUTOR`, `TIPO_AUTOR`) VALU
 --
 
 --
+-- Indices de la tabla `audi_libro`
+--
+ALTER TABLE `audi_libro`
+  ADD PRIMARY KEY (`ID_AUDI`);
+
+--
+-- Indices de la tabla `audi_socio`
+--
+ALTER TABLE `audi_socio`
+  ADD PRIMARY KEY (`ID_AUDI`);
+
+--
 -- Indices de la tabla `tabla_autor`
 --
 ALTER TABLE `tabla_autor`
@@ -329,6 +524,22 @@ ALTER TABLE `tabla_socio`
 ALTER TABLE `tabla_tipoautores`
   ADD KEY `COPIA_ISBN` (`COPIA_ISBN`),
   ADD KEY `COPIA_AUTOR` (`COPIA_AUTOR`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `audi_libro`
+--
+ALTER TABLE `audi_libro`
+  MODIFY `ID_AUDI` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `audi_socio`
+--
+ALTER TABLE `audi_socio`
+  MODIFY `ID_AUDI` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
