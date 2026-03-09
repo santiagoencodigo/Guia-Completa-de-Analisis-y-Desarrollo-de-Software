@@ -40,7 +40,9 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [7. Procedimientos y Funciones Aplicadas en Biblioteca BD](#procedimientos-y-funciones-aplicadas-en-biblioteca-bd)
 
-[8. Triggers]()
+[8. Triggers](#triggers)
+
+[9. Eventos y Vistas]()
 
 
 
@@ -3060,5 +3062,410 @@ Y finalmente un trigger de auditoria para DELETE:
 
     DELIMITER ;
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Eventos y Vistas
+
+> Clase del 09/03/2026
+
+* Dan el siguente código para mostrar de ejemplo.
+
+```sql
+    DELIMITER $$
+        CREATE EVENT anual_eliminar_prestamos 
+            ON SCHEDULE EVERY 1 YEAR 
+        DO BEGIN
+            DELETE FROM tbl_prestamo
+            WHERE pres_fechaDevolucion <= NOW() - INTERVAL 1 YEAR;
+            #datos menores a la fecha actual - 1 año
+        END$$
+    DELIMITER ;
+```
+
+Una vista es una tabla virtual basada en el conjunto de resultados de una declaración SQL.
+
+* Una vista contiene filas y columnas, como una tabla real. Los campos de una vista son campos de una o más tablas reales en la BD.
+
+Esta vista se alimenta de tablas reales (Para no usar más memoria y ser más optimo.) Puede agregar especificaciones y se usa por temas de seguridad, facilitan la vida ya que no tiene que escribir consultas complejas una y otra vez.
+
+```sql
+    -- Creamos la vista llamada 'vista_socios_contacto'
+    CREATE VIEW vista_socios_contacto AS
+    SELECT 
+        soc_numero AS ID,
+        CONCAT(soc_nombre, ' ', soc_apellido) AS Nombre_Completo,
+        soc_telefono AS Telefono
+    FROM tbl_socio;
+
+        -- Consultar todos los registros de la vista
+        SELECT * FROM vista_socios_contacto;
+
+        -- Consultar un socio específico a través de la vista
+        SELECT Nombre_Completo 
+        FROM vista_socios_contacto 
+        WHERE ID = 123456;
+```
+
+Se pide realizar el siguente ejercicio:
+
+* Crear la tabla aprendiz según corresponda e inserte el siguente código
+
+```sql
+    CREATE DATABASE APRENDIZ_SANTIAGOENCODIGO_DB;
+    USE APRENDIZ_SANTIAGOENCODIGO_DB;
+
+    CREATE TABLE IF NOT EXISTS APRENDIZ (
+        ID_APRENDIZ INT PRIMARY KEY,
+        APR_NOMBRE VARCHAR(100) NOT NULL,
+        APR_APELLIDO VARCHAR(100) NOT NULL,
+        APR_CORREO VARCHAR(120) NOT NULL,
+        APR_UBICACION VARCHAR(150) NOT NULL
+    );
+```
+
+* Inserte el codigo de los registros SQL:
+
+```sql
+    INSERT INTO aprendiz (id_aprendiz, apr_nombre, apr_apellido, apr_correo, apr_ubicacion)
+    VALUES
+    (1, 'Juan', 'Pérez', 'juan.perez@example.com', 'Ciudad A'),
+    (2, 'María', 'Gómez', 'maria.gomez@example.com', 'Ciudad B'),
+    (3, 'Pedro', 'López', 'pedro.lopez@example.com', 'Ciudad C'),
+    (4, 'Laura', 'Torres', 'laura.torres@example.com', 'Ciudad A'),
+    (5, 'Carlos', 'Rodríguez', 'carlos.rodriguez@example.com', 'Ciudad B');
+```
+
+* Se pide entonces:
+
+1. Crear una vista que permita ver los nombres de los aprendices y su correo correspondiente.
+
+```sql
+    CREATE VIEW vista_contacto_aprendiz AS
+    SELECT 
+        APR_NOMBRE, APR_CORREO
+    FROM APRENDIZ;
+```
+
+```sql
+    SELECT * FROM vista_contacto_aprendiz;
+```
+
+2. 
+
+
+---
+
+**Indices**
+
+Son saltos para encontrar la información más rapido, es para umentar el rendimiento de la consulta y es para poder encontrar los registros que los usuarios neceistan buscar con mayor frecuencia.
+
+Debe crearse solo cuando es estrictamente necesario.
+
+* una PK es obligatoriamente un indice.
+
+* Podemos crear nuestros propios indices.
+
+* Como esta información se guarda debe ser algo totalmente necesario, un indice adecuado puede ser el nombre de un libro en una biblioteca.
+
+Existen tres tipos de indices:
+
+1. PK
+
+2. Índice Ordinario: No es PK, pues fue elegido.
+
+3. Índice único: Dato que no se repite, no admite duplicados
+
+Ejemplos:
+
+```sql
+    CREATE TABLE IF NOT EXISTS APRENDIZ (
+        ID_APRENDIZ INT PRIMARY KEY,
+        APR_NOMBRE VARCHAR(100) NOT NULL,
+        APR_APELLIDO VARCHAR(100) NOT NULL,
+        APR_CORREO VARCHAR(120) NOT NULL,
+        APR_UBICACION VARCHAR(150) NOT NULL
+
+        -- Índices
+            PRIMARY KEY (ID_APRENDIZ),
+            INDEX(APR_NOMBRE),
+            UNIQUE INDEX(APR_CORREO)
+    );
+```
+
+Por otro lado si es otro tipo de index:
+
+```sql
+    -- Despues de crear la tabla
+    CREATE INDEX index_name
+    ON TABLE_NAME(COLUMN1, COLUMN2, COLUMN3...);
+```
+
+Para eliminar un index:
+
+```sql
+    ALTER TABLE regiones DROP INDEX IDX_REGIONES;
+
+    -- Se sugiere en la nombreclatura IDX_NOMBREINDEX
+```
+
+Se pide insertar el siguente código:
+
+```sql
+    CREATE TABLE posiciones(
+    id INT AUTO_INCREMENT,
+    grupo CHAR(10) NOT NULL,
+    pais VARCHAR(45) NOT NULL,
+    jugados INT NOT NULL,
+    ganados INT NOT NULL,
+    empatados INT NOT NULL,
+    perdidos INT NOT NULL,
+    puntos INT NOT NULL,
+
+        PRIMARY KEY (ID),
+        INDEX(GRUPO),
+        -- No se repite
+        UNIQUE INDEX(PAIS)
+    );
+
+    -- Si estos no se crearon hay que crearlos por aparte.
+```
+
+---
+
+**Empezamos a trabajar con nuestra biblioteca.**
+
+> Una vista es para hacer un reporte. Se pide entonces actualizar el repositorio y la documentación de la actividad.
+
+* Realizar un trigger de auditoria para la tabla autor en donde se registren las actualizaciones.
+
+```sql
+    -- Para crear auditoria para AUTOR se debe hacer primero la tabla
+    CREATE TABLE AUDI_AUTOR(
+        ID_AUDI INT AUTO_INCREMENT,
+
+        AUT_CODIGO INT,
+
+        AUT_APELLIDO_ANTERIOR VARCHAR(100),
+        AUT_APELLIDO_NUEVO VARCHAR(100),
+
+        AUT_NACIMIENTO_ANTERIOR DATE,
+        AUT_NACIMIENTO_NUEVO DATE,
+
+        AUT_MUERTE_ANTERIOR DATE,
+        AUT_MUERTE_NUEVO DATE,
+
+        AUDI_FECHA DATETIME,
+        AUDI_USUARIO VARCHAR(50),
+        AUDI_ACCION VARCHAR(20),
+
+        PRIMARY KEY (ID_AUDI)
+    );
+```
+
+> Ahora sí el trigger
+
+```sql
+    -- AUTOR_BEFORE_UPDATE
+    DROP TRIGGER IF EXISTS AUTOR_BEFORE_UPDATE;
+
+    DELIMITER $$
+
+        CREATE TRIGGER AUTOR_BEFORE_UPDATE 
+        BEFORE UPDATE ON TABLA_AUTOR
+        FOR EACH ROW
+
+        BEGIN
+
+            INSERT INTO AUDI_AUTOR (
+                AUT_CODIGO,
+
+                AUT_APELLIDO_ANTERIOR,
+                AUT_APELLIDO_NUEVO,
+
+                AUT_NACIMIENTO_ANTERIOR,
+                AUT_NACIMIENTO_NUEVO,
+
+                AUT_MUERTE_ANTERIOR,
+                AUT_MUERTE_NUEVO,
+
+                AUDI_FECHA,
+                AUDI_USUARIO,
+                AUDI_ACCION,
+            )
+
+            VALUES (
+                OLD.AUT_CODIGO,
+
+                OLD.AUT_APELLIDO,
+                NEW.AUT_APELLIDO,
+
+                OLD.AUT_NACIMIENTO,
+                NEW.AUT_NACIMIENTO,
+
+                OLD.AUT_MUERTE,
+                NEW.AUT_MUERTE,
+
+                NOW(),
+                USER(),
+                'UPDATE'
+            );
+
+        END //
+
+    DELIMITER ;
+
+```
+
+
+* Realizar un trigger de auditoria para la autor en donde se registren eliminaciones realizadas
+
+```sql
+    -- 
+    DELIMITER //
+
+        DROP TRIGGER IF EXISTS autor_after_delete //
+
+        CREATE TRIGGER autor_after_delete
+        AFTER DELETE ON tabla_autor
+        FOR EACH ROW
+        BEGIN
+
+        INSERT INTO audi_autor(
+            AUT_CODIGO,
+            AUT_APELLIDO_ANTERIOR,
+            AUT_APELLIDO_NUEVO,
+            AUT_NACIMIENTO_ANTERIOR,
+            AUT_NACIMIENTO_NUEVO,
+            AUT_MUERTE_ANTERIOR,
+            AUT_MUERTE_NUEVO,
+            AUDI_FECHA,
+            AUDI_USUARIO,
+            AUDI_ACCION
+        )
+        VALUES(
+            OLD.AUT_CODIGO,
+            OLD.AUT_APELLIDO,
+            NULL,
+            OLD.AUT_NACIMIENTO,
+            NULL,
+            OLD.AUT_MUERTE,
+            NULL,
+            NOW(),
+            USER(),
+            'DELETE'
+        );
+
+        END //
+
+    DELIMITER ;
+```
+
+
+**Eventos**
+
+* Realizar un evento para eliminar prestamos agregar start y ends al evento
+
+```sql
+    --
+
+    DELIMITER //
+
+        CREATE EVENT eliminar_prestamos_vencidos
+        ON SCHEDULE EVERY 1 DAY
+        STARTS '2026-03-10 00:00:00'
+        ENDS '2026-12-31 23:59:59'
+        DO
+        BEGIN
+
+        DELETE FROM tabla_prestamo
+        WHERE PRES_FECHA_DEVOLUCION < CURDATE();
+
+        END //
+
+    DELIMITER ;
+```
+
+
+**Vistas**
+
+* Realizar dos vistas de las consultas que pueden ser más comunes en este caso. (Tipo reporte + de una tabla)
+
+```sql
+    -- VISTA 1: REPORTE DE PRÉSTAMOS CON SOCIOS Y LIBROS
+    CREATE VIEW VISTA_REPORTE_PRESTAMOS AS
+    SELECT 
+        P.PRES_ID,
+        S.SOC_NOMBRE,
+        S.SOC_APELLIDO,
+        L.LIB_TITULO,
+        P.PRES_FECHA_PRESTAMO,
+        P.PRES_FECHA_DEVOLUCION
+    FROM TABLA_PRESTAMO P
+    JOIN TABLA_SOCIO S 
+        ON P.SOC_COPIA_NUMERO = S.SOC_NUMERO
+    JOIN TABLA_LIBRO L 
+        ON P.LIB_COPIA_ISBN = L.LIB_ISBN;
+
+
+    -- VISTA 2: REPORTE DE LIBROS CON AUTORES
+    CREATE VIEW VISTA_LIBROS_AUTORES AS
+    SELECT
+        L.LIB_TITULO,
+        L.LIB_GENERO,
+        A.AUT_APELLIDO,
+        TA.TIPO_AUTOR
+    FROM TABLA_LIBRO L
+    JOIN TABLA_TIPOAUTORES TA
+        ON L.LIB_ISBN = TA.COPIA_ISBN
+    JOIN TABLA_AUTOR A
+        ON TA.COPIA_AUTOR = A.AUT_CODIGO;
+
+    -- Seleccionar
+
+    SELECT * FROM VISTA_REPORTE_PRESTAMOS;
+    SELECT * FROM VISTA_LIBROS_AUTORES;
+```
+
+**Índices**
+
+* Realizar un index en la tabla
+
+```sql
+    -- CREAR INDEX EN LA TABLA AUTOR PARA MEJORAR BUSQUEDAS POR APELLIDO
+
+    CREATE INDEX IDX_AUTOR_APELLIDO
+    ON TABLA_AUTOR(AUT_APELLIDO);
+
+    SELECT * 
+    FROM TABLA_AUTOR
+    WHERE AUT_APELLIDO = 'GARCIA';
+```
+
+> Debo repasar
 
 ---

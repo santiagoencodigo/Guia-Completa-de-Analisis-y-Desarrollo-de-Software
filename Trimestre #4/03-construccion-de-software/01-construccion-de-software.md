@@ -21,6 +21,8 @@ A continuación mis apuntes y/o documentación de los temas vistos en Construcci
 
 [4. Comandos de Git](#comandos-de-git)
 
+[5. Contribuciones](#contribuciones)
+
 
 
 
@@ -863,5 +865,49 @@ Investigar: Qué es un FORK
 * Documentación de GitHub - ¿Qué es un Fork?: https://docs-github-com.translate.goog/es/get-started/quickstart/fork-a-repo?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=wapp
 
 > Y si hicieramos un FORK a MYSQL, GIMP, VLC, BITCOIN y demás elementos de código abierto. ¿Qué sucederia? Serviria para apuntar        
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+## Contribuciones
+
+Habla sobre un flujo de trabajo donde hay un lider y contribuidores que hacen pull request generalmente en donde se justifica por qué se necesitan los cambios.
+
+Se hablan sobre contribuciones y cómo interactuar.
+
+* Se pide hacer un fork a un repositorio que recien creó la instructora (Es como una lista de asistencia en un index.html) 
+
+1. Hago el fork
+
+2. Edito el HTML directamente desde github (Por el ejercicio, preferi hacerlo en la interfaz de github. Pero si hubiera sido un proyecto profesional estilo mysql, gimp y demás, hubiera sido muy interesante buscar hacer un trabajo de este estilo.)
+
+Muestra entonces la interfaz y fue interesante que mostró un flujo de trabajo donde una persona trabaja de cierto numero de líneas de código hacia abajo para alterar esas y no las que otra persona posiblemente podría cambiar.
+
+Asi entonces queda un buen flujo de trabajo sin conflicto en git, para poder luego ajustar los espacios. Entonces me imagino que en una empresa habrá un jefe TI el cuál tenga que verificar todo este tipo de cosas.
+
+---
+
+
 
 ---

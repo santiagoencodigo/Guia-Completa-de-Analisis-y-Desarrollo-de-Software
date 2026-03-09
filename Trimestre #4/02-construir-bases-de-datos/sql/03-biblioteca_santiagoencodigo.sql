@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 05-03-2026 a las 17:33:44
+-- Tiempo de generación: 09-03-2026 a las 17:29:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -135,6 +135,26 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `audi_autor`
+--
+
+CREATE TABLE `audi_autor` (
+  `ID_AUDI` int(11) NOT NULL,
+  `AUT_CODIGO` int(11) DEFAULT NULL,
+  `AUT_APELLIDO_ANTERIOR` varchar(100) DEFAULT NULL,
+  `AUT_APELLIDO_NUEVO` varchar(100) DEFAULT NULL,
+  `AUT_NACIMIENTO_ANTERIOR` date DEFAULT NULL,
+  `AUT_NACIMIENTO_NUEVO` date DEFAULT NULL,
+  `AUT_MUERTE_ANTERIOR` date DEFAULT NULL,
+  `AUT_MUERTE_NUEVO` date DEFAULT NULL,
+  `AUDI_FECHA` datetime DEFAULT NULL,
+  `AUDI_USUARIO` varchar(50) DEFAULT NULL,
+  `AUDI_ACCION` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `audi_libro`
 --
 
@@ -211,6 +231,41 @@ INSERT INTO `tabla_autor` (`AUT_CODIGO`, `AUT_APELLIDO`, `AUT_NACIMIENTO`, `AUT_
 (789, 'Rodríguez', '1985-12-10', '0000-00-00'),
 (890, 'Brown', '1982-11-17', '0000-00-00'),
 (901, 'Soto', '1979-05-13', '2015-11-05');
+
+--
+-- Disparadores `tabla_autor`
+--
+DELIMITER $$
+CREATE TRIGGER `autor_after_delete` AFTER DELETE ON `tabla_autor` FOR EACH ROW BEGIN
+
+INSERT INTO audi_autor(
+    AUT_CODIGO,
+    AUT_APELLIDO_ANTERIOR,
+    AUT_APELLIDO_NUEVO,
+    AUT_NACIMIENTO_ANTERIOR,
+    AUT_NACIMIENTO_NUEVO,
+    AUT_MUERTE_ANTERIOR,
+    AUT_MUERTE_NUEVO,
+    AUDI_FECHA,
+    AUDI_USUARIO,
+    AUDI_ACCION
+)
+VALUES(
+    OLD.AUT_CODIGO,
+    OLD.AUT_APELLIDO,
+    NULL,
+    OLD.AUT_NACIMIENTO,
+    NULL,
+    OLD.AUT_MUERTE,
+    NULL,
+    NOW(),
+    USER(),
+    'DELETE'
+);
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -476,9 +531,61 @@ INSERT INTO `tabla_tipoautores` (`COPIA_ISBN`, `COPIA_AUTOR`, `TIPO_AUTOR`) VALU
 (7777777777, 765, 'Autor'),
 (9999999999, 98, 'Autor');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_libros_autores`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_libros_autores` (
+`LIB_TITULO` varchar(255)
+,`LIB_GENERO` varchar(20)
+,`AUT_APELLIDO` varchar(45)
+,`TIPO_AUTOR` varchar(20)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_reporte_prestamos`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_reporte_prestamos` (
+`PRES_ID` varchar(20)
+,`SOC_NOMBRE` varchar(45)
+,`SOC_APELLIDO` varchar(45)
+,`LIB_TITULO` varchar(255)
+,`PRES_FECHA_PRESTAMO` date
+,`PRES_FECHA_DEVOLUCION` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_libros_autores`
+--
+DROP TABLE IF EXISTS `vista_libros_autores`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_libros_autores`  AS SELECT `l`.`LIB_TITULO` AS `LIB_TITULO`, `l`.`LIB_GENERO` AS `LIB_GENERO`, `a`.`AUT_APELLIDO` AS `AUT_APELLIDO`, `ta`.`TIPO_AUTOR` AS `TIPO_AUTOR` FROM ((`tabla_libro` `l` join `tabla_tipoautores` `ta` on(`l`.`LIB_ISBN` = `ta`.`COPIA_ISBN`)) join `tabla_autor` `a` on(`ta`.`COPIA_AUTOR` = `a`.`AUT_CODIGO`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_reporte_prestamos`
+--
+DROP TABLE IF EXISTS `vista_reporte_prestamos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_reporte_prestamos`  AS SELECT `p`.`PRES_ID` AS `PRES_ID`, `s`.`SOC_NOMBRE` AS `SOC_NOMBRE`, `s`.`SOC_APELLIDO` AS `SOC_APELLIDO`, `l`.`LIB_TITULO` AS `LIB_TITULO`, `p`.`PRES_FECHA_PRESTAMO` AS `PRES_FECHA_PRESTAMO`, `p`.`PRES_FECHA_DEVOLUCION` AS `PRES_FECHA_DEVOLUCION` FROM ((`tabla_prestamo` `p` join `tabla_socio` `s` on(`p`.`SOC_COPIA_NUMERO` = `s`.`SOC_NUMERO`)) join `tabla_libro` `l` on(`p`.`LIB_COPIA_ISBN` = `l`.`LIB_ISBN`)) ;
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `audi_autor`
+--
+ALTER TABLE `audi_autor`
+  ADD PRIMARY KEY (`ID_AUDI`);
 
 --
 -- Indices de la tabla `audi_libro`
@@ -496,7 +603,8 @@ ALTER TABLE `audi_socio`
 -- Indices de la tabla `tabla_autor`
 --
 ALTER TABLE `tabla_autor`
-  ADD PRIMARY KEY (`AUT_CODIGO`);
+  ADD PRIMARY KEY (`AUT_CODIGO`),
+  ADD KEY `IDX_AUTOR_APELLIDO` (`AUT_APELLIDO`);
 
 --
 -- Indices de la tabla `tabla_libro`
@@ -530,6 +638,12 @@ ALTER TABLE `tabla_tipoautores`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `audi_autor`
+--
+ALTER TABLE `audi_autor`
+  MODIFY `ID_AUDI` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `audi_libro`
 --
 ALTER TABLE `audi_libro`
@@ -558,6 +672,19 @@ ALTER TABLE `tabla_prestamo`
 ALTER TABLE `tabla_tipoautores`
   ADD CONSTRAINT `tabla_tipoautores_ibfk_1` FOREIGN KEY (`COPIA_ISBN`) REFERENCES `tabla_libro` (`LIB_ISBN`),
   ADD CONSTRAINT `tabla_tipoautores_ibfk_2` FOREIGN KEY (`COPIA_AUTOR`) REFERENCES `tabla_autor` (`AUT_CODIGO`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `eliminar_prestamos_vencidos` ON SCHEDULE EVERY 1 DAY STARTS '2026-03-10 00:00:00' ENDS '2026-12-31 23:59:59' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+
+        DELETE FROM tabla_prestamo
+        WHERE PRES_FECHA_DEVOLUCION < CURDATE();
+
+        END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
