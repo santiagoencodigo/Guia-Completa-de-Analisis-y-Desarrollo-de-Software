@@ -3468,4 +3468,136 @@ Se pide insertar el siguente código:
 
 > Debo repasar
 
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+## Aislamiento
+
+> Clase de 12/03/26
+
+* Dirty Reads: Lectura sucia porque no se muestra la realidad, es como cuando hay una transacción, utiliza un monton de pago y antes de hacer el coommit hay otra transacción que otma el alor de los pagos. Pero si ocurre un problema con el rollback
+
+* NON-Reapiting: Dos consultas exactamente iugales, pero se obtienen resltados distintos, esto pasa poque hay otra transacción actualizando,, nuevamente el nivel de aislamiento brinda la solución a este caso (Es el aislamiento por defecto de SQL)
+
+* Phaton reads
+
+**Niveles de Aislamiento**
+
+1. Perdida de datos
+
+2.  
+
+---
+
+**DCL**
+
+---
+
+**Derechos**
+
+Asignar derechos (GRANT): Determina los permisos si se pueden hacer triggers, ciertas consultas.
+
+```sql
+    -- Se le dio derechos a ALFREDO para actualizar registros en:
+    GRANT UPDATE (ARTICULO, CANTIDAD) ON STOCK TO ALFREDO;
+```
+
+Para quitar 
+
+Por ejemplo
+
+```sql
+    TABLA USUARIOS A SMITH:
+    REVOKE SELECT ON USUARIOS FROM ASMITH;
+
+    -- Para quitar todos los derechos a SMITH:
+    REVOKE ALL PRIVILEGES ON USUARIOS FROM SMITH;
+```
+
+Para mirar los usuarios que estan en XAMPP:
+
+```sql
+    SELECT USER();
+    SELECT * FROM MYSQL.USER;
+```
+
+--- 
+
+Users and provileges MySQLWorkbench
+
+---
+
+Hay diferentes capas de seguridad:
+
+1. Primer nivel: Protección de la información, cifrado y descifrado: FIREWALL
+
+2. Protección contra amenazas que como tal son las Auditorias, es un estandar de seguriidad, registros de eventos para detectar infracciones, detectar anomalias, e investigar sospechas de abusos.
+
+3. Administración de acceso, autenticación 
+
+---
+
+**Plataformas de seguridad para bases de datos**
+
+Hay empresas que son "celosas" por lo que hacen seguridad de datos in house. Es decir en su mismo ecosistema.
+
+> Seguridad de datos: In house vs In cloud
+
+---
+
+**SQL injection o SQLi**
+
+Es una forma de ataque, cuando hay un LOGIN lo que sucede deras es realmente una consulta para validar que el usuario y la contraseña coincidan. Un atacante, le agrega a uno de estos inpus agregandole un OR para que sea valido en diferente usuario estilo 'OR 1=1' y eso se debe controlar con BACKEND mediante librerias en donde usualmente ya se tienen la solución a esto.
+
+Por esto tambien se hacen procedimientos almacenados, para que quede más dificil ciertas consultas como estas.
+
+---
+
+**Se pide por grupos de proyecto**
+
+1. Diseño del modelo relacional de la base de datos
+
+2. La creación de la BD
+
+3. La inserción de datos (Al menos 7 por cada una de las tablas y garantizar que tengan relación con otras tablas de ser el caso.)
+
+4. Generar dos procedimientos de una consulta que involucren a 2 tablas con INNER JOIN
+
+5. Generar un procedimiento para actualizar datos de alguna tabla.
+
+6. Generar un procedimiento para para la inserción de datos de alguna tabla.
+
+7. Generar un procedimiento para para la eliminación de datos de alguna tabla.
+
+8. Generar dos vistas ()
+
+> Las consultas deben etar relacionadas con el CORE del proyecto
+
+> Con criterio se debe agregar algunos índices ordinarios o únicos.
+
+> Promover una buena práctica en el nombre de las tablas y campos.
+
+> Debo repasar
+
 ---
