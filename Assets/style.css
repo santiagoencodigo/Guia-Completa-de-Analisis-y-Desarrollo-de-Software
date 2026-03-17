@@ -1,0 +1,457 @@
+body {
+
+font-family: Arial, Helvetica, sans-serif;
+line-height: 1.6;
+
+max-width: 900px;
+margin: auto;
+padding: 20px;
+
+background-color: #0d1117;
+color: #e6edf3;
+
+}
+
+header {
+
+border-bottom: 1px solid #30363d;
+margin-bottom: 30px;
+padding-bottom: 20px;
+
+}
+
+    /* ============================= */
+    /* EFECTO TORNASOL PARA EL HEADER */
+    /* ============================= */
+
+    .gradient-text {
+        background: linear-gradient(135deg, 
+            #58a6ff,  /* Azul claro */
+            #8957e5,  /* Morado */
+            #b15bff,  /* Morado claro */
+            #3b82f6,  /* Azul medio */
+            #8b5cf6   /* Morado oscuro */
+        );
+        background-size: 300% 300%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: gradient-shift 8s ease infinite;
+        display: inline-block; /* Para que el gradiente se aplique correctamente */
+    }
+
+    .gradient-text-subtle {
+        background: linear-gradient(135deg, 
+            #7aa9e3,  /* Azul suave */
+            #a385d9,  /* Morado suave */
+            #9b7bda,  /* Morado medio */
+            #6b9be3   /* Azul medio */
+        );
+        background-size: 300% 300%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: gradient-shift 10s ease infinite;
+        font-weight: 500;
+    }
+
+    /* Animación para que los colores se muevan */
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    /* Para mantener el enlace visible pero con el efecto */
+    .gradient-text-subtle a {
+        background: linear-gradient(135deg, 
+            #58a6ff,
+            #b15bff,
+            #58a6ff
+        );
+        background-size: 200% 200%;
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-weight: bold;
+        animation: gradient-shift 6s ease infinite;
+        text-decoration: none;
+        transition: text-decoration 0.3s ease;
+    }
+
+    .gradient-text-subtle a:hover {
+        text-decoration: underline;
+        text-decoration-color: #58a6ff;
+    }
+/* Se terminaron EFECTOS tornasol */
+
+h1 {
+
+font-size: 2rem;
+color: #58a6ff;
+
+}
+
+h2 {
+
+margin-top: 40px;
+color: #58a6ff;
+
+}
+
+a {
+
+color: #58a6ff;
+text-decoration: none;
+
+}
+
+a:hover {
+
+text-decoration: underline;
+
+}
+
+ul {
+
+margin-top: 10px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================= */
+/* Sección de proyectos */
+/* ============================= */
+
+.projects-section {
+
+margin-top: 60px;
+
+}
+
+.projects-section h2 {
+
+font-size: 1.8rem;
+margin-bottom: 10px;
+color: #58a6ff;
+
+}
+
+.projects-section p {
+
+margin-bottom: 30px;
+max-width: 700px;
+
+}
+
+/* ============================= */
+/* Grid de tarjetas */
+/* ============================= */
+
+.projects-grid {
+
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 25px;
+
+}
+
+/* ============================= */
+/* Tarjetas */
+/* ============================= */
+
+.project-card {
+
+background-color: #161b22;
+border: 1px solid #30363d;
+
+border-radius: 10px;
+
+overflow: hidden;
+
+transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+display: flex;
+flex-direction: column;
+
+}
+
+.project-card:hover {
+
+transform: translateY(-6px);
+box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+}
+
+/* Imagen */
+
+.project-card img {
+
+width: 100%;
+height: 160px;
+object-fit: cover;
+
+}
+
+/* Contenido */
+
+.card-content {
+
+padding: 18px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+flex-grow: 1;
+
+}
+
+.card-content h3 {
+
+font-size: 1.2rem;
+color: #e6edf3;
+
+}
+
+.card-content p {
+
+font-size: 0.95rem;
+color: #8b949e;
+flex-grow: 1;
+
+}
+
+    /* Botones para las SECCIONES DE PAGINAS DE ADSO */
+
+    .card-button {
+
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #58a6ff;
+    border-radius: 6px;
+
+    color: #58a6ff;
+    text-decoration: none;
+
+    font-size: 0.9rem;
+
+    transition: background 0.2s ease, color 0.2s ease;
+
+    }
+
+    .card-button:hover {
+
+    background-color: #58a6ff;
+    color: #0d1117;
+
+    }
+
+    /* ============================= */
+    /* Responsividad extra */
+    /* ============================= */
+
+    @media (max-width: 600px) {
+
+    .project-card img {
+
+    height: 140px;
+
+    }
+
+    }
+
+footer {
+
+margin-top: 40px;
+padding-top: 20px;
+border-top: 1px solid #30363d;
+
+font-size: 0.9rem;
+
+}
+
+/* ============================= */
+/* NUEVAS SECCIONES: Herramientas y Trimestres */
+/* ============================= */
+
+/* Estilos comunes para ambas secciones */
+.tools-section, .quarters-section {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #30363d;
+}
+
+.tools-section h2, .quarters-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #58a6ff;
+}
+
+/* Grids */
+.tools-grid, .quarters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* ============================= */
+/* Tarjetas de Herramientas */
+/* ============================= */
+.tool-card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    
+    /* Animación de "float" continua */
+    animation: float 3s ease-in-out infinite;
+    
+    /* Transición para el hover */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Aseguramos que el hover tenga prioridad */
+    will-change: transform, box-shadow;
+}
+
+/* Hover: escala y rota suavemente */
+.tool-card:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+    border-color: #58a6ff;
+    animation-play-state: paused; /* Pausa la animación de float al hacer hover */
+}
+
+.tool-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.tool-card h3 {
+    font-size: 1.2rem;
+    color: #e6edf3;
+    margin: 0;
+}
+
+.tool-card p {
+    font-size: 0.85rem;
+    color: #8b949e;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ============================= */
+/* Tarjetas de Trimestres */
+/* ============================= */
+.quarter-card {
+    background: linear-gradient(145deg, #1a1f2a, #161b22);
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    padding: 25px 20px;
+    text-decoration: none;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    
+    /* Animación de "float" continua */
+    animation: float 3.5s ease-in-out infinite;
+    
+    /* Transición para el hover */
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Aseguramos que el hover tenga prioridad */
+    will-change: transform, box-shadow;
+}
+
+/* Hover: escala y rota suavemente */
+.quarter-card:hover {
+    transform: scale(1.05) rotate(-0.5deg);
+    box-shadow: 0 20px 30px -8px rgba(0, 0, 0, 0.8);
+    border-color: #58a6ff;
+    animation-play-state: paused; /* Pausa la animación de float al hacer hover */
+}
+
+.quarter-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(88, 166, 255, 0.2);
+    line-height: 1;
+    margin-bottom: -5px; /* Ajuste para que se monte un poco sobre el título */
+}
+
+.quarter-card h3 {
+    font-size: 1.4rem;
+    color: #58a6ff;
+    margin: 0;
+}
+
+.quarter-card p {
+    font-size: 0.9rem;
+    color: #8b949e;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ============================= */
+/* Animación de flotación (float) */
+/* ============================= */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* ============================= */
+/* Ajustes para el footer */
+/* ============================= */
+footer a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

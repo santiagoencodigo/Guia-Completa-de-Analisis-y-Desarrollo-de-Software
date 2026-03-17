@@ -4,6 +4,10 @@ Este repositorio recopila todos mis avances, proyectos y ejercicios desarrollado
 
 Las carpetas del repositorio estan organizadas por trimestres, y cada una funciona como un índice dentro de la tabla de contenido. Allí documentaré los ejercicios, proyectos y notas técnicas que realice a lo largo de mi proceso formativo.
 
+<img src="./Assets/img/0-guia-adso.PNG">
+
+[Realice click Aqui para ingresar a la page]()
+
 ## Tabla de Contenido
 
 1. [Introducción](#introducción)
