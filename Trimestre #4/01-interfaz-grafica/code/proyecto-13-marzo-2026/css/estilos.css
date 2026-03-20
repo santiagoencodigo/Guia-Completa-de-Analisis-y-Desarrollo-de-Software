@@ -7,17 +7,23 @@
 /* Instructora Angelica Triana */
 
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
 
 
 
 /* Variables */
     :root {
     /* Tipografia */    
-        --letter: font-family: "Lora", serif;
-        
+        --letter: font-family: "Cormorant Garamond", serif;
+            
     /* Colores */
-        --primery-color: gray;
+        --primery-color: #091413;
+        
+        /* Verde */
+        --second-color: #285A48;
+        --third-color: #c8c8c8;
+        --fourth-color: #B0E4CC;
 
     }
 
@@ -28,121 +34,284 @@
         margin:0;
         padding: 0;
     }
-    /* clases especiales*/
-    .borde{
-    border:1px solid gray;
+
+        /* Generalización para etiquetas A */
+            a {
+                text-decoration: none;
+            }
+
+    body{
+        color: white;
+        background-color: var(--primery-color);
+    }
+
+    h1 {
+        color: var(--third-color);
     }
 
     .titulo{
         width: 100%;
-        height: 50px;
+
+        margin-top:5rem;
         padding: 10px;
-        background-color: rgba(0,0,0);
+
         font-family: var(--letter);
-        color:#fff;
+
+        color:var(--third-color);
         text-align: center;
-        font-size: 25px;/*puede ser 2em*/
+        font-size: 50px;
+    }
+
+/* clases especiales*/
+    .borde{
+        /* background-color: var(--primery-color); */
+        background-color: var(--primery-color);
     }
 
     .contenedor{
-        width: 99%;
-        max-width: 1280px;
+        /* width: 99%; */
         margin:auto; /*quede centrado*/
     }
 
-    body{
-        background-image: url('../img/fondo-pagina.jpg');
-        background-size: 100% 100%;
-        background-attachment: fixed;/*la imagen se quede fija*/
-        font-family: var(--letter);
-    }
+
+
+/* Imagen de Fondo en HEADER */
+.imagen-fondo {
+    background-image: url('../css/img/1-background-cuadricula-blanca.png');
+    background-size:100% 100%;
+}
+
 
 /*navegador*/
 
     nav{
         width: 100%;
-        height: 50px;
-        background-color: gray;
+        /* height: 50px; */
+        /* background-color: var(--third-color); */
+        margin: 0px;
+
+        /* border:1px solid black; */
+        border-radius:10px;
+
+        padding:2rem;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
     }
 
     .logo{
         width: 20%;
         height: 100%;
         float: left;
-        padding: 5px;
-        text-align: center;
+        text-align: center;         
     }   
 
     .logo img{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        transition: 1s all;
+
+        border:1px solid transparent;
+        border-radius:5px;
+        padding:5px;
+    }
+
+    .logo img:hover {
+        border:1px solid var(--third-color);
+        border-radius:5px;    
+        padding:5px;
     }
 
     .navegacion{
         width: 65%;
         height: 100%;
         float: left;
+
+        /* align-items: center; */
+        text-align: center;
+        
+        gap:100px;
     }
-    .ingreso{
-        width: 15%;
-        height: 100%;
+
+        /* Etiquetas A */
+        .navegacion a {
+            margin:10px;
+            width: 170px;
+            height: 5px;
+
+            border:1px solid var(--third-color);
+            padding: 20px;
+            color: var(--third-color);
+
+            border-radius:5px;
+
+            transition: 2s all;
+        }
+
+        .navegacion a:hover {
+            color: var(--primery-color);
+            background-color: var(--third-color);
+        }
+
+    /* Boton para login */
+
+    .ingreso {
+        padding: 20px;
+
+        border:1px solid transparent;
+
+        color: var(--primery-color);
+
+        background-color: var(--third-color);
+
+        border-radius:5px;
+
+        transition: 2s all;
+
         float: left;
     }
 
+    .ingreso a {
+        color: var(--primery-color);
+        transition: 2s all;
+    }
+    
+    .ingreso a:hover {
+        color:var(--third-color);
+    }
+
+    .ingreso:hover {        
+        background-color: var(--primery-color);
+        border:1px solid var(--third-color);
+    }
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
 /*encabezado*/
 
-header{
-    width: 100%;
-    height: 550px;
-    /*depende del monitor*/
-    background-image: url('../img/fondo-header.jpg');
-    background-size:100% 100%;
-}
+    header{
+        width: 100%;
+        height: 550px;
 
-main#portafolio{
-    width: 100%;
-    height: 550px;
-    background: rgb(255,255,255,0.9);/*transparencia 0.4*/
-}
 
-.div-porta{
-    width: 33.33%;
-    height:100%;
-    float: left;
-    text-align: center;
-    padding: 50px;
-    font-size: 13px;
-}
+        border-radius: 5px;
+
+        max-width: 1280px;
+
+        margin:auto auto 3rem auto;
+    }
+
+    main#portafolio{
+        width: 100%;
+        height: 550px;
+        /* background: rgb(255,255,255,0.9);transparencia 0.4 */
+    }
+
+    .div-porta{
+        width: 33.33%;
+        height:100%;
+        float: left;
+        text-align: center;
+        padding: 50px;
+        font-size: 13px;
+    }
     .div-porta img{
-        width: 150px;
+        width: 170px;
         height: 150px;
         margin: 40px 0px 0px 0px;
-        border-radius: 50%;
+        border-radius: 10px;
     }
 
     .div-porta p{
+        color:var(--third-color);
+
+        font-size: 17px;
         margin: 40px 0px 0px 0px;
         text-align: justify;
+
+        margin-bottom: 25px;
+
+        border-radius:5px;
+    }
+
+    .div-porta a {
+        border: 1px solid var(--third-color);
+        
+        padding: 10px;
+        font-size: 15px;
+        color: var(--third-color);
+
+        transition: 2s all;
+
+        border-radius:5px;
+    }
+
+    .div-porta a:hover{
+        color: var(--primery-color);
+        background-color: var(--third-color);
     }
 
     section#quienes-somos{
         width: 100%;
         height: 550px;
     }
+
+    #titulo-quienes-somos {
+        margin-top: 5rem;
+    }
+
     .fila{
         width: 100%;
         height: 33.33%;
     }
+
     .col-ext{
         width: 40%;
         height: 100%;
-      float: left;
+        float: left;
+
+        border: 1px solid blue;
+        
     }
+
+    .col-ext h3 {
+        color: var(--third-color);
+    }
+
+    .col-ext p {
+        color: var(--third-color);
+    }
+
     .col-cen{
         width: 20%;
         height: 100%;
         float: left;
+        border:1px solid red;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .col-cen img {
+        border-radius: 10px;
+        width: 230px;
+        height: 170px;
     }
 
     section#contactenos{
