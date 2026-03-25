@@ -23,6 +23,8 @@ A continuación mis apuntes y/o documentación de los temas vistos en Construcci
 
 [5. Contribuciones](#contribuciones)
 
+[6. Proyecto en Formación](#proyecto-en-formación)
+
 
 
 
@@ -908,6 +910,82 @@ Asi entonces queda un buen flujo de trabajo sin conflicto en git, para poder lue
 
 ---
 
+
+
+---
+
+
+## Proyecto en Formación
+
+> Clase del 25/03/2025
+
+¿Qué es interpretar y qué es diseñar? ¿Cómo lo relacionamos con nuestro programa?
+
+> Cuestionese: ¿Qué evidencias de proyectos ahí?
+
+Debemos tener entregables:
+
+1. Requerimientos
+
+2. Diagramas UML
+
+3. Propuesta de Interfaz
+
+> Diferencie: ¿Cual es la diferencia entre bosquejo, wireframe, mockup, protototipo?
+
+Se pide preguntarse y asegurarse de:
+
+* Flujo de trabajo con compañeros.
+
+* ¿Qué herramientas podemos usar?
+
+* ¿Qué herramientas de seguimiento hemos estado realizando?
+
+* ¿Nos hemos planteado las necesidades de hardware?
+
+* ¿Ya reviso software o proyectos similares a este?
+
+¿Cual son los requisitos del hardware o la estructura basica necesaria para el software que se va a realizar? En esto se debe pensar en los recursos que necesitamos del computador de trabajo y de los servidores.
+
+---
+
+Servidor Web: Uno se puede referir a eso como el mismo software que se esta ejecutando
+
+* Un host puede alojar múltiples soluciones de software para servidores web.
+
+---
+
+**Frontend y Backend**
+
+¿Cómo relacionamos el informe de diseño con las herramientas de desarrollo ?
+
+STACK FRONTEND: VUE, JS, ANGULAR, REACT - Consumo de APIs, Validaciones, Logica en el Cliente, Interfaz Web.
+
+STACK BACKEND: Bases de Datos, Seguridad, Solo lenguajes de programación, pero se tienen en cuenta las reglas de negocio.
+
+> Las APIS no necesariamente tube que crearlas yo. Una API muy común es para iniciar sesión.
+
+---
+
+**Frameworks**
+
+Framework vs Libreria
+
+* FRAMEWORK es un marco con soluciones listas, con codigo que sabe que se necesitaria por buenas practicas.
+
+* LIBRERIA es una solución especifica como para imprimir informes, 
+
+---
+
+**FULLSTACK**
+
+Se le conoce como el todero. Aunque lo normal en una empresa es una especialidad 
+
+El fullstack le sabe al: FRONTEND, BACKEND, DATABASE, DEVOPS, MOBILE APP
+
+> Imaginese tener que pensar por cada cosa.
+
+Y entonces habra sobre: LAMP, aunque existe MERN, PERN
 
 
 ---
