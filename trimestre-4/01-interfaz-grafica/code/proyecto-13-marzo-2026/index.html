@@ -13,19 +13,41 @@
     <div class="contenedor">
         <div class="imagen-fondo">
             <nav>
-                <div class="logo">
+                <div class="logo" id="div-inicio">
                     <a href="https://santiagoencodigo.github.io/Desarrollo-Web-Profesional/" target="_blank" rel="noopener noreferrer">
                         <img src="./css/img/person-icon.svg" alt="imagen logo" title="Logo santiagoencodigo | Computadores">
                     </a>
                 </div>
                 <div class="navegacion">
-                    <a href="#">Inicio</a>
-                    <a href="#titulo_portafolio">Portafolio</a>
-                    <a href="#">Quiénes Somos</a>
-                    <a href="#">Contáctenos</a>
+                    <a href="#div-inicio">Inicio</a>
+                    
+                    <!-- Menú desplegable Portafolio -->
+                    <div class="dropdown">
+                        <a href="#titulo_portafolio" class="dropbtn">Portafolio</a>
+                        <div class="dropdown-content">
+                            <div class="submenu">
+                                <a href="#" class="submenu-btn">Productos ▼</a>
+                                <div class="submenu-content">
+                                    <a href="#">Producto 1</a>
+                                    <a href="#">Producto 2</a>
+                                    <a href="#">Producto 3</a>
+                                </div>
+                            </div>
+                            <a href="#">Servicios</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#titulo-quienes-somos">Quiénes Somos</a>
+                    <a href="#titulo-contactenos">Contáctenos</a>
                 </div>
-                <div class="ingreso">
-                    <a href="HTML/ingreso.html">Ingresar</a>
+                
+                <!-- Menú desplegable Ingresar -->
+                <div class="ingreso dropdown">
+                    <a href="HTML/ingreso.html" class="dropbtn">Ingresar</a>
+                    <div class="dropdown-content ingresar-dropdown">
+                        <a href="./html/registro.html">Registro</a>
+                        <a href="./html/ingreso.html">Ingreso</a>
+                    </div>
                 </div>
             </nav>
 
@@ -33,7 +55,7 @@
         </div>
 
 
-        <div class="titulo" id = "titulo_portafolio">Portafolio</div>
+        <div class="titulo" id="titulo_portafolio">Portafolio</div>
             <div id="portafolio">
                 <div class="div-porta borde">
                     <h1>PC Gamer Orion X</h1>
@@ -96,7 +118,7 @@
                 </div>
             </section>
 
-    <div class="titulo">Contáctenos</div>
+    <div class="titulo" id="titulo-contactenos">Contáctenos</div>
         <section id="contactenos">
             <div class="div-contacto borde">
                 <h3 style="text-align: center; margin-top: 10px;">Contácta con nosotros</h3>
@@ -137,7 +159,7 @@
 
             <div class="div-contacto">
                 <div class="div-arr borde">
-                    <!-- Mapa interactivo usando imagen de Google Maps estática -->
+                    <!-- Mapa interactivo usando Google Maps -->
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254508.51141489705!2d-74.107807!3d4.64829755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bfd2da6cb29%3A0x239d635520a33914!2zQm9nb3TDoQ!5e0!3m2!1ses-419!2sco!4v1774619187212!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="div-aba borde" style="text-align: center; padding: 10px; position: relative;">
@@ -146,7 +168,7 @@
                     <p style="font-size: 14px; margin: 5px 0;"><strong>✉️ Email:</strong> www.munetonsantiago@gmail.com</p>
                     
                     <div style="margin-top: 10px;">
-                        <!-- Iconos de redes sociales con enlaces funcionales y URLs de imágenes reales -->
+                        <!-- Iconos de redes sociales -->
                         <a href="https://santiagoencodigo.github.io/Desarrollo-Web-Profesional/" target="_blank" style="margin: 0 5px;">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="28" style="border-radius: 5px;">
                         </a>
@@ -155,7 +177,7 @@
                         </a>
                         <a href="https://x.com/santiagoencode" target="_blank" style="margin: 0 5px;">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="28" style="border-radius: 5px;">
-                        </a>
+                        </a>    
                         <a href="https://www.youtube.com/watch?v=VPDaiJkxN6Y" target="_blank" style="margin: 0 5px;">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733646.png" alt="Youtube" width="28" style="border-radius: 5px;">
                         </a>
@@ -169,7 +191,7 @@
 
         <footer class="borde">
             <div style="float: left; padding: 15px;">
-                <a href="#">Inicio</a> | <a href="#">Portafolio</a> | <a href="#">Quiénes Somos</a> | <a href="#">Contáctenos</a>
+                <a href="#div-inicio">Inicio</a> | <a href="#titulo_portafolio">Portafolio</a> | <a href="#titulo-quienes-somos">Quiénes Somos</a> | <a href="#titulo-contactenos">Contáctenos</a>
             </div>
             <div style="float: right; padding: 15px;">
                 © Copyright - 2026 | Todos los derechos reservados a: <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer">santiagoencodigo</a>

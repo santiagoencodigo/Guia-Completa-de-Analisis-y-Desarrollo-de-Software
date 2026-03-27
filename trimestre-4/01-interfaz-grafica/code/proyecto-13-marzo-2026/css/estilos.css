@@ -74,6 +74,8 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
+    z-index: 100;
 }
 
 .logo {
@@ -104,9 +106,13 @@ nav {
     float: left;
     text-align: center;
     gap: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.navegacion a {
+.navegacion > a,
+.dropdown > .dropbtn {
     margin: 10px;
     width: 170px;
     height: 5px;
@@ -115,35 +121,260 @@ nav {
     color: var(--third-color);
     border-radius: 5px;
     transition: 2s all;
+    display: inline-block;
+    text-align: center;
 }
 
-.navegacion a:hover {
+.navegacion > a:hover,
+.dropdown > .dropbtn:hover {
     color: var(--primery-color);
     background-color: var(--third-color);
 }
 
+/* Estilos para los dropdowns */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primery-color);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    border: 1px solid var(--second-color);
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
+
+.dropdown-content a {
+    color: var(--third-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    transition: all 0.3s;
+    border-radius: 8px;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--second-color);
+    color: var(--fourth-color);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Submenú para productos */
+.submenu {
+    position: relative;
+}
+
+.submenu-btn {
+    color: var(--third-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.submenu-btn:hover {
+    background-color: var(--second-color);
+    color: var(--fourth-color);
+    border-radius: 8px;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: var(--primery-color);
+    min-width: 160px;
+    border-radius: 8px;
+    border: 1px solid var(--second-color);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.submenu-content a {
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.submenu:hover .submenu-content {
+    display: block;
+}
+
+/* Ajuste para el dropdown de Ingresar */
+/* Estilos para los dropdowns */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    cursor: pointer;
+}
+
+/* Agrega un pseudo-elemento que actúe como puente */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--primery-color);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    border: 1px solid var(--second-color);
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0; /* Cambia de 10px a 0 */
+    padding-top: 10px; /* Agrega padding superior en lugar de margin */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Submenú para productos */
+.submenu {
+    position: relative;
+}
+
+.submenu-btn {
+    color: var(--third-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.submenu-btn:hover {
+    background-color: var(--second-color);
+    color: var(--fourth-color);
+    border-radius: 8px;
+}
+
+/* Agrega puente para el submenú */
+.submenu::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 15px;
+    height: 100%;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: var(--primery-color);
+    min-width: 160px;
+    border-radius: 8px;
+    border: 1px solid var(--second-color);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    margin-left: 0; /* Cambia de 0 a 0, pero ajustamos con padding */
+    padding-left: 10px; /* Agrega padding izquierdo como puente */
+}
+
+.submenu:hover .submenu-content {
+    display: block;
+}
+
+/* Ajuste específico para el dropdown de Ingresar */
 .ingreso {
-    padding: 20px;
+    padding: 0;
     border: 1px solid transparent;
     color: var(--primery-color);
     background-color: var(--third-color);
     border-radius: 5px;
     transition: 2s all;
     float: left;
+    position: relative;
 }
 
-.ingreso a {
+.ingreso .dropbtn {
+    margin: 0;
+    padding: 20px;
+    display: block;
     color: var(--primery-color);
     transition: 2s all;
+    border: none;
+    background: transparent;
+    width: auto;
+    height: auto;
 }
 
-.ingreso a:hover {
+.ingreso .dropbtn:hover {
     color: var(--third-color);
+    background-color: transparent;
 }
 
 .ingreso:hover {
     background-color: var(--primery-color);
     border: 1px solid var(--third-color);
+}
+
+/* Puente para el dropdown de ingresar */
+.ingreso::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.ingreso .dropdown-content {
+    background-color: var(--primery-color);
+    border: 1px solid var(--second-color);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 180px;
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+.ingreso .dropdown-content a {
+    color: var(--third-color);
+    padding: 12px 16px;
+}
+
+.ingreso .dropdown-content a:hover {
+    background-color: var(--second-color);
+    color: var(--fourth-color);
 }
 
 /* Encabezado */
@@ -297,8 +528,7 @@ section#contactenos {
     width: 100%;
     position: relative;
     overflow: hidden;
-    /* Aspect ratio 16:9 para el iframe */
-    padding-bottom: 56.25%; /* 9/16 = 0.5625 */
+    padding-bottom: 56.25%;
     height: 0;
 }
 
@@ -419,40 +649,65 @@ footer div {
         text-align: center;
         margin-top: 1rem;
         gap: 20px;
+        flex-direction: column;
     }
-    .navegacion a {
+    
+    .navegacion > a,
+    .dropdown > .dropbtn {
         width: auto;
-        padding: 10px;
+        padding: 10px 20px;
+        margin: 5px;
     }
+    
     .logo, .ingreso {
         width: auto;
         float: none;
         display: inline-block;
     }
+    
     nav {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
     }
+    
+    .dropdown-content {
+        position: static;
+        transform: none;
+        margin-top: 5px;
+        width: 100%;
+    }
+    
+    .submenu-content {
+        position: static;
+        left: 0;
+        margin-left: 20px;
+    }
+    
     .div-porta {
         width: 100%;
         padding: 20px;
     }
+    
     .col-ext, .col-cen {
         width: 100%;
         text-align: center;
     }
+    
     .fila {
         flex-direction: column;
         align-items: center;
     }
+    
     .div-contacto {
         width: 90%;
         margin-bottom: 2rem;
     }
+    
     footer {
         text-align: center;
     }
+    
     footer div {
         float: none !important;
         display: block;

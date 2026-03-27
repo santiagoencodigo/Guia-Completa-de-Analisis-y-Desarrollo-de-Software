@@ -1,0 +1,263 @@
+/* Inicio de Estilos de Formularios (Ingreso, Registro, Olvido Contraseña) */
+/* santiagoencodigo | Computadores */
+/* 27/03/2026 */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variables */
+:root {
+    --primery-color: #091413;
+    --second-color: #285A48;
+    --third-color: #c8c8c8;
+    --fourth-color: #B0E4CC;
+    --white: #ffffff;
+    --error: #e74c3c;
+    --success: #2ecc71;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--primery-color) 0%, var(--second-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Caja de login */
+.login-box {
+    background: rgba(9, 20, 19, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 35px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(40, 90, 72, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.login-box:hover {
+    transform: translateY(-5px);
+}
+
+/* Logo y título */
+.logo-form {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-form img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s;
+}
+
+.logo-form img:hover {
+    transform: scale(1.05);
+}
+
+.logo-form h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--third-color);
+    margin-bottom: 5px;
+}
+
+.logo-form p {
+    color: var(--fourth-color);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* Grupos de input */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.text {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: var(--third-color);
+    background: rgba(40, 90, 72, 0.1);
+    border: 1px solid var(--second-color);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.text:focus {
+    border-color: var(--fourth-color);
+    background: rgba(40, 90, 72, 0.2);
+    box-shadow: 0 0 8px rgba(176, 228, 204, 0.3);
+}
+
+.text::placeholder {
+    color: rgba(200, 200, 200, 0.6);
+    font-weight: 300;
+}
+
+/* Opciones (recordar y olvidó contraseña) */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+}
+
+.remember {
+    color: var(--third-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.remember input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--fourth-color);
+}
+
+.forgot {
+    color: var(--fourth-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot:hover {
+    color: var(--third-color);
+    text-decoration: underline;
+}
+
+/* Botón de enviar */
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    color: var(--primery-color);
+    background: linear-gradient(135deg, var(--fourth-color) 0%, var(--third-color) 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(176, 228, 204, 0.4);
+    background: linear-gradient(135deg, var(--third-color) 0%, var(--fourth-color) 100%);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Enlace de registro */
+.register-link {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.register-link p {
+    color: var(--third-color);
+    font-size: 0.9rem;
+}
+
+.register-link a {
+    color: var(--fourth-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.register-link a:hover {
+    color: var(--third-color);
+    text-decoration: underline;
+}
+
+/* Botón volver al inicio */
+.back-home {
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(40, 90, 72, 0.3);
+}
+
+.btn-back {
+    color: var(--third-color);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-back:hover {
+    color: var(--fourth-color);
+}
+
+/* Estilos para mensajes de error (opcional) */
+.error-message {
+    background: rgba(231, 76, 60, 0.2);
+    border-left: 3px solid var(--error);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #e74c3c;
+    text-align: center;
+}
+
+.success-message {
+    background: rgba(46, 204, 113, 0.2);
+    border-left: 3px solid var(--success);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.85rem;
+    color: #2ecc71;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 25px;
+    }
+    
+    .options {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    
+    .logo-form h2 {
+        font-size: 1.8rem;
+    }
+}
