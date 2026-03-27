@@ -20,7 +20,7 @@
                 </div>
                 <div class="navegacion">
                     <a href="#">Inicio</a>
-                    <a href="#">Portafolio</a>
+                    <a href="#titulo_portafolio">Portafolio</a>
                     <a href="#">Quiénes Somos</a>
                     <a href="#">Contáctenos</a>
                 </div>
@@ -33,7 +33,7 @@
         </div>
 
 
-        <div class="titulo">Portafolio</div>
+        <div class="titulo" id = "titulo_portafolio">Portafolio</div>
             <div id="portafolio">
                 <div class="div-porta borde">
                     <h1>PC Gamer Orion X</h1>
@@ -59,23 +59,23 @@
 
         <div class="titulo" id="titulo-quienes-somos">Quiénes somos</div>
             <section id="quienes-somos">
+                <!-- Fila 1: Misión -->
                 <div class="fila">
                     <div class="col-ext">
                         <h3>Nuestra misión</h3>
                         <p>En santiagoencodigo | computadores trabajamos para brindar soluciones tecnológicas confiables y de alto rendimiento, diseñadas para adaptarse a las necesidades reales de cada usuario. Nos enfocamos en ofrecer equipos de calidad, combinando innovación, eficiencia y un servicio cercano que garantice una experiencia satisfactoria en cada compra.</p>
                     </div>
-
                     <div class="col-cen">
-                        <img src="https://imgs.search.brave.com/ygAVPQxf_iokdlWaAmqpDWyj95PQ-mnbaKwxhmJ37JA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/cHYtdGFyZ2V0LWlt/YWdlcy84ZTg0NTIx/NGFkY2E4ZmM3N2Qy/MTY3NjkwZTI1YmI5/MTNlNGJlNWFlYTFk/Mjk3YmRhNjBiOTJk/MzUzNGMwNDZjLmpw/Zw" alt="quienes somos"">
+                        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Equipo trabajando en misión" title="Nuestra misión">
                     </div>
-
-                    <!-- <div class="col-ext"></div> -->
+                    <div class="col-ext"></div> <!-- Espacio vacío para mantener simetría -->
                 </div>
 
+                <!-- Fila 2: Visión -->
                 <div class="fila">
-                    <div class="col-ext"></div>
+                    <div class="col-ext"></div> <!-- Espacio vacío -->
                     <div class="col-cen">
-                        <img src="https://imgs.search.brave.com/ygAVPQxf_iokdlWaAmqpDWyj95PQ-mnbaKwxhmJ37JA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/cHYtdGFyZ2V0LWlt/YWdlcy84ZTg0NTIx/NGFkY2E4ZmM3N2Qy/MTY3NjkwZTI1YmI5/MTNlNGJlNWFlYTFk/Mjk3YmRhNjBiOTJk/MzUzNGMwNDZjLmpw/Zw" alt="quienes somos"">
+                        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Visión de futuro tecnológico" title="Nuestra visión">
                     </div>
                     <div class="col-ext">
                         <h3>Nuestra visión</h3>
@@ -83,16 +83,17 @@
                     </div>
                 </div>
 
+                <!-- Fila 3: Compromiso -->
                 <div class="fila">
                     <div class="col-ext">
                         <h3>Nuestro compromiso</h3>
                         <p>Nos comprometemos a ofrecer un servicio integral basado en la calidad, la transparencia y la atención personalizada. Cada cliente es nuestra prioridad, por lo que trabajamos con pasión por la tecnología para entregar soluciones eficientes, asesoría experta y productos que superen las expectativas.</p>
                     </div>
                     <div class="col-cen">
-                        <img src="https://imgs.search.brave.com/ygAVPQxf_iokdlWaAmqpDWyj95PQ-mnbaKwxhmJ37JA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL1Mv/cHYtdGFyZ2V0LWlt/YWdlcy84ZTg0NTIx/NGFkY2E4ZmM3N2Qy/MTY3NjkwZTI1YmI5/MTNlNGJlNWFlYTFk/Mjk3YmRhNjBiOTJk/MzUzNGMwNDZjLmpw/Zw" alt="quienes somos"">
+                        <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Atención personalizada" title="Nuestro compromiso">
                     </div>
+                    <div class="col-ext"></div> <!-- Espacio vacío -->
                 </div>
-
             </section>
 
     <div class="titulo">Contáctenos</div>
@@ -136,19 +137,31 @@
 
             <div class="div-contacto">
                 <div class="div-arr borde">
-                    <img src="img/mapa.jpg" alt="Mapa de ubicación" style="width: 100%; height: 100%; object-fit: cover;">
+                    <!-- Mapa interactivo usando imagen de Google Maps estática -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254508.51141489705!2d-74.107807!3d4.64829755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9bfd2da6cb29%3A0x239d635520a33914!2zQm9nb3TDoQ!5e0!3m2!1ses-419!2sco!4v1774619187212!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="div-aba borde" style="text-align: center; padding: 10px; position: relative;">
-                    <p style="font-size: 12px;">Dirección: Calle xx N° xx - xx</p>
-                    <p style="font-size: 12px;">Teléfonos: (031) xxx xx xx / 310 xxx xx xx</p>
-                    <p style="font-size: 12px;">Bogotá D.C.</p>
+                    <p style="font-size: 14px; margin: 5px 0;"><strong>📍 Dirección:</strong> Bogotá D.C. Colombia</p>
+                    <p style="font-size: 14px; margin: 5px 0;"><strong>📞 Teléfonos:</strong> 3144314902</p>
+                    <p style="font-size: 14px; margin: 5px 0;"><strong>✉️ Email:</strong> www.munetonsantiago@gmail.com</p>
                     
                     <div style="margin-top: 10px;">
-                        <img src="img/fb.png" alt="Facebook" width="25" style="margin: 0 5px;">
-                        <img src="img/ig.png" alt="Instagram" width="25" style="margin: 0 5px;">
-                        <img src="img/tw.png" alt="Twitter" width="25" style="margin: 0 5px;">
-                        <img src="img/yt.png" alt="Youtube" width="25" style="margin: 0 5px;">
-                        <img src="img/in.png" alt="LinkedIn" width="25" style="margin: 0 5px;">
+                        <!-- Iconos de redes sociales con enlaces funcionales y URLs de imágenes reales -->
+                        <a href="https://santiagoencodigo.github.io/Desarrollo-Web-Profesional/" target="_blank" style="margin: 0 5px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="28" style="border-radius: 5px;">
+                        </a>
+                        <a href="https://www.instagram.com/santiagoencodigo/" target="_blank" style="margin: 0 5px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" width="28" style="border-radius: 5px;">
+                        </a>
+                        <a href="https://x.com/santiagoencode" target="_blank" style="margin: 0 5px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="28" style="border-radius: 5px;">
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=VPDaiJkxN6Y" target="_blank" style="margin: 0 5px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733646.png" alt="Youtube" width="28" style="border-radius: 5px;">
+                        </a>
+                        <a href="https://www.linkedin.com/in/santiago-mu%C3%B1eton-hernandez" target="_blank" style="margin: 0 5px;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" width="28" style="border-radius: 5px;">
+                        </a>
                     </div>                    
                 </div>
             </div>
@@ -159,7 +172,7 @@
                 <a href="#">Inicio</a> | <a href="#">Portafolio</a> | <a href="#">Quiénes Somos</a> | <a href="#">Contáctenos</a>
             </div>
             <div style="float: right; padding: 15px;">
-                © Copyright - 2026 | Todos los derechos reservados a: Albert Romeo
+                © Copyright - 2026 | Todos los derechos reservados a: <a href="https://github.com/santiagoencodigo" target="_blank" rel="noopener noreferrer">santiagoencodigo</a>
             </div>
         </footer>
     </div>
