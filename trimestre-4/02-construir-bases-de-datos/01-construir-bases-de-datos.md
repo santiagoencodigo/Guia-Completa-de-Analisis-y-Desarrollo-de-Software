@@ -42,7 +42,11 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [8. Triggers](#triggers)
 
-[9. Eventos y Vistas]()
+[9. Eventos y Vistas](#eventos-y-vistas)
+
+[10. Aislamiento](#aislamiento)
+
+[11. Mongo Shell](#mongo-shell)
 
 
 
@@ -3600,4 +3604,173 @@ Por esto tambien se hacen procedimientos almacenados, para que quede más difici
 
 > Debo repasar
 
+
+
+
+
+
+
+
+
+
+
+
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+## Mongo Shell
+
+MongoDB es una base de datos NoSQL por lo que no usa tablas como MySQL, usa colecciones (carpetas) y por dentro tiene guardada documentos (Como JSON)
+
+Como por ejemplo un documento JSON puede ser:
+
+```JSON
+    {
+    "nombre": "Santiago",
+    "edad": 18
+    }
+```
+
+Si en tal caso se quiere ejecutar codigo usamos la pagina: **https://onecompiler.com/** y se selecciona MongoDB dentro de Bases de Datos **https://onecompiler.com/mongodb** en donde en las consultas como por ejemplo 'db.createColection("micoleccion");' y entonces se le da a RUN... onecompiler para estos casos y afirmar que se creo va a aparecer:
+
+**Configuración de Mongo Shell/mongosh**
+
+Se menciona modificar una path, una variable de entorno siendo esto parte de las propiedades del sistema. Se puede usar en cualquier ruta. Cuando uno instala uno debe insertar la ruta del qué ejecuta el programa, por lo que si no tengo la ruta de donde se ejecuta el programa no enuentra la variable de entorno por lo que se tendria que decir de forma manual donde se encuentra esta ruta Por lo que hay que aivsar donde esta el mongo shell.     
+
+Inicialmente se escribe 'mongod' en donde ejecutara ciertos scripts y se instalo la linea de comandos de tal servidor.
+
+Luego escribimos 'mongosh' en donde dira qué se instalo
+
+Y por medio de 'show databases' en donde mostrara diferentes.
+
+---
+
+La anterior medida era con mongoshell, pero si no abre... Nos tocaria usar la instalación de MongoDB for VSCODE en el Visual Studio Code de Microsoft
+
+Es recomendable realizar la siguente lectura: https://www.mongodb.com/products/tools/vs-code
+
+---
+
+MongoDB tiene diferentes versiones por lo que puede tener diferentes formas de escribir lo mismo por lo que hay que ir hasta la ultima versión. Esto tienen muchos soportes y hay que revisar MongoDb directamente desde la pagina
+Hay diferentes consultas que se pueden hacer ahí directamente por medio de la consola, tenemos que saber leer e interpretar el código.
+
+---
+
+**Como actividad de forma individual:**
+
+> Se va a realizar un quiz escrito de los comandos solicitados o condiciones encontradas para la ejecución de los comandos solicitados o condiciones encontradas para la ejecución de las mismas preguntas.
+
+Investigar qué lineas de comandos se requieren en Mongo DB para los siguentes casos:
+
+1. Cómo crear una base de datos.
+
+Es de tenerse en cuenta que asi como en esta respuesta como en las siguentes, se pensara la solución de esto por medio de la Línea de Comandos que provee MondoDB o la Shell de VSCODE por lo que para crear una Base de Datos... MongoDB no la crea inmediatamente, pues se crea en el momento que se guarda el primer dato.
+
+Esto se hace por medio de:
+
+```bash
+    use nombreBaseDatos
+```
+
+Un ejemplo aplicado a una base de datos que se va a nombrar como santiagoencodigoBD
+
+```bash
+    use santiagoencodigoBD
+```
+
+2. Cómo se consultan las bases de datos existentes.
+
+Para hacer esto, en la terminal se escribe:
+
+```bash
+    show dbs
+```
+
+> Podemos inferir que dbs es la abreviatura de databases
+
+3. Cómo se usa una base de datos
+
+Esto sirve para crear la base de datos si no existe, y si existe va a cambiar como si fuera un switch a esta.
+
+```bash
+    use nombreBaseDatos
+```
+
+4. Cómo borrar una base de datos
+
+```js
+    db.dropDatabases("nombreDB");
+```
+
+> Si no se crea una colección, la base de datos se va a borrar.
+
+5. Cómo crear una colección
+
+```js
+    db.createCollection("nombreColeccion");
+```
+
+6. Cómo borrar una colección
+
+```js
+    db.nombreColeccion.drop()
+```
+
+Como por ejemplo:
+
+```js
+    db.coleccionSantiago.drop()
+```
+
+7. Cómo mostrar las colecciones de una base de datos
+
+```bash
+    show collections
+```
+
+8. Mostrar los documentos de una coleccion
+
+```bash
+    db.nombreColeccion.find()
+```
+
+Entonces en Teoria el siguente código JS corresponde a:
+
+```js
+    // Crear BD en Mongo
+    use santiagoencodigodb
+
+    // Verificar que si se creo mirando todas las BD
+    show dbs
+
+    // Eliminación de BD
+    db.dropDatabases("santiagoencodigodb")
+
+    // Verificar que si se elimino mirando todas las BD
+    show dbs
+
+```
+
+---
+
+**Tipos de Datos/Datatypes de mongoDB**
+
+Se pide escribir de forma manual, hacer un mapa mental en donde se represente cómo se escribe y cual es un ejemplo.
+
+Se menciona la técnica de abstracción para sintetizar y resumir pensamiento.
+
+Usare el siguente Video y realizare mis apuntes: https://www.youtube.com/watch?v=xUVox3WwVck
+
+---
+
+Se pide leer: https://drive.google.com/file/d/1sY8cdgYde-jE_GHWnTfNVzN4LQBNvmbQ/view?pli=1
