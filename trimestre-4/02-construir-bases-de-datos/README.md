@@ -48,6 +48,8 @@ A continuación viene una serie de apuntes y/o documentación respecto a lo que 
 
 [11. Mongo Shell](#mongo-shell)
 
+[12. Mongo DB]()
+
 
 
 
@@ -3774,3 +3776,738 @@ Usare el siguente Video y realizare mis apuntes: https://www.youtube.com/watch?v
 ---
 
 Se pide leer: https://drive.google.com/file/d/1sY8cdgYde-jE_GHWnTfNVzN4LQBNvmbQ/view?pli=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Mongo DB
+
+Tenga en cuenta que todo lo siguente fue tomado en practica en:
+
+> Clae del 6/04/2026
+
+Para insertar varios documentos a la vez se puede utilizar el método 'insertMany()'. Este método inserta un array de objetos en la base de datos:
+
+```mongodb
+
+```
+
+Ahora existe el otro metodo que es 'find()' en donde para ejecutar puede ser **db.empleado.find()** siendo entonces su estructura db.COLLECTION_NAME.find()
+
+Para usar una busqueda
+
+Entonces por ejemplo podemos escribir: db.empleado.findOne({"nombre":"Cami Luna"})
+
+> Mongo DB se ejecuta en JavaScript
+
+```javascript
+    db.empleados.insertOne({nombre:'Ana',departamento:'Ventas'});
+
+    db.empleados.insertOne({nombre:'Ana', apellido: 'Luna', departamento:'Compras',direccion:'Calle 19'});
+
+    db.empleados.insertMany([
+    {_id: 1, nombre: 'Clark', departamento: 'Ventas', ganancias:3000000 },
+    {_id: 2, nombre: 'Dave', departamento: 'Cuentas', ganancias:0},
+    {_id: 3, nombre: 'Ava', departamento: 'Ventas', ganancias:10000000 }
+    ]);
+
+    db.empleados.findOne();
+    db.empleados.find();
+    db.empleados.find({departamento: 'Ventas'});
+
+    db.empleados.findOne({nombre:'Ana'});
+```
+
+**db.empleados.findOne()**: consiste en buscar el primer registro de la colección
+
+Un equivalente al where en SQL puede ser db.empleadosfindOne({nombre: "ana"})
+
+---
+
+**Projection**
+
+En mongo DB el projection consiste en mostrar los campos que quiero que se vean en la consulta.
+
+El contenido en las **({}) = llaves** 
+
+---
+
+> Si tiene 1 va a mostrar el filtro
+
+> Si esta en 0 no se va a mostrar el filtro como por ejemplo el ID en el siguente ejemplo
+
+```js
+    db.posts.find({nombre:'ana'}, {_id:0,nombre:1});
+```
+
+y si ahora quiero mirar todo.
+
+```js
+    db.posts.find({}, {_id:0,nombre:1});
+```
+
+Si quiero mirar todo lo de la colección
+
+```js
+    db.posts.find({}, {_id:0,nombre:0});
+```
+
+---
+
+**Equivalencias RDBMS**
+
+Existen operaciones por lo que siguen la siguente sintaxis:
+
+```js
+    // Values equal
+    {<key>:{$eq:<value>}}
+
+    // Values not equal
+    {<key>:{$ne:<value>}}
+
+    // Values in an array
+    {<key>:{$in:<value>}}
+
+```
+
+---
+
+Un ejemplo completo de codigo de MONGODB
+
+```sql
+    db.micoleccion.find({
+    $and: [
+        { "poblacion": 5000000 },
+        { "nombre": "California" }
+    ]
+    })
+
+    [
+    {
+        "_id": ObjectId("64f4eec5ed38356d68c2784a"),
+        "nombre": "California",
+        "pais": "USA",
+        "region": "No existe",
+        "poblacion": 5000000
+    }
+    ]
+```
+
+---
+
+Expresiones regulares en MONGODb
+
+$regex: Patrones de consulta como letras en especifico
+
+Si fueramos nosotros a buscar datos en donde pueden haber nulos podemos usar '$exists':
+
+```js
+    db.empleados.find({nombre:'Ana', direccion:{$exists:true}}, {_id:0, departamento:0});
+```
+
+A continuación diferentes consultas que mostro la instructora:
+
+```js
+    db.empleados.findOne();
+
+    db.empleados.find();
+    db.empleados.find({departamento: 'Ventas'});
+
+    db.empleados.findOne({nombre: 'Ana'});
+
+    db.empleados.find({}, {_id:0, nombre:0});
+
+    db.empleados.find({nombre: 'Ana', direccion:{$exists:true}}, {_id:0, departamento:0});
+
+    db.empleados.find({ganancias:{$eq:0}});
+
+    db.empleados.find({ganancias:{$ne:0}});
+
+    // JavaScript es sensible en minusculas y mayusculas. Por ende es sensitive case.
+
+    db.empleados.find({departamento:{$in:['Ventas', 'Compras']}});
+
+    db.empleados.find({$and:[{nombre: 'Ana'}, {apellido: 'Luna'}, {departamento: 'Compras'}]});
+
+    // 
+
+    db.empleados.find
+```
+
+---
+
+**update**
+
+Puedo hacer un 'updateOne' y 'updateMany'
+
+```js
+    db.micoleccion.updateOne({"pais":"USA"}, {$set:{"nombre":"San francisco"}})
+    db.micoleccion.find({pais:"USA"})
+    [
+        {
+            _id: ObjectId("64f4cf5d21d41c85278d5f35"),
+            nombre: 'San francisco',
+            pais: 'USA',
+            region: 'No existe',
+            poblacion: 5000000
+        },
+        {
+            _id: ObjectId("64f4eec5ed38356d68c2784a"),
+            nombre: 'California',
+            pais: 'USA',
+            region: 'No existe',
+            poblacion: 5000000
+        },
+        {
+            _id: ObjectId("64f4eed6ed38356d68c2784b"),
+            nombre: 'New York',
+            pais: 'USA',
+            region: 'No existe',
+            poblacion: 5000000
+        }
+    ]
+```
+
+```js
+    // Esto es una actualización solo posible en BD no relacionales debido a que agrega un nuevo campo siendo este apellido
+    db.empleados.updateOne({_id:1},{$set:{departamento:'Compras',apellido:'Kent'}});
+
+    db.empleados.find();
+
+    
+    // $rename puede actualizar datos
+        
+        // Se puede observar como el filtro queda para todo el mundo, pues se va a cambiar el nombre del campo nombre por name      
+        db.empleados.updateMany({},{$rename:{"nombre":"name"}})
+
+        db.empleados.find();
+```
+
+Me parecio curioso la identación:
+
+```js
+    db.posts.updateOne(
+    { title: "Post Title 5" },
+    {
+        $set:
+        {
+        title: "Post Title 5",
+        body: "Body of post.",
+        category: "Event",
+        likes: 5,
+        tags: ["news", "events"],
+        date: Date()
+        }
+    },
+    { upsert: true }
+    )
+```
+
+---
+
+**Eliminaciones en MONGODB**
+
+Depende de lo que se valla a eliminar pues generalmente en datos especiales como objetos se tendria que eliminar
+
+En el siguente ejemplo se elimina un registro de un ID que uno mismo llego a poner.
+
+```js
+    db.empleados.deleteOne({_id:3});
+```
+
+> No hay problema para insertar las comillas para el campo.
+
+> El ; no es necesario en algunas ocasiones siempre y cuando no se integre con otra consulta 
+
+A continuación el siguente código es en ejemplo de la creación de una colección
+
+```js
+    colegio> db.createCollection("asignatura")
+    { ok: 1 }
+
+    colegio> db.createCollection("profesor")
+    { ok: 1 }
+
+    colegio> db.createCollection("estudiante")
+    { ok: 1 }
+
+    colegio> show collections;
+    asignatura
+    estudiante
+    profesor
+
+    colegio> db.asignatura.insertOne({"nombre":"Matemáticas 1","id":1})
+    {
+    acknowledged: true,
+    insertedId: ObjectId("64f4dac621d41c85278d5f38")
+    }
+
+    colegio> db.asignatura.insertOne({"nombre":"Base de datos","id":2})
+    {
+    acknowledged: true,
+    insertedId: ObjectId("64f4dad321d41c85278d5f39")
+    }
+
+    colegio> db.estudiante.insertOne({"nombre":"Nestor S. Campos","id":1,"asignaturas":[1,2]})
+    {
+    acknowledged: true,
+    insertedId: ObjectId("64f4dbf021d41c85278d5f3a")
+    }
+
+    // El atributo asignaturas es un arreglo.
+    colegio> db.profesor.insertOne({"nombre":"Pedro Ortiz","id":1,"asignaturas":[1,2]})
+    {
+    acknowledged: true,
+    insertedId: ObjectId("64f4dcc121d41c85278d5f3c")
+    }
+```
+
+---
+
+**Operadores de consulta MongoDB**
+
+Hay muchos operadores de consulta que se pueden utilizar para comparar y hacer referencia a campos de documentos.
+
+Comparación
+
+Los siguientes operadores se pueden utilizar en consultas para comparar valores:
+
+$eq: Los valores son iguales.
+
+$ne: Los valores no son iguales.
+
+$gt: El valor es mayor que otro valor.
+
+$gte: El valor es mayor o igual a otro valor.
+
+$lt: El valor es menor que otro valor.
+
+$lte: El valor es menor o igual a otro valor.
+
+$in: El valor coincide dentro de una matriz.
+
+Lógico
+Los siguientes operadores pueden comparar lógicamente varias consultas:
+
+$and: Devuelve documentos donde ambas consultas coinciden.
+
+$or: Devuelve documentos donde cualquiera de las consultas coincide.
+
+$nor: Devuelve documentos donde ambas consultas no coinciden.
+
+$not: Devuelve documentos donde la consulta no coincide.
+
+Evaluación
+Los siguientes operadores ayudan en la evaluación de documentos:
+
+$regex: Permite el uso de expresiones regulares al evaluar valores de campos.
+
+$text: Realiza una búsqueda de texto.
+
+$where: Utiliza una expresión JavaScript para hacer coincidir documentos.
+
+
+Gemini dijo
+Operadores de actualización de MongoDB
+Hay muchos operadores de actualización que se pueden utilizar durante las actualizaciones de documentos.
+
+Campos
+Se pueden utilizar los siguientes operadores para actualizar campos:
+
+$currentDate: Establece el valor del campo en la fecha actual.
+
+$inc: Incrementa el valor del campo.
+
+$rename: Cambia el nombre del campo.
+
+$set: Establece el valor de un campo.
+
+$unset: Elimina el campo del documento.
+
+Array
+Los siguientes operadores ayudan con la actualización de matrices o array:
+
+$addToSet: Agrega elementos distintos a una matriz (evita duplicados).
+
+$pop: Elimina el primer o último elemento de una matriz.
+
+$pull: Elimina todos los elementos de una matriz que coinciden con la consulta.
+
+$push: Agrega un elemento a una matriz.
+
+---
+
+Se pide insertar el siguente código:
+
+```js
+    %agrupación
+
+    //contar empleados
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        totalEmpleados: { $sum: 1 }
+        }
+    }
+    ]);
+
+    //suma
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        totalGanancias: { $sum: "$ganancias" }
+        }
+    }
+    ]);
+
+    //promedio
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        promedioGanancias: { $avg: "$ganancias" }
+        }
+    }
+    ]);
+```
+
+A continuación otro ejemplo de como insertar datos y crear una colección en MONGODB
+
+```js
+    // 1. Crear colección y documento inicial
+
+    db.estudiantes.insertOne({
+    nombre: "Juan",
+    cursos: ["Matemáticas", "Física"]
+    });
+
+    // Ver estado inicial
+    db.estudiantes.find();
+
+    // 2. $push -> Agrega un elemento (permite duplicados)
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $push: { cursos: "Química" } }
+    );
+
+    // Agregar duplicado
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $push: { cursos: "Física" } }
+    );
+
+    db.estudiantes.find();
+
+    // 3. $addToSet → Agrega solo si NO existe (evita duplicados)
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $addToSet: { cursos: "Biología" } }
+    );
+
+    // Intentar agregar duplicado (no se agrega)
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $addToSet: { cursos: "Biología" } }
+    );
+
+    db.estudiantes.find();
+
+    // 4. $pop → Elimina elementos por posición
+    // -1 elimina el PRIMERO
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $pop: { cursos: -1 } }
+    );
+
+    // 1 elimina el ÚLTIMO
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $pop: { cursos: 1 } }
+    );
+
+    db.estudiantes.find();
+
+    // 5. $pull → Elimina elementos específicos
+    db.estudiantes.updateOne(
+    { nombre: "Juan" },
+    { $pull: { cursos: "Física" } }
+    );
+
+    db.estudiantes.find();
+```
+
+---
+
+**Agrupando Datos (aggregate)**
+
+```js
+    //contar empleados
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        totalEmpleados: { $sum: 1 }
+        }
+    }
+    ]);
+
+    //suma
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        totalGanancias: { $sum: "$ganancias" }
+        }
+    }
+    ]);
+
+
+    // Si quiero que me liste los nombres en un arreglo:
+    db.empleados.aggregate([
+    {
+        $group: {
+        _id: "$departamento",
+        empleados: { $push: "$name" }
+        }
+    }
+    ]);
+
+    // El siguente match actua como si fuera un equal
+
+        //agrupacion y filtro con match
+    db.empleados.aggregate([
+    { $match: { departamento: "Ventas" } },
+    {
+        $group: {
+        _id: "$departamento",
+        total: { $sum: 1 }
+        }
+    }
+    ]);
+```
+
+---
+
+**Ordenando Datos**
+
+```js
+    //ascendente
+    db.empleados.find().sort({ name: 1 });
+
+    //descendente
+    db.empleados.find().sort({ name: -1 });
+
+    //ordenar por ganancias
+    db.empleados.find().sort({ ganancias: -1 });
+
+    // Combinaciones
+        //ordenar por nombre y departamento
+        db.empleados.find().sort({departamento: 1,name: 1});
+
+    //ordenar y limitar resultados
+        // El .limit(2) es la cantidad de registros que quiero ver en la consulta por lo que en este caso solo se desea mirar 2
+        db.empleados.find().sort({ ganancias: -1 }).limit(2);
+
+    //ordenar con filtro
+        // En este caso se organizan los datos y se filtran.
+    db.empleados.find({ departamento: "Compras" }).sort({ name: 1 });
+```
+
+---
+
+La instructora compartio el siguente LINK, tenemos que leerlo: https://www.mongodb.com/es/docs/manual/
+
+Se pide un entregable por lo que tendrmos que realizar la lectura de un docujmento que ella va a compartir y vamos tomando captura cada vez que ejecutemos. Respondiendo las preguntas del componente formativo justificando las respuestas. 
+
+Se creara una colección, actualizan datos, se realizan cláusulas equivalentes y demás...
+
+Mi forma de presentarlo en este README será por medio de SÓLO CÓDIGO sin integrar las capturas que iran en el PDF. Si quiere revisar el PDF puede hacer click en el siguente vinculo: ()[]
+
+Parte de las referencias del siguente trabajo: https://avbravo-2.gitbook.io/jmoordbtaller
+
+> En onecompiler no hay que insertar esto realmente porque sino no funciona ya que realmente no crea a base de datos.
+
+```js
+    // Insertar Documentos
+        // Abrir la base de datos
+        use("santiagoencodigo_mongodb")
+
+        // Insertar un nuevo documento
+        db.persona.insertOne({"cedula":"7","nombre":"Maria"})
+
+        // Insertar otro documento
+        db.persona.insertOne({"cedula":"8","nombre":"Juan", "pais":"Panama" })
+    // (Captura de pantalla de la ejecución y su resultado)
+
+
+    // Consulta de Documentos
+        // Consultar
+        db.persona.find()
+
+        // Buscar un documento por cédula (corrija la consulta)
+
+        db.persona.find({"cedula":"7"})
+    // (Captura de pantalla de la ejecución y su resultado)
+
+
+    // Documento embebido
+        // Agregar un documento embebido con la información del padre y la madre
+        db.persona.insertOne({"cedula":"8","nombre":"Maria","padres":{"mama":"Luris","papa":"Juan"}})
+
+        // Ingrese otro documento embebido
+        db.persona.insertOne({"cedula":"9","nombre":"Santiago","padres":{"mama":"Nicol","papa":"Juan"}})    
+        
+        // Consultar todos los documentos con mama = Luris
+        db.persona.find({"padres.mama":"Luris"})
+    // (Captura de pantalla de la ejecución y su resultado)
+
+
+    // Conteste: ¿Cómo es la sintaxis para buscar en un documento incrustado o embebido?
+        db.persona.find({"padres.mama":"Luris"})
+
+
+    // Eliminar Documentos
+        // Eliminar un documento
+        db.persona.deleteOne({"cedula":"7"})
+
+            // Consulta para verificar que registros antes de eliminar varios
+            db.persona.find({})
+
+        // Eliminar múltiples documentos
+        db.persona.deleteMany({"pais":"Panama"})
+        
+        // Realice una consulta que muestre que documentos se encuentran en la colección
+        db.persona.find({})
+    // (Captura de pantalla de la ejecución y su resultado)
+
+
+    // Conteste: ¿El deleteMany que borro o no borro?, justifique su respuesta.
+
+    // Actualizar documentos
+        // Crear un documento
+        db.persona.insertOne({"cedula":"6","nombre":"Diana","edad":25})
+        
+        // Actualizar el nombre
+        db.persona.updateOne({"cedula":"6"},{$set:{"nombre":"Marlenys"}})
+        
+        // Consulte la colección para observar los cambios
+        db.persona.find()
+
+
+        // Práctique actualizando un documento embebido (consulte el resultado)
+        db.persona.find({"cedula":"8"})
+        db.persona.updateOne({"cedula":"8"},{$set:{"padres.mama":"Luisa"}})
+        db.persona.find({"cedula":"8"})
+    // (Captura de pantalla de la ejecución y su resultado)
+```
+
+Ahora a continuación la parte 2 del mismo documento.
+
+**Cláusulas equivalentes**
+
+1. Crear una base de datos que tenga una colección llamada Aprendiz
+
+```js
+    // 1. Abrir/Crear la base de datos
+    use("colegio_db");
+
+    // Crear la colección 
+    db.createCollection("Aprendiz");
+```
+
+> (Captura de pantalla de la ejecución de cada una de las consultas y su resultado)
+
+2. Inserte al menos 5 documentos en la colección con los siguientes campos clave: documentoID, nombreCompleto, edad, correo.
+
+```js
+    // 2. Insertar al menos 5 documentos
+    db.Aprendiz.insertMany([
+    { "documentoID": 101, "nombreCompleto": "Santiago Lopez", "edad": 19, "correo": "santiago@mail.com" },
+    { "documentoID": 102, "nombreCompleto": "Maria Rodriguez", "edad": 22, "correo": "maria@mail.com" },
+    { "documentoID": 103, "nombreCompleto": "Juan Perez", "edad": 17, "correo": "juan@mail.com" },
+    { "documentoID": 104, "nombreCompleto": "Ana Garcia", "edad": 25, "correo": "ana@mail.com" },
+    { "documentoID": 105, "nombreCompleto": "Pedro Picapiedra", "edad": 30, "correo": "pedro@mail.com" }
+    ]);
+```
+
+> (Captura de pantalla de la ejecución de cada una de las consultas y su resultado)
+
+. Realice las siguientes cláusulas para consultar: $eq, $lte, $gte, $ne, $in,$nin, $and, $or, $nor, $not
+
+```js
+    // Operadores De Comparación
+        // $eq: Aprendices que tengan exactamente 22 años
+        db.Aprendiz.find({ "edad": { $eq: 22 } });
+
+        // $lte: Aprendices con edad menor o igual a 19
+        db.Aprendiz.find({ "edad": { $lte: 19 } });
+
+        // $gte: Aprendices con edad mayor o igual a 25
+        db.Aprendiz.find({ "edad": { $gte: 25 } });
+
+        // $ne: Aprendices cuyo documentoID NO sea 101
+        db.Aprendiz.find({ "documentoID": { $ne: 101 } });
+
+        // $in: Aprendices cuyo documentoID esté en la lista [102, 104, 105]
+        db.Aprendiz.find({ "documentoID": { $in: [102, 104, 105] } });
+
+        // $nin: Aprendices cuya edad NO esté en el grupo [17, 30]
+        db.Aprendiz.find({ "edad": { $nin: [17, 30] } });
+
+
+    // Operadores Lógicos
+        // $and: Que se llame 'Ana Garcia' Y tenga 25 años
+        db.Aprendiz.find({ $and: [ { "nombreCompleto": "Ana Garcia" }, { "edad": 25 } ] });
+
+        // $or: Que tenga 17 años O se llame 'Santiago Lopez'
+        db.Aprendiz.find({ $or: [ { "edad": 17 }, { "nombreCompleto": "Santiago Lopez" } ] });
+
+        // $nor: Que NO tenga 19 años Y que tampoco tenga 22
+        db.Aprendiz.find({ $nor: [ { "edad": 19 }, { "edad": 22 } ] });
+
+        // $not: Que la edad NO sea mayor a 20 (invierte la condición)
+        db.Aprendiz.find({ "edad": { $not: { $gt: 20 } } });
+```
+
+> (Captura de pantalla de la ejecución de cada una de las consultas y su resultado)
