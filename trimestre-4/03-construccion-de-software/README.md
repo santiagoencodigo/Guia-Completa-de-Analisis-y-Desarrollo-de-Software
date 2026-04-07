@@ -25,6 +25,8 @@ A continuación mis apuntes y/o documentación de los temas vistos en Construcci
 
 [6. Proyecto en Formación](#proyecto-en-formación)
 
+[7. Hosting](#hosting)
+
 
 
 
@@ -988,4 +990,91 @@ El fullstack le sabe al: FRONTEND, BACKEND, DATABASE, DEVOPS, MOBILE APP
 Y entonces habra sobre: LAMP, aunque existe MERN, PERN
 
 
+
+
+
+
+
+
+
+
+
+
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+## Hosting
+
+> Clase del 7/04/2026
+
+MVC - Modelo Vista Controlador, es el patron de arquitectura que vamos a usar en nuestro tecnologo, se basa en la división de responsabilidades.
+
+> Separa la lógica de la aplicación de la lógica de la vista de la aplicación
+
+Modelo - Base de Datos
+
+Vista - Interfaz
+
+Controlador - Comunicación front y back
+
+---
+
+**Preguntas orientadoras:**
+
+IDE - Entorno de Desarrollo Integrado
+
+EDITOR - Editor de líneas de código: Necesita instalarse extensiones o complementos para desarrollar como VSCODE, ATOM, ECLIPSE.
+Este agarra el código
+
+Dependiendo del lenguaje de programación
+
+Como por ejemplo para .net es visual studio code (morado)
+
+Para android se usa android studio
+
+Java se usaria en eclipse
+
+**¿Cómo instalaré el software?**
+
+> Se debe verificar la compatibilidad entre el hardware y software.
+
+> Se debe verificar la integridad, se debe instalar desde fuentes oficiales y evitar software de terceros.
+
+> Es importante copiar, desempacar y descomprimir los archivos del software y sus manuales.
+
+> Sublime text no se usa en el SENA porque tiene un apartado de pago.
+
+---
+
+**¿Qué es el diseño?**
+
+> ¿Por qué se le dice Diseñador? 
+
+**Analizar** es decir ¿Por qué suceden esto?, ¿Qué caracteristicas tiene?, ¿Del problema qué puedo revisar o concluir?
+
+En el **diseño** se establece una solución para cierto problema. Por lo que si el planteamiento es adecuado nosotros pasaremos al **desarrollo**.
+
+---
+
+Ahora de acuerdo a nuestra base de datos.
+
+Se nos pide realizar un informe que termina siendo una investigación y a su vez una propuesta suponiendo sobre el futuro del proyecto pensando asi ¿Qué lograré con este alojamiento, lenguaje?, ¿Qué podré lograr?.
+
+Actualmente tenemos una versión inicial de la BD, pero en el momento de la implementación puede cambiar varias cosas...
+
+> Es interesante que empezamos a manejar PDF en el repositorio de github.
+
+> "Lo que fue, fue.": Se debe tener cuidado cómo se esta trabajando en grupo.
+
+> Tambien se nos pide verificar la curva de aprendizaje
+
