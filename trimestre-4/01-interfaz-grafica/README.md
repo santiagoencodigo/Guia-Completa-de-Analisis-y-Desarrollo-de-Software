@@ -38,6 +38,8 @@ A continuación toda la documentación y mis apuntes personales de Interfaz Grá
 
 [6. Maquetación](#maquetación-en-css)
 
+[7. Proyecto Maqueta](#proyecto-maqueta)
+
 
 
 
@@ -1448,4 +1450,152 @@ Actualmente se recomienda usar Flexbox o Grid para maquetación moderna, pero en
 
 
 
-        
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Proyecto Maqueta
+
+La intructora tiene un estilo interesante, donde se separa los temas de estudio por sesiones en donde por sesión hay un PDF. Por lo que son 4 instructivos o paso a paso explicando como desarrollar el proyecto.
+
+> Es interesante, porque ella explica cada PDF según corresponda la sesión.
+
+Este proyecto se separa en 4 partes por lo que:
+
+---
+
+**1. Instructivo de Maquetación y Navegación (Parte 1)**
+
+Es interesante que se pida analizar: ¿Cuantos contenedores principales podría tener la pagina?
+
+Se pide realizar determinada estructura de carpetas y archivos en donde esta la carpeta raiz que en este caso la voy a llamar 'proyecto-13-marzo-2026' y dentro de esta habran 5 carpetas: css, html, img, js, si
+
+* css: tendrá por dentro los archivos estilos-formulario.css y estilos.css
+
+* html: tendrá por dentro los archivos ingreso.html, olvido-contraseña.html, registro.html
+
+* img: Por ahora no tendra nada, eso será a medida de lo necesitado.
+
+* js: Por ahora no tendra nada, eso será a medida de lo necesitado.
+
+* si: por dentro la carpeta tendra las carpetas admin, html, css, img, js
+
+Se pidió insertar cierto código HTML al index.html y al estilos.css dentro de la carpeta css. Me pareció curioso que primero, al determinar cuantas secciones iban a ser y al haber un diseño completo. Se crearon cada una de las secciónes y se separaron por medio de divs.
+
+Entonces al momento de mirar la pagina, es como una cuadricula en donde cada div tiene su tamaño.
+
+> Tenga en cuenta la siguente imagen esta en 33% de la vista en el navegador.
+
+<img src="./code/proyecto-13-marzo-2026/img/1_divs_dimensiones.png">
+
+* Es recomendable observar si tiene el modo guardado automático en VSCODE y sino es asi, asegurese de guardar con 'control + s'
+
+Se pidio entonces analizar el código escrito y copiar y pegar código en los archivos. Quedando una buena estructura, ya entonces se pide pensar en varias fotos para agregar como fondos por lo que se pide buscar un tema de interes y buscar en paginas fuera de derechos de autor, puede ser **https://pixabay.com/es/**
+
+Entonces primero debo pensar ¿Tema de mi Interes? como esto termina siendo la tematica del proyecto voy a escoger robots!
+
+Entonces necesito:
+
+1. Fondo del Header
+
+<img src="./code/proyecto-13-marzo-2026/img/2-header.jpg">
+
+2. Fondo de la Pagina
+
+<img src="./code/proyecto-13-marzo-2026/img/3-background.jpg">
+
+3. Imagen para Logo
+
+<img src="./code/proyecto-13-marzo-2026/img/0-LOGO-brain.svg">
+
+4. Imagen para sección de portafolio
+
+> Deje en opción dos:
+
+<img src="./code/proyecto-13-marzo-2026/img/1-LOGO-brainPatron.svg">
+
+<img src="./code/proyecto-13-marzo-2026/img/4-background-rose.png">
+
+Se pide insertar el icono en los metadatos del HTML para hacer el icono de la pagina y se pide insertarlo en una parte del nav. Despues ya se pide directamente desde el CSS agregar al header el background. Y tambien al body.
+
+```css
+/*cuerpo*/
+    body{
+        background-image: url('../img/fondo-pagina.jpg');
+        background-size: 100% 100%;
+        background-attachment: fixed;/*la imagen se quede fija*/
+    }
+```
+
+> Me imagino que a muchos les habra asutado llegar hasta aqui, porque puede que no tenga tanta estructura la pagina inicialmente.
+
+Observe la siguente imagen:
+
+<img src="./code/proyecto-13-marzo-2026/img/1_div_background.png">
+
+Se recomienda usar todos los recursos desde la carpeta raiz y no usar direcciones locales o de url externas.
+
+Por otro lado, ahora se van a insertar colores a la pagina.
+
+Yo para iniciar con esto, quiero ir con variables de una.
+
+Por lo que:
+
+Se recomiendan las siguentes paginas:
+
+* https://color.adobe.com/es/create/color-wheel
+
+* https://colorhunt.co/
+
+```css
+    :root {
+        --primaryColor: black;
+        --secondColor: gray;
+        --thirdColor: white;
+        --fourthColor: #343434;
+    }
+```
+
+Despues de insertar algunos cambios, se pide investigar por fuentes:
+
+Pagina Recomendada para Esto: https://fonts.google.com/
+
+Y como tal fue insertar el código. 
+
+Por lo que ya finalizado esto, pase al siguente:
+
+---
+
+**2. Intructivo Barra Navegación**
+
+La navegación es la acción de pasar por distintas secciones del sistema de acuerdo a lo planeado. [Mapa del Sitio.] Para pasar a esta sección se invita a repasar sobre selectores avanzados.
+
+Un ejemplo de un Selector Avanzado:
+
+```css
+    nav ul li ul {
+        propiedad: valor;
+    }
+```
+
+Me parecio muy agradable como fue hecho ese menu.
+
+---
+
+**3. Navegación Interna Externa**
+
+
+
+
+---

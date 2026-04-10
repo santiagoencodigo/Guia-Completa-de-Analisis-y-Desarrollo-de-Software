@@ -1,0 +1,195 @@
+/* Estilos para crear-usuarios.html */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --color-principal: black;
+    --color-secundario: #D3DAD9;
+    --color-terciario: #3C3D37;
+    --color-cuarto: #3C3D37;
+    --fuente-principal: 'Noto Serif Display', serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--fuente-principal);
+}
+
+body {
+    background: var(--color-secundario);
+    background-attachment: fixed;
+    color: #5d4a44;
+}
+
+/* Contenedor principal */
+.contenedor {
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    background: var(--color-principal);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(93, 74, 68, 0.1);
+}
+
+/* Migas de pan */
+nav {
+    padding: 15px 20px;
+    background: var(--color-principal);
+    border-bottom: 1px solid var(--color-secundario);
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--color-secundario);
+    font-size: 0.85em;
+    transition: 0.3s;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+nav a:hover {
+    border: 1px solid var(--color-secundario);
+    background: transparent;
+}
+
+/* Contenido principal */
+main {
+    padding: 30px 20px;
+}
+
+main h1 {
+    text-align: center;
+    color: var(--color-secundario);
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Formulario de dos columnas */
+.form-comp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.form-doble {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(211, 218, 217, 0.05);
+    border: 1px solid var(--color-secundario);
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.form-doble:hover {
+    background: rgba(211, 218, 217, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.borde-izq,
+.borde-der {
+    border-radius: 20px;
+}
+
+/* Estilos de formulario */
+form .form-cuerpo > div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-secundario);
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--color-secundario);
+    border: 2px solid var(--color-secundario);
+    border-radius: 12px;
+    font-family: var(--fuente-principal);
+    font-size: 0.9em;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--color-principal);
+    background: #ffffff;
+}
+
+/* Grupo de radio buttons */
+.tipo-radio {
+    background: rgba(211, 218, 217, 0.1);
+    padding: 12px;
+    border-radius: 15px;
+}
+
+.tipo-radio label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.tipo-radio input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+    margin-left: 15px;
+    transform: translateY(2px);
+}
+
+.tipo-radio input[type="radio"]:first-of-type {
+    margin-left: 0;
+}
+
+/* Pie del formulario con botones */
+.form-pie {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.form-pie div {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form-pie a {
+    display: inline-block;
+    background: var(--color-principal);
+    color: var(--color-secundario);
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    border: 2px solid var(--color-secundario);
+    transition: 0.5s;
+    font-size: 0.9em;
+}
+
+.form-pie a:hover {
+    background: var(--color-secundario);
+    color: var(--color-principal);
+    transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    .form-comp {
+        flex-direction: column;
+    }
+    .form-doble {
+        width: 100%;
+    }
+}

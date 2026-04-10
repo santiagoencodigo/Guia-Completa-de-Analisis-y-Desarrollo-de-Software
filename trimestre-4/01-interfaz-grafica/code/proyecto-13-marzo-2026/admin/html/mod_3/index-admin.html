@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | AstroShop</title>
+    <link rel="shortcut icon" href="../../../img/1-person-icon.svg">
+    <link rel="stylesheet" href="../../css/estilos-admin.css">
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Barra de navegación principal -->
+        <nav>
+            <div class="logo">
+                <img src="../../../img/1-person-icon.svg" alt="Logo AstroShop">
+            </div>
+            <div class="navega">
+                <div class="documentacion">
+                    <ul>
+                        <li><a href="#">Opciones</a>
+                            <ul>
+                                <li><a href="#">Opción A</a>
+                                    <ul>
+                                        <li><a href="../../doc/reportes/mapa-navegacion.pdf" target="area-principal">Opción A-1 doc</a></li>
+                                        <li><a href="#">Opción A-2</a></li>
+                                        <li><a href="#">Opción A-3</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Opción B</a>
+                                    <ul>
+                                        <li><a href="#">Opción B-1</a></li>
+                                        <li><a href="#">Opción B-2</a></li>
+                                        <li><a href="#">Opción B-3</a></li>
+                                        <li><a href="#">Opción B-4</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ingreso">
+                <ul>
+                    <li><a href="#">Administrador</a>
+                        <ul>
+                            <li><a href="../mod_1_usuarios/configura-perfil.html" target="area-principal">Configuración</a></li>
+                            <li><a href="../../../index.html">Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Barra lateral (aside) con perfil y módulos -->
+        <aside>
+            <div class="borde mod-perfil">
+                <div class="descr-perfil">
+                    <h1>Administrador</h1>
+                    <p>Juan Carlos Martínez Rojas</p>
+                    <a href="../mod_1_usuarios/configura-perfil.html" target="area-principal">Configuración</a>
+                </div>
+            </div>
+
+            <div class="borde mod-usuarios">
+                <h3>Módulo 1</h3>
+                <h4>Gestión de usuarios</h4>
+                <div class="opciones">
+                    <a href="../mod_1_usuarios/crear-usuarios.html" target="area-principal">Crear Usuario</a>
+                    <a href="../mod_1_usuarios/consultar-usuarios.html" target="area-principal">Consultar Usuarios</a>
+                    <a href="../mod_1_usuarios/reporte-usuarios.html" target="area-principal">Reporte Usuario</a>
+                </div>
+            </div>
+
+            <div class="borde mod-dos">
+                <h3>Módulo 2</h3>
+                <h4>RF2 - Req. Func. 2</h4>
+            </div>
+
+            <div class="borde mod-tres">
+                <h3>Módulo 3</h3>
+                <h4>RF3 - Req. Func. 3</h4>
+            </div>
+        </aside>
+
+        <!-- Área de contenido principal (iframe) -->
+        <main>
+            <iframe name="area-principal" src="principal.html"></iframe>
+        </main>
+
+        <!-- Pie de página -->
+        <footer>
+            <div class="borde foot-izq">
+                <ul>
+                    <li title="Salir"><a href="../../../index.html">Salir</a></li>
+                </ul>
+            </div>
+            <div class="borde foot-der">
+                <p>Brindamos equipos de astronomía de alta calidad para aficionados y expertos. Compra segura, envíos confiables y asesoría para que elijas el producto ideal.</p>
+                <p>© 2026 santiagoencodigo. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
