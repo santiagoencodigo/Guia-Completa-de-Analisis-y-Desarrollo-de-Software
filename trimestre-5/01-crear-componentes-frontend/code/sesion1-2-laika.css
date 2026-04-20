@@ -1,0 +1,204 @@
+*{
+    margin:0;
+    font-family: "Rubik",sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+#info-encabezado{
+    background-color: #180344;
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#info-general{
+    background-color: #36079C;
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#info-general img{
+    width: 50px;
+}
+
+#buscar{
+    max-width: 400px;
+    height: 45px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+#ingresar{
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #36079C;
+    color:white;
+    border:none;
+}
+
+nav ul{
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+
+nav > ul{
+    display: flex;
+    background-color: #F2F2F2;
+}
+
+nav > ul> li{
+    position: relative;
+    padding: 15px 20px;
+    color:black;
+    cursor:pointer;
+}
+
+nav >ul>li:hover{
+    background-color: gray;
+}
+
+/*para ocultar el submenu*/
+nav ul ul{
+    display: none;
+    position: absolute;
+    top:100%;
+    left: 0;
+    background-color: gray;
+    min-width: 150px;
+}
+
+nav ul ul li{
+    color: black;
+    padding: 10px;
+}
+
+/*para mostrar el submenu*/
+nav ul li:hover>ul{
+    display: block;
+}
+
+nav ul ul li:hover{
+    background-color: #6d2cff;
+}
+
+header,nav{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index:1000;
+}
+
+header{
+    top:0;
+}
+
+nav{
+    top:100px;
+}
+
+body{
+    margin-top:180px;
+}
+
+#banner{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+#banner img{
+    width: 80%;
+    max-width: 1200px;
+    border-radius: 10px;
+}
+
+#mascotas{
+    display: flex;
+    justify-content: center;
+    margin-top:25px;
+    margin-bottom:25px;
+    gap:20px; /*lo nuevo*/
+}
+
+#perro{
+    background-color: lightgoldenrodyellow;
+    border-radius: 10px;
+}
+
+#gato{
+    background-color: lightblue;
+    border-radius: 10px;
+}
+#perro,#gato{
+    display: flex;
+    align-items: center;
+    gap:15px;
+    width: 500px;
+    height: 300px;
+}
+
+#perro img, #gato img{
+    width: 300px;
+}
+
+.parrafo{
+    padding: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.caja{
+    display:flex;
+    gap:30px;
+    align-items: stretch;
+    padding: 50px 170px;
+    background-color: #F2F2F2;
+}
+
+article h2{
+    font-size: 30px;
+    font-weight: bold;
+    color: #6d2cff;
+    margin-bottom: 5px;
+    padding: auto;
+}
+
+.parrafo-articulo{
+    font-size: 15px;
+    text-align: justify;
+}
+
+.caja-imagenes, article{
+    flex:1;
+}
+
+.caja-imagenes{
+    display:flex;
+    gap:10px;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.caja-imagenes img{
+    flex: 1 1 cal(50% -10px);
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.grande{
+    flex: 1 1 100%;
+    height: 200px;
+}
