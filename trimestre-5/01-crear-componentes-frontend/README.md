@@ -10,7 +10,6 @@
 
 
 
-
 ---
 
 ## Primera Sesión
@@ -247,3 +246,214 @@ Para que tengan sufijo:
 *  extra-large: xl
 
 *  extra-extra-large: xxl
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Tercera Sesión
+
+> Clase del 27/04/2026 | Día Lunes
+
+Tenga en cuenta que, los ejercicios de esta sesión se encuentra en code/sesion3-bootstrap-secciones.html
+ 
+La instructora pide que realicemos el siguente ejercicio:
+
+<img src="../../Assets/img/0-readmes-images/1-cap-actividad-bootstrap.png">
+
+> Primero, ¿Realmente sé hacer esto? No. Todavia no sé cómo hacerlo y tengo que averiguarlo.
+
+Lo que hice fue solicitarle a CHAT GPT:
+
+* A continuación estaré aprendiendo sobre Bootstrap por lo que ayudame a realizar varias cosas. Inicialmente estoy aprendiendo a como hacer secciones adaptables por lo que al bootstrap tener un fuerte en la responsividad... Debo hacer el siguente ejercicio, de acuerdo al tamaño del dispositivo los divs se deben organizar. Revisa la imagen, dime paso a paso qué debo hacer, y explicamelo como un principiante. Tengo buenos conocimientos en CSS, y apenas estoy iniciando con bootstrap.
+
+> Le envie la imagen que encuentras arriba.
+
+Entonces a continuación mi razonamiento y reflexiones al momento de hacerlo.
+
+1. Me parece interesante como es que inicialmente para crear el documento con estilos de bootstrap toca ir a la pagina de esta libreria y tomar la estructura HTML que te dan inicialmente en DOCS que es:
+
+```html
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Hello, world!</h1>
+
+        <!-- Scrips -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    </body>
+    </html>
+```
+
+2. Es clave entender que este ejercicio es importante, porque funciona para entender el sistema de grilla de Bootstrap (grid system)
+
+3. Hay que entender entonces que cada tamaño (pequeño, mediano, grande, extra grande) representa un breakpoint por lo que:
+
+* **pequeño**: col-sm = > 576px
+
+* **mediano**: col-md = > 768px
+
+* **grande**: col-lg = > 992px
+
+* **extra grande**: col-xl > 1200px
+
+> Bootstrap funciona con 12 columnas y uno decide cuantas ocupa cada elemento dependiendo del tamaño.
+
+4. Crear estructura:
+
+```html
+    <!--
+        container: centra el contenido
+        row: para establecer donde estaran las columnas
+        col: Con eso ingresaremos las columnas y sus tamaños con el -
+    -->
+
+    <div class="container">
+        <div class="row">
+            <!-- Aquí van tus columnas -->
+        </div>
+    </div>
+```
+
+5. Se piensa en cómo estan organizadas las secciones
+
+Por lo que:
+
+* **col-sm**: header (azul), menú (rojo), contenido (verde, con tres cajas por dentro), footer (morado), todo ocupa las 12 columas por ende (full width)
+
+* **col-md**: Header: 12 columnas, Menú (rojo): 4 columnas, Contenido (verde): 8 columnas, Footer: 12 columnas
+
+* **col-lg**: Header: 12 columnas, Menú: 3 columnas, Contenido: 9 columnas, Dentro del contenido hay 3 cajas en fila (cada una ocupa 4 columnas)
+
+* **col-xl**: Igual que grande, pero las cajas internas se acomodan mejor (más espacio horizontal)
+
+Entonces:
+
+```html
+    <div class="container">
+    
+    <!-- HEADER -->
+    <div class="row">
+        <div class="col-12 bg-primary">Header</div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="row">
+        
+        <!-- MENÚ -->
+        <div class="col-12 col-md-4 col-lg-3 bg-danger">
+        Menu
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="col-12 col-md-8 col-lg-9 bg-success">
+        
+        <div class="row">
+            <div class="col-12 col-lg-4 bg-warning">Item 1</div>
+            <div class="col-12 col-lg-4 bg-warning">Item 2</div>
+            <div class="col-12 col-lg-4 bg-warning">Item 3</div>
+        </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="row">
+        <div class="col-12 bg-secondary">Footer</div>
+    </div>
+
+    </div>
+```
+
+6. Ya finalmente la inteligencia artificial tuvo un problema para el desarrollo del ejercicio por lo que yo mismo fui editando el código de acuerdo a lo que entendí
+
+por lo que:
+
+```html
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+
+            <!-- header -->
+            <div class="row">
+                <div class="col-12 bg-primary p-5"></div>
+            </div>
+
+            <!-- contenido -->
+            <div class="row">
+
+                <!-- menu -->
+                <div class="col-12 col-md-4 col-lg-3 bg-danger p-5"></div>
+
+                <!-- caja verde -->
+                <div class="col-12 col-md-8 col-lg-9 bg-success p-3">
+
+                <div class="row g-3">
+
+                    <div class="col-12 col-lg-5 col-xl-4">
+                    <div class="bg-warning p-4"></div>
+                    </div>
+
+                    <div class="col-12 col-lg-5 col-xl-4">
+                    <div class="bg-warning p-4"></div>
+                    </div>
+
+                    <div class="col-12 col-lg-5 col-xl-4">
+                    <div class="bg-warning p-4"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="row">
+            <div class="col-12 bg-secondary p-5"></div>
+        </div>
+
+        </div>
+
+        <!-- Scrips -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+    </body>
+    </html>
+```
+
+Aprendí que:
+
+1. Las grillas en las que se basan bootstrap son 12, y por ende podemos pensar de ¿Cuanto tamaño utilizara nuestro div o caja? Será col-[tamaño como small, medium, large, extra large]-(numero del 1 al 12 de acuerdo a las grillas que se quieren utilizar)
+
+2. bg es de background y luego le sigue el nombre del color como danger = rojo, primary = azul claro, warning = amarillo, success = verde

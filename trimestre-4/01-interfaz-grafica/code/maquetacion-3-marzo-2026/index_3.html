@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Maquetación Index 3</title>
+
+    <style>
+        * { 
+            box-sizing: border-box; 
+        }
+        body { 
+            margin: 0; 
+            height: 100vh; 
+        }
+
+        .contenedor-principal {
+            display: flex;
+            height: 100%;
+        }
+
+        .columna {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid black;
+        }
+
+
+        .columna:nth-child(1) { 
+            width: 40%; 
+        }
+        .columna:nth-child(2) { 
+            width: 40%; 
+        }
+        .columna:nth-child(3) { 
+            width: 20%; 
+        }
+
+
+        .fila-superior { 
+            display: flex; 
+            height: 80%; 
+        }
+        .azul { 
+            background-color: #5D9CDE; 
+            width: 50%; 
+            border: 1px solid black; }
+            
+        .naranja { 
+            background-color: #FFAD4F; 
+            height: 20%; 
+            border: 1px solid black; }
+
+        .morado { 
+            background-color: #9B7CC3; 
+            height: 100%; 
+            width: 100%; }
+
+        .rojo { 
+            background-color: #F05F57; 
+            height: 80%; 
+            border: 1px solid black; }
+
+        .naranja-pequeno { 
+            background-color: #FFAD4F; 
+            height: 20%; 
+            border: 1px solid black; }
+    </style>
+</head>
+<body>
+
+    <main class="contenedor-principal">
+        
+        <div class="columna">
+            <div class="fila-superior">
+                <div class="azul"></div>
+                <div class="azul"></div>
+            </div>
+            <div class="naranja"></div>
+        </div>
+
+        <div class="columna">
+            <div class="morado"></div>
+        </div>
+
+        <div class="columna">
+            <div class="rojo"></div>
+            <div class="naranja-pequeno"></div>
+        </div>
+
+    </main>
+
+</body>
+</html>
