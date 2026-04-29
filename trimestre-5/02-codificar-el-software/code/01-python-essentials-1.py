@@ -62,9 +62,6 @@ print()
 print("11. Ejercicio: Operadores")
 print("12. Ejercicio: 2.4.4 Cómo emplear una variable")
 print("13. Ejercicio: 2.4.7 - LAB - Variables(john, mary, adam)")
-print("14. Ejercicio:")
-print("15. Ejercicio:")
-
 
 print()
 print()
@@ -454,3 +451,7 @@ elif seleccion_pregunta == 13:
     # suzy = 2
     # print(peter / suzy)
     # print("Total number of apples:", total_apples)
+
+else:
+    print("Este ejercicio no existe.")
+    
