@@ -24,7 +24,7 @@ print()
 # Inicio de Menú
 
 print("---")
-print("  |  Menú - Fundamentos Python 1  | ")
+print("  |  Menú - Fundamentos Python 1  | Sesión 1 y 2 ")
 print("---")
 
 
