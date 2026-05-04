@@ -8,6 +8,8 @@
 
 [3. Tercera Sesión](#tercera-sesión)
 
+[4. Cuarta Sesión]
+
 
 
 ---
@@ -457,3 +459,103 @@ Aprendí que:
 1. Las grillas en las que se basan bootstrap son 12, y por ende podemos pensar de ¿Cuanto tamaño utilizara nuestro div o caja? Será col-[tamaño como small, medium, large, extra large]-(numero del 1 al 12 de acuerdo a las grillas que se quieren utilizar)
 
 2. bg es de background y luego le sigue el nombre del color como danger = rojo, primary = azul claro, warning = amarillo, success = verde
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+## Cuarta Sesión - Media Queries
+
+Son una técnica de CSS que permite aplicar diferentes estilos según las características del dispositivo, como el ancho de pantalla, la resolución o la orientación.
+
+```css
+@media (max-width: 768px) {
+    /* Estilos para dispositivos pequeños (móviles) */
+}
+
+@media (min-width: 768px) {
+    /* Estilos para tablets y superiores */
+}
+
+@media (min-width: 1024px) {
+    /* Estilos para pantallas grandes (desktop) */
+}
+
+@media (orientation: landscape) {
+    /* Estilos cuando el dispositivo está en modo horizontal */
+}
+
+@media (min-resolution: 192dpi) {
+    /* Estilos para pantallas de alta resolución */
+}
+```
+
+* Usar breakpoints lógicos: No limitarse únicamente a medidas estándar como 768px o 1024px, sino ajustar los puntos de ruptura según el contenido.
+
+* Mantener el código limpio: Agrupar las media queries al final del archivo o en secciones organizadas para facilitar el mantenimiento.
+
+Buenas prácticas adicionales:
+
+* Evitar duplicar estilos innecesarios dentro de múltiples media queries.
+
+* Priorizar el uso de min-width sobre max-width para una mejor escalabilidad.
+
+* Probar el diseño en distintos dispositivos o usando herramientas del navegador (DevTools).
+
+* Utilizar unidades relativas como %, em, rem, vw, vh para lograr diseños más flexibles.
+
+
+Concepto clave
+
+Las media queries son fundamentales para el diseño responsive, ya que permiten que una misma página web se adapte correctamente a diferentes tamaños de pantalla, mejorando la usabilidad, accesibilidad y experiencia del usuario.
+
+
+---
+
+**Interacción con el DOM a través de JS**
+
+Es para agregar, modificar, eliminar elementos dinamicamente.
+
+---
+
+Manipulación del DOM con JavaScript – Lista de Tareas
+
+En este ejemplo se muestra cómo crear dinámicamente elementos HTML utilizando JavaScript y agregarlos al DOM mediante una función.
+
+**Estructura HTML**
+
+Se define un contenedor con un título y un botón que ejecuta una función al hacer clic:
+
+```html
+<body>
+    <div id="container">
+        <h1>Lista de Tareas</h1>
+    </div>
+
+    <button onclick="agregarTarea()">Agregar tarea</button>
+</body>
+
+https://lfrestrepo404.github.io/javascript-notes/
+
+https://lenguajejs.com/dom/introduccion/que-es/

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Página de Inicio</title>
+
+    <style>
+        /* Estilo general para la página */
+        body {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Encabezado */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        /* Sección de contenido principal */
+        .main-content {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .main-content .section {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content .section h2 {
+            color: #333;
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* * Media Query para pantallas más pequeñas (máximo 600px de ancho) */
+        @media (max-width: 600px) {
+
+            /* Ajustar el tamaño del encabezado */
+            header h1 {
+                font-size: 24px;
+                color: black;
+            }
+
+            /* Sección de contenido en una sola columna */
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-content .section {
+                width: 80%;
+                /* Las secciones ocupan el 80% del ancho */
+                margin-bottom: 20px;
+            }
+
+            /* Pie de página se adapta */
+            footer {
+                padding: 15px 0;
+            }
+        }
+
+        /*aqui se aplica los estilos cuando el  
+ancho de la pantalla es mayor o igual al valor especificado.*/
+        @media (min-width: 1024px) {
+            header h1 {
+                color: #f4d03f;
+                text-decoration: underline white;
+                /* Subrayado white */
+            }
+        }
+
+        /* pantalla está en modo retrato, la altura de la pantalla es mayor que su anchura.
+Por ejemplo, un celular en posición vertical.*/
+        @media (orientation: portrait) {
+            header h1 {
+                font-size: 24px;
+                color: #5dade2;
+                text-decoration: underline white;
+            }
+        }
+
+        /* Estilo para orientación horizontal (paisaje) */
+        @media (orientation: landscape) {
+            body {
+                background-color: lightgreen;
+            }
+        }
+
+        @media (min-resolution: 192dpi) {
+
+            /* Estilo para pantallas de alta resolución (192 dpi o más) */
+            body {
+                background-color: lightblue;
+                /* Fondo azul claro en pantallas de alta resolución */
+            }
+
+            img {
+                /* Cargar imágenes de mayor calidad en pantallas de alta resolución */
+                content: url('imagenx.jpg');
+            }
+        }
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <h1>Bienvenido a la Página de Inicio</h1>
+    </header>
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <div class="section">
+            <h2>Sección 1</h2>
+            <p>Este es un texto de ejemplo en la primera sección. Aquí puedes poner información importante.</p>
+        </div>
+        <div class="section">
+            <h2>Sección 2</h2>
+            <p>Este es un texto de ejemplo en la segunda sección. Puedes hablar sobre tus productos o servicios aquí.
+            </p>
+        </div>
+        <div class="section">
+            <h2>Sección 3</h2>
+            <p>Este es un texto de ejemplo en la tercera sección. Aquí puedes agregar más detalles acerca de tu negocio.
+            </p>
+        </div>
+    </div>
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 Mi Empresa. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
