@@ -8,7 +8,9 @@
 
 [3. Tercera Sesión](#tercera-sesión)
 
-[4. Cuarta Sesión]
+[4. Cuarta Sesión](#)
+
+[5. Quinta Sesión]
 
 
 
@@ -559,3 +561,223 @@ Se define un contenedor con un título y un botón que ejecuta una función al h
 https://lfrestrepo404.github.io/javascript-notes/
 
 https://lenguajejs.com/dom/introduccion/que-es/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Quinta Sesiòn
+
+Miramos BADGE
+
+´´´html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Usuarios</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="p-4">
+        <nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+        <a href="/BREADCRUM/BREADCRUM.html">Perfil</a>
+        </li>
+    </ol>
+    </nav>
+        <div id="usuarios" class="mt-0">
+    <h1>Usuarios</h1>
+    <p>Aquí puedes ver los usuarios registrados.</p>
+    </div>
+    </body>
+    </html>
+´´´
+
+
+´´´html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="p-4">
+        <nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="usuarios.html">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item">
+        <a href="BREADCRUMB.html">Perfil</a>
+        </li>
+
+    </ol>
+    </nav>
+        
+    <div id="inicio" class="mt-0">
+    <h4>Inicio</h4>
+    <p>Bienvenido a la página principal.</p>
+    
+    </div>
+    </body>
+    </html>
+´´´
+
+La exposiciòn:
+
+https://getbootstrap.com/docs/5.3/components/accordion/
+
+https://getbootstrap.com/docs/5.3/components/alerts/
+
+https://getbootstrap.com/docs/5.3/components/badge/
+
+´´´html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+
+            <h1 class="text-center">
+                Jugadores del Real Madrid
+                <img src="https://img.icons8.com/?size=100&id=38541&format=png&color=000000"
+                    style="width: 40px; height: 40px;">
+            </h1>
+
+            <div class="col-md-2">
+                <div class="card h-100">
+
+                    <!-- CAROUSEL -->
+                    <div id="carouselMbappe" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <img src="img/mbappe/mbappe.jpg" class="d-block w-100"
+                                    style="height: 450px; object-fit: cover;">
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="img/mbappe/7d4e7acde97a3d4f1828a827430ffceb.jpg" class="d-block w-100"
+                                    style="height: 450px; object-fit: cover;">
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="img/mbappe/8c78fdeda42f75009ebdc924c559ff1a.jpg" class="d-block w-100"
+                                    style="height: 450px; object-fit: cover;">
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="img/mbappe/effa1543a65deae563d9abf5a4362417.jpg" class="d-block w-100"
+                                    style="height: 450px; object-fit: cover;">
+                            </div>
+
+                        </div>
+
+                        <!-- Botones -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMbappe"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselMbappe"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+
+                    </div>
+
+                    <!-- CONTENIDO -->
+                    <div class="card-body">
+                        <h5>Kylian Mbappé</h5>
+                        <p>Texto...</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="col-md-2">
+                <div class="card h-100">
+                    <img src="img/cr7.jpg" class="w-100"
+                        style="height: 450px; object-fit: cover; object-position: top;">
+                    <div class="card-body">
+                        <h5>Cristiano Ronaldo</h5>
+                        <p>Texto...</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="card h-100">
+                    <img src="img/vini.jpg" class="w-100"
+                        style="height: 450px; object-fit: cover; object-position: top;">
+                    <div class="card-body">
+                        <h5>Vinicius Junior.</h5>
+                        <p>Texto...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="card h-100">
+
+                    <!-- CAROUSEL -->
+                    <div id="carouselValverde" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner">
+´´´
