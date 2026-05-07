@@ -12,5 +12,5 @@ class Usuario:
     # Esta es una función especial, que se llama str o "string". 
     # Es importante para temas de impresión: id, nombre, email.
     # Ahora vamos a modelar la base de datos aqui:
-    def _str_ (self):
+    def __str__ (self):
         return f"{self.id} - {self.nombre} - {self.email}"
