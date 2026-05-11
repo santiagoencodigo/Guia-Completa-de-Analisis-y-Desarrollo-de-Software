@@ -10,7 +10,9 @@
 
 [4. Cuarta Sesión](#)
 
-[5. Quinta Sesión]
+[5. Quinta Sesión](#)
+
+[6. Sexta Sesión](#)
 
 
 
@@ -781,3 +783,119 @@ https://getbootstrap.com/docs/5.3/components/badge/
 
                         <div class="carousel-inner">
 ´´´
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Sexta Sesión
+
+El enfoque de estos componentes son formularios
+
+> Nos esta presentando clases de input
+
+Para solo lectura podemos agregar el atributo readonly
+
+---
+
+Se nos presenta el atributo is-valid o is-invalid   
+
+```css
+
+```
+
+Se nos presenta la clase input-group.
+
+Se nos presenta la clase form-control
+
+---
+
+Se nos pide insertar el siguente código:
+
+```html
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap demo</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Ejemplo de entrada de archivo predeterminado</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Ejemplo de entrada de varios archivos</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple>
+            </div>
+            <div class="mb-3">
+                <label for="formFileDisabled" class="form-label">Ejemplo de entrada de archivo deshabilitada</label>
+                <input class="form-control" type="file" id="formFileDisabled" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="formFileSm" class="form-label">Ejemplo de entrada de archivo pequeño</label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file">
+            </div>
+            <div>
+                <label for="formFileLg" class="form-label">Ejemplo de entrada de archivo grande</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file">
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+    </html>
+```
+
+En donde se comenta que se debe tener mucho cuidado con los tipos de datos que ingresaremos en el input
+
+---
+
+**textarea**
+
+---
+
+**bootstrap icons**
+
+Link: [https://icons.getbootstrap.com/](https://icons.getbootstrap.com/ "icons.getbootstrap.com/")
+
+---
+
+**Form Select**
+
+---
+
+**Actividad de Sesión**
+
+Se pide hacer la pagina de inicio de LAIKA, con bootstrap
+
+> Ahora se puede decir que sabemos algo de bootstrap, no todo. Pero si sabemos usar la libreria ahora.
+
+---
+
