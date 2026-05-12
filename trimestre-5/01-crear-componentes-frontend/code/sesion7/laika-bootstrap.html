@@ -17,60 +17,7 @@ Actividad de Sesión: Replicar https://laika.com.co/
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laika Bootstrap | santiagoencodigo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* Solo mantenemos la definición del color de fondo personalizado */
-        .bg-laika-dark { background-color: lab(9.39% 37.28 -42.26); }
-        
-        /* Ajuste mínimo para que los párrafos no rompan el flex */
-        .top-bar p { margin-bottom: 0; font-size: 0.85rem; }
-        .top-bar { font-size: 0.85rem; padding: 6px 0; }
-
-    /* Color morado de Laika */
-        :root { --laika-purple: #614394; }
-
-        /* Hover para todos los enlaces del nav */
-        .nav-link:hover, .dropdown-item:hover {
-            color: var(--laika-purple) !important;
-        }
-
-        /* Activar Dropdown al pasar el mouse */
-        @media (min-width: 992px) {
-            .nav-item.dropdown:hover > .dropdown-menu {
-                display: block;
-                margin-top: 0;
-            }
-        }
-
-        /* Animación del icono de flecha */
-        .dropdown-toggle::after {
-            transition: transform 0.3s ease;
-            vertical-align: middle;
-        }
-
-        .dropdown:hover > .dropdown-toggle::after {
-            transform: rotate(180deg);
-            color: var(--laika-purple);
-        }
-
-        /* Estilo del botón de ciudad según la imagen */
-        .btn-city {
-            background-color: var(--laika-purple);
-            color: white !important;
-            border-radius: 8px;
-            padding: 5px 15px;
-        }
-        
-        .btn-city:hover {
-            opacity: 0.9;
-        }
-
-        /* Ajuste para el scroll de ciudades si la lista es muy larga */
-        .dropdown-scroll {
-            max-height: 300px;
-            overflow-y: auto;
-        }        
-    </style>
+    <link rel="stylesheet" href="./laika-bootstrap.css">
   </head>
 
 
@@ -522,8 +469,400 @@ Actividad de Sesión: Replicar https://laika.com.co/
 
 
 
-    <main class="container-fluid h-100" style="background: rgb(226, 225, 225);">
-        a
+
+
+
+
+
+
+
+
+
+
+    <main class="container-fluid bg-main-light min-vh-100">
+        <div class="container carousel-container p-0">
+            <div id="laikaCarousel" class="carousel slide" data-bs-ride="carousel">
+                
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                    <button type="button" data-bs-target="#laikaCarousel" data-bs-slide-to="9" aria-label="Slide 10"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./header/header-1.png" class="d-block w-100" alt="Promo 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-2.png" class="d-block w-100" alt="Promo 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-3.png" class="d-block w-100" alt="Promo 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-4.png" class="d-block w-100" alt="Promo 4">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-5.png" class="d-block w-100" alt="Promo 5">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-6.png" class="d-block w-100" alt="Promo 6">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-7.png" class="d-block w-100" alt="Promo 7">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-8.png" class="d-block w-100" alt="Promo 8">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-9.png" class="d-block w-100" alt="Promo 9">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./header/header-10.png" class="d-block w-100" alt="Promo 10">
+                    </div>
+                </div>
+
+                <!--
+                <button class="carousel-control-prev" type="button" data-bs-target="#laikaCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#laikaCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+                -->
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    
+    <div class="container my-5">
+        <div class="row g-4">
+            
+            <div class="col-12 col-md-6">
+                <div class="card promo-card bg-yellow-laika h-100 shadow-sm d-flex flex-row">
+                    <div class="promo-img-container">
+                        <img src="./01-dog.png" alt="Perro">
+                    </div>
+                    <div class="promo-content">
+                        <h3>Cuida a tu mejor amigo</h3>
+                        <p class="mb-3">Todo lo que necesita para ser feliz y saludable.</p>
+                        <button class="btn btn-laika text-white boton_comprar_mascota">Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="card promo-card bg-blue-laika h-100 shadow-sm d-flex flex-row">
+                    <div class="promo-img-container">
+                        <img src="./02-cat.png" alt="Gato">
+                    </div>
+                    <div class="promo-content">
+                        <h3>Mima a tu felino</h3>
+                        <p class="mb-3">Productos hechos para su comodidad y diversión.</p>
+                        <button  class="btn btn-laika text-white boton_comprar_mascota">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container my-5">
+        <h1 class="fs-2 fw-bold">Favoritos para tu PET-AMIGO</h1>
+        <p class="text-secondary">Descubre descuentos exclusivos, combos y precios especiales en nuestros productos por tiempo limitado.</p>
+
+        <div id="productCarousel" class="carousel slide product-carousel" data-bs-ride="carousel">
+            
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="1"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <span class="badge badge-oferta">OFERTA</span>
+                                <div class="img-container">
+                                    <img src="./productos/1-dieta-horneada-de-res.png" alt="Producto 1">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Pixie</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Pixie - Dieta Horneada Carne De Res</h6>
+                                    <div class="text-success fw-bold small">7% OFF</div>
+                                    <div class="fs-5 fw-bold">$12.183</div>
+                                    <div class="text-muted small">($24,37/gr)</div>
+                                    <div class="member-price fw-bold">Member $11.790 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">500 GR</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/2-arenera-semicerrada.png" alt="Producto 2">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Paw day</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Paw Day - Arenera Semicerrada</h6>
+                                    <div class="fs-5 fw-bold mt-4">$58.900</div>
+                                    <div class="text-muted small">($19,63/gr)</div>
+                                    <div class="member-price fw-bold">Member $54.188 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">MULTICOLOR</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/3-arena-multi-cat-frebreze.png" alt="Producto 3">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Fresh step</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Fresh Step - Arena Multi Cat con Frebreze</h6>
+                                    <div class="fs-5 fw-bold mt-4">$70.900</div>
+                                    <div class="text-muted small">($11,15/gr)</div>
+                                    <div class="member-price fw-bold">Member $65.228 <i class="fas fa-crown member-icon"></i></div>
+                                    <div class="d-flex gap-1 mt-2">
+                                        <span class="badge border text-dark" style="font-size: 0.6rem;">14 LB</span>
+                                        <span class="badge border text-muted" style="font-size: 0.6rem;">25 LB</span>
+                                    </div>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/4-peluditos-barf-natural-barf.png" alt="Producto 4">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Peluditos barf</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Peluditos Barf - Natural Barf</h6>
+                                    <div class="fs-5 fw-bold mt-4">$3.600</div>
+                                    <div class="text-muted small">($12/gr)</div>
+                                    <div class="member-price fw-bold">Member $3.420 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">300 GR</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/5-paw-day-pescado-electrico.png" alt="Producto 5">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Paw day</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Paw Day - Pescado Eléctrico</h6>
+                                    <div class="fs-5 fw-bold mt-4">$30.300</div>
+                                    <div class="text-muted small">($37,88/gr)</div>
+                                    <div class="member-price fw-bold">Member $27.270 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">ÚNICA</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/6-hills-pd-metabolic-alimento-perro.png" alt="Producto 6">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Hills</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Hills Pd Metabolic - Alimento Perro...</h6>
+                                    <div class="fs-5 fw-bold mt-4">$235.900</div>
+                                    <div class="text-muted small">($67,59/gr)</div>
+                                    <div class="member-price fw-bold">Member $214.669 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">7.7 LB</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card product-card shadow-sm p-2">
+                                <div class="img-container">
+                                    <img src="./productos/7-besties-huesos-masticables-mini-sabor.png" alt="Producto 7">
+                                </div>
+                                <div class="card-body p-2">
+                                    <small class="text-muted">Por Besties</small>
+                                    <h6 class="card-title fw-bold mb-1" style="font-size: 0.9rem;">Besties - Huesos Masticables Mini Sabor...</h6>
+                                    <div class="fs-5 fw-bold mt-4">$15.100</div>
+                                    <div class="text-muted small">($97,42/gr)</div>
+                                    <div class="member-price fw-bold">Member $13.288 <i class="fas fa-crown member-icon"></i></div>
+                                    <span class="badge border text-dark mt-2" style="font-size: 0.7rem;">9 UDS</span>
+                                    <button class="btn btn-agregar w-100 mt-3">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container my-4">
+        <!-- Banner Principal QR (Opcional según tu código previo) -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <img src="./03-qr.png" alt="QR Promoción" class="img-fluid rounded w-100">
+            </div>
+        </div>
+
+        <!-- Sección de Categorías (Basada en image_9f3059.jpg) -->
+        <div class="row g-3">
+            <!-- Columna Izquierda: Catálogo (Imagen Alta) -->
+            <div class="col-md-4">
+                <div class="h-100">
+                    <img src="./04-catalogo.png" alt="Catálogo" class="img-fluid rounded w-100 h-100 object-fit-cover">
+                </div>
+            </div>
+
+            <!-- Columna Central: Tiendas y Veterinario -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column gap-3 h-100">
+                    <img src="./05-tiendas.png" alt="Tiendas" class="img-fluid rounded w-100 flex-grow-1 object-fit-cover">
+                    <img src="./07-veterinario-domicilio.png" alt="Veterinario a Domicilio" class="img-fluid rounded w-100 flex-grow-1 object-fit-cover">
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Laika Member y VetCare -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column gap-3 h-100">
+                    <img src="./06-laika-member.png" alt="Laika Member" class="img-fluid rounded w-100 flex-grow-1 object-fit-cover">
+                    <img src="./08-vetcare.png" alt="VetCare" class="img-fluid rounded w-100 flex-grow-1 object-fit-cover">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container my-5">
+        <div class="row align-items-start g-4">
+            <!-- Lado Izquierdo: Mosaico de Imágenes -->
+            <div class="col-lg-6">
+                <div class="row g-2">
+                    <!-- Columna interna izquierda: Perro (Imagen alta) -->
+                    <div class="col-6">
+                        <img src="./09-dog-2.png" alt="Dog" class="img-fluid rounded w-100 mb-2" style="height: 390px; object-fit: cover;">
+                        <img src="./12-fabrica.png" alt="Tienda" class="img-fluid rounded w-100" style="height: 140px; object-fit: cover;">
+                    </div>
+                    
+                    <!-- Columna interna derecha: Universo y Familia -->
+                    <div class="col-6">
+                        <img src="./11-universo-laika.png" alt="Universo" class="img-fluid rounded w-100 mb-2" style="height: 160px; object-fit: cover;">
+                        <img src="./13-familia.png" alt="Familia" class="img-fluid rounded w-100" style="height: 370px; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lado Derecho: Texto Informativo -->
+            <div class="col-lg-6">
+                <h2>LAIKA: <span style="color: var(--laika-purple, #614394)">La Tienda Online de Mascotas que tu PET-AMIGO Necesita</span></h2>
+
+                <p class="mt-4">
+                    LAIKA fue el primer ser vivo en conocer el espacio, y así se convirtió en nuestra guardiana, ahora se encarga de todo el universo de cuidado y bienestar para tu PET-AMIGO en un solo lugar.
+                </p>
+                
+                <p>
+                    Al navegar en LAIKA descubrirás un sistema de envíos a domicilio el mismo día que te conecta desde los accesorios más trendy y adorables para perros y gatos, el alimento y snacks que conquista cualquier paladar, los juguetes perfectos que aseguran una diversión de otro mundo, las camas mas cómodas y confortables que llevarán a tener sueños bajo las estrellas, y todo para verse y sentirse como los mas guapos, cepillos, shampoo, arenas para gatos exigentes y todos los productos de higiene y farmacia para perros y gatos.
+                </p>
+
+                <p>
+                    Nuestra misión es acompañar sus momentos juntos, de esta forma creamos 2 universos uno de ellos digital (app y web) para que sea fácil y rápido conseguir lo que necesiten y otro en tiendas físicas que responde a materializar un mundo mágico para nuestros PET-AMIGOS, creemos que el amor por los animales es lo que nos une, y en LAIKA, queremos ser parte de esa conexión. Únete a nosotros en este viaje intergaláctico de exploración y cuidado, donde las necesidades de tu PET-AMIGOS son siempre nuestra estrella polar.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <h2>Todas<span style="color: var(--laika-purple, #614394)"> las marcas</span></h2>  
+        <a href="" style="color: var(--laika-purple, #614394)" class="float-end">Ver todas las marcas >></a>
+        <br>
+        <small class="text-secondary">Todas nuestras mejores marcas.</small>     
+        
+        <div class="col">
+            <img src="./brands/01-nutra-nuggets.png" alt="">
+        </div>
+    </div>
+
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
