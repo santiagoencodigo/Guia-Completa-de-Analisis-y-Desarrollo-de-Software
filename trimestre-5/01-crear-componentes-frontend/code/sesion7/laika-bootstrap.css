@@ -1,0 +1,224 @@
+/* =========================================
+1. VARIABLES GLOBALES Y COLORES
+========================================= */
+:root {
+    --laika-purple: #614394;
+    --laika-purple-light: #f3e5f5; /* Morado suave para hover */
+    --laika-yellow: #fff27d;
+    --laika-blue: #ade8f4;
+    --laika-gold: #ffc107;
+}
+
+/* Fondos específicos */
+.bg-laika-dark { background-color: lab(9.39% 37.28 -42.26); }
+.bg-yellow-laika { background-color: var(--laika-yellow); }
+.bg-blue-laika { background-color: var(--laika-blue); }
+.bg-main-light { background-color: #f4f4f4; padding: 20px 0; }
+
+
+/* =========================================
+2. BARRA DE NAVEGACIÓN Y TOP BAR
+========================================= */
+.top-bar { font-size: 0.85rem; padding: 6px 0; }
+.top-bar p { margin-bottom: 0; font-size: 0.85rem; }
+
+.nav-link:hover, .dropdown-item:hover {
+    color: var(--laika-purple) !important;
+}
+
+@media (min-width: 992px) {
+    .nav-item.dropdown:hover > .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+}
+
+.dropdown-toggle::after {
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.dropdown:hover > .dropdown-toggle::after {
+    transform: rotate(180deg);
+    color: var(--laika-purple);
+}
+
+.btn-city {
+    background-color: var(--laika-purple);
+    color: white !important;
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+.btn-city:hover { opacity: 0.9; }
+
+.dropdown-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+/* =========================================
+3. CARRUSEL PRINCIPAL (HEADER)
+========================================= */
+.carousel { margin-bottom: 50px; }
+.carousel-container { margin-top: 5px; overflow: hidden; }
+.carousel-indicators { bottom: -40px; }
+
+.carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid var(--laika-purple);
+    margin: 0 5px;
+    opacity: 1;
+}
+
+.carousel-indicators .active {
+    background-color: var(--laika-purple) !important;
+}
+
+
+/* =========================================
+4. TARJETAS PROMOCIONALES (PROMO CARDS)
+========================================= */
+.promo-card {
+    border-radius: 15px;
+    border: none;
+    position: relative;
+    min-height: 250px;
+    overflow: visible;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: row;
+}
+
+.promo-card:hover { transform: translateY(-5px) scale(1.01); }
+
+.promo-img-container {
+    width: 45%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.promo-img-container img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.promo-content {
+    width: 55%;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.promo-content h3 {
+    font-weight: 800;
+    color: #000;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.promo-content p {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.btn-laika {
+    background-color: var(--laika-purple);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 25px;
+    font-weight: bold;
+    width: fit-content;
+}
+.btn-laika:hover { color: white; opacity: 0.9; }
+
+
+/* =========================================
+5. CARRUSEL DE PRODUCTOS (INFINITO & HOVER)
+========================================= */
+
+/* Contenedor para permitir scroll con cursor (Drag) */
+.product-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px 5px 60px 5px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Oculta scroll en Firefox */
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+}
+
+.product-scroll-container:active { cursor: grabbing; }
+
+.product-scroll-container::-webkit-scrollbar { display: none; } /* Oculta scroll en Chrome/Safari */
+
+.product-item {
+    min-width: 280px; /* Ancho fijo para que siempre se vean varios */
+    flex: 0 0 auto;
+}
+
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    height: 100%;
+    background: white;
+    position: relative;
+}
+
+.product-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+.img-container {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.img-container img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+/* Efecto solicitado: Hover morado suave en el precio por gramo */
+.price-per-unit {
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+    padding: 2px 5px;
+    display: inline-block;
+}
+
+.price-per-unit:hover {
+    background-color: var(--laika-purple-light);
+    color: var(--laika-purple) !important;
+}
+
+.btn-agregar {
+    background-color: var(--laika-purple);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.badge-oferta {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    z-index: 2;
+}
+
+.member-price { color: #666; font-size: 0.85rem; font-weight: bold; }
+.member-icon { color: var(--laika-gold); font-size: 0.8rem; }
