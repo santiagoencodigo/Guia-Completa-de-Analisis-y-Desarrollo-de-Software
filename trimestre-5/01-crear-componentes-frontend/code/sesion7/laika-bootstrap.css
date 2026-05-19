@@ -222,3 +222,243 @@
 
 .member-price { color: #666; font-size: 0.85rem; font-weight: bold; }
 .member-icon { color: var(--laika-gold); font-size: 0.8rem; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   8. SECCIÓN ESPECÍFICA DE MARCAS (GRID 2x5)
+   ========================================= */
+.brands-grid-container {
+    display: grid;
+    /* Forzar 5 columnas de igual tamaño */
+    grid-template-columns: repeat(5, 1fr); 
+    /* Forzar 2 filas */
+    grid-template-rows: repeat(2, 1fr); 
+    gap: 15px; /* Separación idéntica entre tarjetas */
+    padding: 10px 0;
+}
+
+.brand-card {
+    background-color: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    height: 160px; /* Altura perfecta para mantener el aspecto semi-cuadrado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.brand-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Modificadores para los botones indicadores (Dots) del carrusel */
+.carousel-indicators .dot-indicator {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    border: 1px solid var(--laika-purple) !important;
+    background-color: transparent !important;
+    opacity: 1 !important;
+    margin: 0 5px;
+    box-sizing: content-box;
+}
+
+.carousel-indicators .dot-indicator.active {
+    background-color: var(--laika-purple) !important;
+}
+
+/* Responsividad: En pantallas medianas y pequeñas se reduce a 2 y 3 columnas */
+@media (max-width: 992px) {
+    .brands-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .brands-grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   9. CORRECCIÓN CONTROL DE ESPACIOS LAIKA
+   ========================================= */
+
+:root {
+    --laika-purple: #50387a; 
+}
+
+/* El footer se acopla inmediatamente al término del main */
+.custom-footer {
+    background-color: #ffffff !important;
+    position: relative;
+    padding-top: 0px; 
+    margin-top: 0px; 
+    width: 100%;
+}
+
+/* Contenedor truco: añade el margen superior pero con fondo blanco para tapar el main */
+.footer-divider-wrapper {
+    background-color: #ffffff;
+    padding-top: 50px;     /* Espacio interno superior */
+    padding-bottom: 40px;  /* Espacio antes de las columnas */
+    width: 100%;
+}
+
+/* Línea gris del 100% del contenedor */
+.footer-top-divider {
+    border-top: 1px solid #e9ecef;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* El logo circular encima de la línea e izquierdo */
+.footer-logo-circle-left {
+    position: absolute;
+    top: 0;
+    left: 12px; 
+    transform: translateY(-170%);
+    background-color: #ffffff;
+    border: 1px solid var(--laika-purple);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    z-index: 10;
+}
+
+.footer-logo-circle-left img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Títulos de las columnas */
+.footer-title {
+    color: var(--laika-purple) !important;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* Enlaces del menú */
+.footer-menu-links a {
+    color: #555555;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.footer-menu-links a:hover {
+    color: var(--laika-purple);
+}
+
+/* Botonera de suscripción */
+.custom-input-laika {
+    border: 1px solid #ced4da;
+    border-radius: 6px !important;
+    font-size: 0.88rem;
+    padding: 8px 12px;
+}
+
+.custom-input-laika:focus {
+    border-color: var(--laika-purple);
+    box-shadow: none;
+}
+
+.btn-subscribe-laika {
+    background-color: var(--laika-purple) !important;
+    color: white !important;
+    border: none;
+    border-radius: 6px !important;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-subscribe-laika span {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Links legales */
+.text-laika-purple {
+    color: var(--laika-purple) !important;
+}
+
+.footer-legal-section {
+    border-top: 1px solid #f1f3f5;
+    font-size: 0.76rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.small-copyright {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+/* Tarjetas de pago */
+.payment-card-badge {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #495057;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* Ajuste responsive para celulares */
+@media (max-width: 768px) {
+    .footer-logo-circle-left {
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
