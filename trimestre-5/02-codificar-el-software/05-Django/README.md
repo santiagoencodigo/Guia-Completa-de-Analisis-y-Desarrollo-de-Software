@@ -1,3 +1,5 @@
+> Clase del 20/05/2026
+
 # Proyecto Django - ADSO
 
 Este proyecto fue desarrollado como práctica de aprendizaje del framework Django durante el trimestre 5 del tecnólogo ADSO.
@@ -37,6 +39,10 @@ Este proyecto fue desarrollado como práctica de aprendizaje del framework Djang
 [3. Creación Hola Mundo](#creación-hola-mundo)
 
 [4. Creación App](#creación-de-app)
+
+[5. Proyecto Django: MVT](#proyecto-django-mvt)
+
+[6. Actividad de la sesión](#actividad-de-la-sesión)
 
 
 
@@ -567,4 +573,290 @@ Algo que me tranquiliza, le pedí a chatgpt que analizará antes de yo ejecutar 
 
     Eso está bien.
 
-    De hecho es profesional
+    De hecho es profesional.
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+## Actividad de la sesión
+
+> La idea de esta actividad es ver como un HTML interactua con esto.
+
+    Crear:
+
+        1. Proyecto "miweb"
+
+        2. App "inicio"
+
+        3. Pagina Home
+
+        4. Pagina About
+
+        5. Navbar Básica
+
+---
+
+Ahora entonces se va a crear otro proyecto, lo haré en mi misma carpeta porque no tendré problema con las dependencias.
+
+Ahora se pide ir a miweb/settings.py y modificar:
+
+```py
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [BASE_DIR / 'templates'], #Se agrego base dir
+            'APP_DIRS': True,
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.request',
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
+        },
+    ]
+```
+
+> Esta es la dirección donde se guardaran todos los templates
+
+Y ahora en miweb/urls.py
+
+Vamos a enrutarlo
+
+```python
+    from django.contrib import admin
+    # Tenemos que importar tambien include
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        # Nuevo:
+        path('',include('inicio.urls')),
+    ]
+```
+
+Ahora vamos a ir a nuestra aplicación inicio/ y crearemos el archivo urls.py
+
+Tendremos varias vistas como el home, about y el navbar.
+
+Entonces:
+
+```python
+    from django.urls import path
+    from . import views
+
+    urlspath = [
+        # Aqui ya hablamos del futuro porque tendremos una función llamada home
+        path('', views.home, name='home'),
+        path('about/', views.about, name='about'),
+        path('blog/', views.blog, name='blog'),
+        path('contacto/', views.contacto, name='contacto')
+    ]
+```
+
+Estas URL son lo que literalmente vamos a ver en la URL y asi mismo van a llamar estas funciones que estarán en views y por eso "hablamos del futuro."
+
++ Estamos viendo el código crudo.
+
+Ahora en inicio/views.py
+
+```python
+    from django.shortcuts import render
+
+    # Create your views here.
+
+    # Cuando llamen a la función home.
+        
+    def home(request):
+        # Ya no usaremos http request sino render:
+            # Todavia no hemos creado el archivo HTML, pero aqui lo ponemos.
+        return render(request, 'inicio/home.html')
+
+    # Copiar y pegar para los demas
+
+    def about(request):
+        return render(request, 'inicio/about.html')
+
+    def blog(request):
+        return render(request, 'inicio/blog.html')
+
+    def contacto(request):
+        return render(request, 'inicio/contacto.html')
+```
+
++ La idea de usar un framework es DRY.
+
+Ahora dentro de la carpeta raiz miweb que es contenedor de miweb/ y de inicio/
+
+* Se tiene que crear la carpeta templates que estara al mismo nivel que inicio/, miweb/.
+
+* Se va a crear el archivo base.html en templates/
+
+Este archivo me va a servir para armar y utilizar codigo para poner los otros templates.
+
+Será entonces un menú que siempre se va a replicar **navbar** por cada archivo.
+
+> Siempre mostrar un menú de navegación.
+
+Por lo que en este archivo:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MiWeb | santiagoencodigo | django</title>
+</head>
+<body>
+    <nav style="background:#eee; padding:10px;">
+        <a href="/">Home</a> |
+        <a href="/about/">About</a> |
+        <a href="/blog/">Blog</a> |
+        <a href="/contacto/">Contacto</a>
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
+```
+
+Ahora vamos a nuestra aplicación inicio/ y crearemos una carpeta que se llame templates/
+
+Y ahí crearemos 4 archivos HTML
+
+1. home.html
+
+2. about.html
+
+3. blog.html
+
+4. contacto.html
+
+Siendo estas las que se encuentran a inicio/urls.py
+
+Se pide escribir en home.html:
+
+```html
+<!-- Esto es como una herencia, en donde se trae esta información. Que base tendria como tal el navbar que hicimos. Por lo que aqui pondrá esa sección. -->
+{% extends 'base.html' %}
+
+<!-- 
+ Esta es una variable de block. En donde todo lo que esta dentro es un bloque de contenido. 
+ En otras palabras tambien block content como aparece en base, eso quiere decir que este contenido va a aparecer en la base.html
+ -->
+
+{% block content %}
+    <h1>Bienvenido a MiWeb</h1>
+    <p>Página principal del proyecto</p>
+{% endblock %}
+```
+
+Ahora por otro lado se pide crear en inicio/ otra carpeta que tenga su mismo nombre inicio/ y dentro de esta la carpeta de los templates.
+
+django tiene una documentación bien detallada y extensa. Siendo incluso una especialización y termina siendo temas de especialidad para profundizar en estos temas.
+
+* Nosotros tenemos mes y algo, la instructora se esta saltando varias partes de lo que estamos viendo debido a que estamos haciendo un tecnologo.
+
+Se pide escribir en el about.html:
+
+```html
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h1>About</h1>
+    <p>Este es un proyecto de práctica con Django</p>
+    {% endblock %}
+```
+
+Se pide escribir en el blog.html:
+
+```html
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h1>Blog Estático</h1>
+
+    <h3>Artículo 1</h3>
+    <p>Introducción a Django</p>
+    <h3>Artículo 2</h3>
+    <p>Flujo URL → View → Template</p>
+    {% endblock %}
+    keep
+```
+
+Y finalmente se pide escribir en contacto.html
+
+```html
+    {% extends 'base.html' %}
+
+    {% block content %}
+    <h1>Contacto</h1>
+    <p>Email: contacto@miweb.com</p>
+    <p>Tel: 300 000 0000</p>
+    {% endblock %}
+```
+
+> Me parece bastante chevere y agradable.
+
+    IMPORTANTE: Aqui ocurrió un error - Desde un inicio se creo la carpeta inicio, dentro de esta se tenia templates. Es al contrario, dentro de templates debe haber inicio y dentro de inicio debe haber todos los html.
+
+Ahora ya podemos ejecutar el server.
+
+Ahora finalmente, me ocurrió un error entonces:
+
+En miweb/miweb/settings.py:
+
+```python
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        # Esto faltaba.
+        'inicio',
+    ]
+```
+
+Y por otro lado en inicio/urls.py estaba escrito mal pues era:
+
+```python
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        # Aqui ya hablamos del futuro porque tendremos una función llamada home
+        path('', views.home, name='home'),
+        path('about/', views.about, name='about'),
+        path('blog/', views.blog, name='blog'),
+        path('contacto/', views.contacto, name='contacto')
+    ]
+```
+
+Aca hicimos templates, views, pero no hemos hecho las migraciones.
+
+> Toca estar pendiente de las importaciones.
