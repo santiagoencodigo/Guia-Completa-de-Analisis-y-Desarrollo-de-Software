@@ -134,6 +134,19 @@ a
 
 ## 3. Programación Orientada a Objetos y Creación de CRUD
 
+
+
+A lo largo del trimestre se debe desarrollar una aplicación completa que incluya:
+
+- Conexión a base de datos (usando XAMPP + Python).
+- CRUD completo (Crear, Leer, Actualizar, Eliminar).
+- Sistema de inicio de sesión.
+- Backend con interfaz de usuario (frontend básico).
+- Descarga de archivos.
+
+
+---
+
 Actividad de Sesión
 
 * Se pide escribir python en la terminal de VSCODE para instalar el entorno de python en el visual, además de que termina abriendo la tienda de microsoft para instalarlo.
