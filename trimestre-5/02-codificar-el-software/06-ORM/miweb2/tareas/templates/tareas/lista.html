@@ -1,0 +1,37 @@
+<h1>Lista de tareas</h1>
+<!-- Crearemos unos enlaces para hacer como los filtros -->
+<a href="/crear/">Crear tarea</a>
+<a href="/completadas/">Tareas completadas</a>
+
+<!-- Como esto es una consulta y tenemos varios registros/objetos, haremos una lista de esos objetos -->
+
+<ul>
+    <!-- 
+        Hay que hacer un ciclo porque si no solo mostrara una tarea
+        Y por ende pasara por cada tarea y por ende va a renderizar una por una.
+    -->
+    {% for tarea in tareas %}
+    <li>
+        
+        <!-- Solo conozco las variables por ende: -->
+
+        <!-- Variable y campo -->
+        <b>{{ tarea.titulo}}</b> - <b>{{ tarea.descripcion}}</b>
+
+        <!-- Dependiendo del estado que me muestre las que estan activas o no -->
+
+            <!-- Esto ya es propio de Django -->
+        {% if tarea.estado %}
+            ** Completada
+        {% else %}
+            xx Pendiente
+        {% endif %}
+
+        <!-- Recordemos que este requiere un ID entonces:
+            eliminar no me funcionaba porque el href estaba con la E en mayuscula. 
+        -->
+        <a href="/editar/{{ tarea.id }}/">Editar</a>        
+        <a href="/eliminar/{{ tarea.id }}/">Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>

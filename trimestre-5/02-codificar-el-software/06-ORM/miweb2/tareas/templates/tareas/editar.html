@@ -1,0 +1,19 @@
+<h1>Editar tareas</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="titulo" value="{{tarea.titulo}}">
+    <br>
+    <textarea name="descripcion">{{tarea.descripcion}}</textarea>
+    <br>
+
+    <!-- Tambien puedo editar el estado y este es un checkbox porque es falso o verdadero -->
+
+    <label for="">
+        Completada:
+        <!-- Ahora toca preguntar si hay un check para determinar si es true o false. -->
+        <input type="checkbox" name="estado" {% if tarea.estado %} checked {% endif %}>
+    </label>
+
+    <button type="submit">Actualizar</button>
+</form>

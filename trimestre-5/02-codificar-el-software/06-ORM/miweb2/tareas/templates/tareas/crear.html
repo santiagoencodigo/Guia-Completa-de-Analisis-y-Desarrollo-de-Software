@@ -1,0 +1,12 @@
+<h1>Crear tareas</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <!-- Aqui es de acuerdo a los campos de tarea -->
+    <input type="text" name="titulo" value="{{tarea.titulo}}">
+    <br>
+    <!-- Un textField es un text area -->
+    <textarea name="descripcion">{{tarea.descripcion}}</textarea>
+    <br>
+    <button type="submit">Guardar</button>
+</form>
