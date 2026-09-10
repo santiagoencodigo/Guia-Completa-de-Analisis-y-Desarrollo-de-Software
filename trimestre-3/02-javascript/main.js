@@ -1,203 +1,318 @@
+/* =========================================================================
+   
 
-// Santiago Muñeton Hernandez
-// Fecha de Inicio de Documento: 04/11/2025
+    09/09/2026: Momento de codificación de esto
 
-// Ficha: 3171608
-// Programa: Análisis y Desarrollo de Software 
-// Instructora Angelica Triana
-
-// Servicio Nacional de Aprendizaje
+    
 
 
-
-
-// ---------------------------------------------------------------------------------
+    JavaScript · Sencillo y Sintaxis Básica
+    Lógica interactiva de la página de ejercicios (modales + inputs)
 
 
 
 
-// Aprender Javascript es fundamental para el desarrollo web moderno, además es importante para entender
-// la lógica del lado del cliente (FRONTEND) y cómo los navegadores interpretan y ejecutan instrucciones
-// para crear experiencias dinámicas e interactivas.
+   ========================================================================= */
 
-// Este lenguaje es versátil y universal ya que se puede usar para el FRONTEND y para el BACKEND
+(function () {
+  'use strict';
 
-// El backend con JS se realiza mediante NODE.JS
+  /* Helpers ------------------------------------------------------------- */
+  const $  = (id) => document.getElementById(id);
+  const fmt = (n) => Number(n).toLocaleString('es-CO');
 
+  /* =====================================================================
+     1) POP-UP DE BIENVENIDA
+     Se muestra al renderizar la página y se cierra tras 4 segundos.
+     ===================================================================== */
+  function initWelcome() {
+    const el = $('welcomeModal');
+    if (!el || typeof bootstrap === 'undefined') return;
 
+    const modal = new bootstrap.Modal(el, { backdrop: 'static', keyboard: false });
+    modal.show();
 
-
-// ---------------------------------------------------------------------------------
-
-
-
-
-// Se propone realizar 7 ejercicios - propuestos por la Ingeniera Angelica Triana.
-
-alert("A continuación ejercicios Javascript");
-alert("Menú de Ejercicios:\n\n" +
-    "Inserte el número 1 para: "+
-    "Inserte el número 2 para: "+
-    "Inserte el número 3 para: "+
-    "Inserte el número 4 para: Ejercicio 4: Calificación en Letras [SWITCH]"+
-    "Inserte el número 5 para: Ejercicio 5: Suma de uno a diez - Números del 1 al 10" +
-    "Inserte el número 6 para: "+
-    "Inserte el número 7 para: " +
-    "Inserte el número 8 para: Ejercicio 8: Wayground - Simulación Factura - Venta Hielo Seco"
-)
-
-let seleccion = parseInt(prompt("Ingrese el número de acuerdo al ejercicio que desea ver")); // Prompt para selección de Ejercicios
-
-if (seleccion == 1) {
-    alert("Ejercicio 1")
-}
-
-
-
-
-else if (seleccion == 2) {
-    alert("Ejercicio 2")
-    alert(`${a}`)
-}
-
-
-
-
-else if (seleccion == 3) {
-    alert("Ejercicio 3")
-}
-
-
-
-
-else if (seleccion == 4) {
-    // Proceso Calificación en Letras
-    // Se debe determinar la calificación  cualitativa según la nota númerica de 1 a 5
-    alert("Ejercicio 4: Calificación en Letras [SWITCH]")
-
-    let nota = 4; // Es un dato fijo que defini con let
-
-    // switch es una estructura de control en javascript y muchos lenguajes que permite ejecutar
-    // bloques de código según el valor de una expresión. Por lo que según el caso de uso puede ser efectiva
-    // y es una alternativa más ordenada al uso de muchos if...else if.. else
-
-    // case es una condición/caso especifico y ejecuta el código si la condición coincide
-
-    // break interrumpe la ejecución del código por lo que evita que siga con los demas casos
-
-    switch (nota) {
-        case 1: // En caso de tal número realizar cierta acción
-            console.log("Deficiente");
-            break;
-        case 2: 
-            console.log("Insuficiente");
-            break;
-        case 3:
-            console.log("Aceptable");
-            break;
-        case 4:
-            console.log("Sobresaliente");
-            break;
-        case 5:
-            console.log("Excelente")  ;
-            break;              
-        default: // Default quiere decir que si ningún caso coincide pues va a realizar la actividad:
-            console.log("Nota no valida, debe estar entre el 1-5");
-            break;
-    }
-}
-
-
-
-
-else if (seleccion == 5) {
-    // Suma de uno a diez - Se debe mostrar los números del 1 al 10
-    alert("Ejercicio 5: Suma de uno a diez - Números del 1 al 10")
-    numero = 0
-    suma = 1 
-
-    while (numero <= 10) {
-        console.log (suma = suma + numero); // Acumula Suma
-        console.log (numero = numero + 1); // Incrementa el contador
+    const bar = $('welcomeProgress');
+    if (bar) {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      // Fuerza reflow para reiniciar la animación
+      void bar.offsetWidth;
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width 4000ms linear';
+        bar.style.width = '100%';
+      });
     }
 
+    window.setTimeout(() => modal.hide(), 4000);
+  }
 
+  /* =====================================================================
+     2) EJERCICIO 1 · Condicionales if / else
+     ===================================================================== */
+  function initEj1() {
+    const btn = $('ej1-btn');
+    if (!btn) return;
 
-}
+    btn.addEventListener('click', () => {
+      const dinero = parseFloat($('ej1-dinero').value);
+      const precio = parseFloat($('ej1-precio').value);
+      const out    = $('ej1-result');
 
+      if (isNaN(dinero) || isNaN(precio)) {
+        out.className = 'result-box result-error';
+        out.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Debes ingresar ambos valores numéricos.';
+        return;
+      }
 
+      if (dinero >= precio) {
+        out.className = 'result-box result-ok';
+        out.innerHTML =
+          `Tienes $${fmt(dinero)} y el producto cuesta $${fmt(precio)}.<br>` +
+          '<strong>¡Puedes comprar el producto!</strong>';
+      } else {
+        out.className = 'result-box result-error';
+        out.innerHTML =
+          `Tienes $${fmt(dinero)} y el producto cuesta $${fmt(precio)}.<br>` +
+          '<strong>No tienes suficiente dinero para comprarlo.</strong>';
+      }
+    });
+  }
 
+  /* =====================================================================
+     3) EJERCICIO 2 · Bucles y arreglos (for + filter)
+     ===================================================================== */
+  function initEj2() {
+    const btn = $('ej2-btn');
+    if (!btn) return;
 
-else if (seleccion == 6) {
-    // Suma de uno a diez - Se debe mostrar los números del 1 al 10
-    alert("Ejercicio 5: Suma de uno a diez - Números del 1 al 10")
+    btn.addEventListener('click', () => {
+      const numeros = [];
+      let suma = 0;
 
+      for (let i = 1; i <= 10; i++) {
+        numeros.push(i);
+        suma += i;
+      }
 
+      const pares = numeros.filter((n) => n % 2 === 0);
 
-}
+      const out = $('ej2-result');
+      out.className = 'result-box result-ok';
+      out.innerHTML =
+        `<strong>Arreglo generado:</strong> [${numeros.join(', ')}]<br>` +
+        `<strong>Suma total (1 al 10):</strong> ${suma}<br>` +
+        `<strong>Números pares (filter):</strong> [${pares.join(', ')}]`;
+    });
+  }
 
+  /* =====================================================================
+     4) EJERCICIO 3 · Funciones con parámetros
+     ===================================================================== */
+  function evaluarNota(nota) {
+    if (nota < 3) return 'Reprobado';
+    if (nota >= 3 && nota < 4) return 'Aprobado';
+    return 'Excelente';
+  }
 
+  function initEj3() {
+    const btn = $('ej3-btn');
+    if (!btn) return;
 
+    btn.addEventListener('click', () => {
+      const nota = parseFloat($('ej3-nota').value);
+      const out  = $('ej3-result');
 
-else if (seleccion == 7) {
-    // Suma de uno a diez - Se debe mostrar los números del 1 al 10
-    alert("Ejercicio 5: Suma de uno a diez - Números del 1 al 10")
+      if (isNaN(nota)) {
+        out.className = 'result-box result-error';
+        out.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Ingresa una nota numérica.';
+        return;
+      }
 
+      const resultado = evaluarNota(nota);
+      out.className = 'result-box result-ok';
+      out.innerHTML = `evaluarNota(${nota}) → <strong>${resultado}</strong>`;
+    });
+  }
 
+  /* =====================================================================
+     5) EJERCICIO 4 · switch (calificación cualitativa)
+     ===================================================================== */
+  function initEj4() {
+    const btn = $('ej4-btn');
+    if (!btn) return;
 
-}
+    btn.addEventListener('click', () => {
+      const nota = parseInt($('ej4-nota').value, 10);
+      const out  = $('ej4-result');
+      let resultado;
 
+      switch (nota) {
+        case 1: resultado = 'Deficiente';  break;
+        case 2: resultado = 'Insuficiente'; break;
+        case 3: resultado = 'Aceptable';   break;
+        case 4: resultado = 'Sobresaliente'; break;
+        case 5: resultado = 'Excelente';   break;
+        default: resultado = 'Nota no válida, debe estar entre 1-5';
+      }
 
+      out.className = 'result-box result-ok';
+      out.innerHTML = `Calificación cualitativa: <strong>${resultado}</strong>`;
+    });
+  }
 
+  /* =====================================================================
+     6) EJERCICIO 5 · while (suma del 1 al 10)
+     ===================================================================== */
+  function initEj5() {
+    const btn = $('ej5-btn');
+    if (!btn) return;
 
-else if (seleccion == 8) {
+    btn.addEventListener('click', () => {
+      let numero = 1;
+      let suma = 0;
+      const pasos = [];
 
-    // Empresa que vende hojas de hielo seco - Santiago Muñeton Hernandez - ADSO - 3171608
+      while (numero <= 10) {
+        suma = suma + numero;
+        pasos.push(`Iteración ${numero}: suma = ${suma}`);
+        numero = numero + 1;
+      }
 
-    // Tipos de clientes
+      const out = $('ej5-result');
+      out.className = 'result-box result-ok';
+      out.innerHTML =
+        pasos.map((p) => `<div class="step-line">${p}</div>`).join('') +
+        `<hr><strong>Resultado final de la suma: ${suma}</strong>`;
+    });
+  }
 
-    cliente_1 = 0.05
-    cliente_2 = 0.08
-    cliente_3 = 0.12
-    cliente_4 = 0.15
+  /* =====================================================================
+     7) EJERCICIO 6 · Números pares del 1 al 10
+     ===================================================================== */
+  function initEj6() {
+    const btn = $('ej6-btn');
+    if (!btn) return;
 
-    // cliente
+    btn.addEventListener('click', () => {
+      const pares = [];
+      for (let i = 1; i <= 10; i++) {
+        if (i % 2 === 0) pares.push(i);
+      }
 
-    nombre_cliente = prompt("Ingrese el nombre del cliente") // prompt para solicitar nombre
-    tipo_cliente = parseInt(prompt("Ingrese el tipo de cliente en un numero entero (1-4)"));
+      const out = $('ej6-result');
+      out.className = 'result-box result-ok';
+      out.innerHTML = `Números pares encontrados: <strong>[${pares.join(', ')}]</strong>`;
+    });
+  }
 
-    // hojas
+  /* =====================================================================
+     8) EJERCICIO 7 · Arrow function (promedio)
+     ===================================================================== */
+  const promedio = (a, b, c) => (a + b + c) / 3;
 
-    cantidad_hojas_compradas = parseInt(prompt("Ingrese la cantidad de hojas de hielo seco compradas por el cliente")); // Cantidad
-    valor_hojas_compradas = parseInt(prompt("Ingrese el valor de las hojas de hielo seco compradas por el cliente")); // Precio
+  function initEj7() {
+    const btn = $('ej7-btn');
+    if (!btn) return;
 
-    // PROGRAMA/PROCESO
+    btn.addEventListener('click', () => {
+      const n1 = parseFloat($('ej7-n1').value);
+      const n2 = parseFloat($('ej7-n2').value);
+      const n3 = parseFloat($('ej7-n3').value);
+      const out = $('ej7-result');
 
-    subtotal = cantidad_hojas_compradas * valor_hojas_compradas
+      if ([n1, n2, n3].some((n) => isNaN(n))) {
+        out.className = 'result-box result-error';
+        out.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Debes ingresar las tres notas.';
+        return;
+      }
 
-    alert("El nombre del cliente es: " + nombre_cliente);
-    alert(`Subtotal por pagar: ${cantidad_hojas_compradas} hojas por ${valor_hojas_compradas} cada una da un total de: ` + subtotal + "unidades monetarias.")
+      const resultado = promedio(n1, n2, n3);
+      out.className = 'result-box result-ok';
+      out.innerHTML = `promedio(${n1}, ${n2}, ${n3}) → <strong>${resultado.toFixed(2)}</strong>`;
+    });
+  }
 
-    // Condicionales para separar descuentos
-    let tipo_cliente_descuento = 0
+  /* =====================================================================
+     9) EJERCICIO 8 · Factura hielo seco
+        Descuentos por tipo de cliente:
+        1 → 5%  |  2 → 8%  |  3 → 12%  |  4 → 15%
+     ===================================================================== */
+  const TASAS = { 1: 0.05, 2: 0.08, 3: 0.12, 4: 0.15 };
 
-    if (tipo_cliente == 1) {
-        tipo_cliente_descuento  = subtotal * cliente_1
+  function initEj8() {
+    const btn = $('ej8-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      const out      = $('ej8-result');
+      const nombre   = $('ej8-nombre').value.trim() || 'Cliente sin nombre';
+      const tipo     = parseInt($('ej8-tipo').value, 10);
+      const cantidad = parseInt($('ej8-cantidad').value, 10);
+      const valor    = parseFloat($('ej8-valor').value);
+
+      if (isNaN(tipo) || isNaN(cantidad) || isNaN(valor) || cantidad <= 0 || valor <= 0) {
+        out.className = 'result-box result-error';
+        out.innerHTML = '<i class="bi bi-exclamation-triangle"></i> Verifica los datos: tipo (1-4), cantidad y valor deben ser válidos.';
+        return;
+      }
+
+      const subtotal  = cantidad * valor;
+      const tasa      = TASAS[tipo] || 0;
+      const descuento = subtotal * tasa;
+      const neto      = subtotal - descuento;
+
+      out.className = 'result-box result-ok';
+      out.innerHTML = `
+        <div class="factura-line"><span>Cliente:</span><strong>${nombre}</strong></div>
+        <div class="factura-line"><span>Tipo de cliente:</span><strong>${tipo} (${(tasa * 100).toFixed(0)}% descuento)</strong></div>
+        <div class="factura-line"><span>Subtotal (${cantidad} × ${fmt(valor)}):</span><strong>${fmt(subtotal)}</strong></div>
+        <div class="factura-line"><span>Descuento aplicado:</span><strong>- ${fmt(descuento)}</strong></div>
+        <div class="factura-line total"><span>Neto por pagar:</span><strong>${fmt(neto)} u.m.</strong></div>
+      `;
+    });
+  }
+
+  /* =====================================================================
+     UTILIDADES: botón "ir arriba" y año en el footer
+     ===================================================================== */
+  function initMisc() {
+    const toTop = $('toTop');
+    if (toTop) {
+      window.addEventListener('scroll', () => {
+        toTop.classList.toggle('visible', window.scrollY > 420);
+      });
+      toTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     }
-    else if (tipo_cliente == 2) {
-        tipo_cliente_descuento = subtotal * cliente_2
-    }
-    else if (tipo_cliente == 3) {
-        tipo_cliente_descuento = subtotal * cliente_3
-    }
-    else if (tipo_cliente == 4) {
-        tipo_cliente_descuento = subtotal * cliente_4
-    }
-    else {
-        tipo_cliente_descuento = subtotal
-    }
 
-    valor_neto = subtotal - tipo_cliente_descuento
+    const yearEl = $('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
 
-    alert(`neto por pagar: ${valor_neto} unidades monetarias`)
-}
+  /* =====================================================================
+     BOOT
+     ===================================================================== */
+  function boot() {
+    initWelcome();
+    initEj1();
+    initEj2();
+    initEj3();
+    initEj4();
+    initEj5();
+    initEj6();
+    initEj7();
+    initEj8();
+    initMisc();
+
+    if (window.AOS)   AOS.init({ duration: 800, once: true, offset: 90, easing: 'ease-out-cubic' });
+    if (window.Prism) Prism.highlightAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();

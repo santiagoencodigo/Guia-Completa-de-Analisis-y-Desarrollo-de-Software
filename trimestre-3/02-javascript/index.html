@@ -1,11 +1,880 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis y Desarrollo de Software / Santiago Muñeton</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JavaScript: sintaxis básica y ejercicios del tercer trimestre ADSO.">
+  <title>JS - Sintaxis Básica | ADSO</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Prism.js (resaltado de código) -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <!-- AOS (animaciones al scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="shortcut icon" href="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg" type="image/x-icon">
 </head>
+
 <body>
-    <script src="main.js"></script>
+
+  <!-- ============================================================ -->
+  <!-- POP-UP DE BIENVENIDA                                          -->
+  <!-- ============================================================ -->
+  <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content welcome-modal">
+        <div class="modal-body text-center">
+          <div class="welcome-icon-wrap">
+            <i class="bi bi-braces-asterisk welcome-icon"></i>
+          </div>
+          <h5 id="welcomeModalLabel" class="welcome-title">¡Hola!</h5>
+          <p class="welcome-text">
+            Bienvenido a mi página de prueba, esto fue lo que vi acerca de Javascript en mi tercer trimestre del tecnologo en analisis y desarrollo de software. (04/11/2025)
+          </p>
+          <div class="progress welcome-progress" role="progressbar" aria-label="Cerrando automáticamente">
+            <div class="progress-bar" id="welcomeProgress"></div>
+          </div>
+          <small class="welcome-hint">Este mensaje se cerrará automáticamente…</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- HEADER / NAVEGACIÓN CON BOOTSTRAP                             -->
+  <!-- ============================================================ -->
+  <header class="main-header" role="banner">
+    <nav class="navbar navbar-expand-md nav-container">
+      <div class="container-fluid px-0">
+        <!-- Logo -->
+        <a href="#inicio" class="navbar-brand nav-logo" aria-label="Ir al inicio">
+          <img src="../../trimestre-4/01-interfaz-grafica/03-botfriends/img/1-person-icon.svg"
+               alt="Logo ADSO" class="nav-logo-img" onerror="this.style.display='none'">
+          ADSO
+        </a>
+
+        <!-- Botón hamburguesa -->
+        <button class="navbar-toggler nav-toggle" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú colapsable -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-md-center">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html#contexto">Contexto</a>
+            </li>
+
+            <!-- Dropdown Trimestres -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="trimestresDropdown"
+                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Trimestres
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="trimestresDropdown">
+                <li><a class="dropdown-item" href="../../index.html#trimestres">Estructura</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-1/index.html">Trimestre 1</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-2/index.html">Trimestre 2</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-3/index.html">Trimestre 3</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-4/index.html">Trimestre 4</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-5/index.html">Trimestre 5</a></li>
+                <li><a class="dropdown-item" href="../../trimestre-6/index.html">Trimestre 6</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html#proyectos">Proyectos</a>
+            </li>
+
+            <!-- Dropdown de contenido de ESTA página -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="contenidoDropdown"
+                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Contenido
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contenidoDropdown">
+                <li><a class="dropdown-item" href="#introduccion">Introducción</a></li>
+                <li><a class="dropdown-item" href="#conceptos">Conceptos clave</a></li>
+                <li><a class="dropdown-item" href="#ejercicios">Ejercicios</a></li>
+                <li><a class="dropdown-item" href="#actividades">Actividades</a></li>
+                <li><a class="dropdown-item" href="#recursos">Recursos</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="../../sitemap.html">Mapa de sitio</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html#mapa-de-sitio">Footer</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- HERO                                                          -->
+  <!-- ============================================================ -->
+  <section id="inicio" class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="container hero-content">
+      <span class="hero-badge" data-aos="fade-down">
+        <i class="bi bi-mortarboard"></i> Tercer Trimestre · ADSO
+      </span>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+        <span class="js-text">JavaScript</span>
+        <span class="hero-sub">Sencillo y Sintaxis Básica</span>
+      </h1>
+      <p class="hero-desc" data-aos="fade-up" data-aos-delay="200">
+        Un recorrido práctico por los fundamentos del lenguaje que da vida al frontend:
+        variables, condicionales, bucles, funciones, arreglos y captura de datos.
+      </p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+        <a href="#ejercicios" class="btn btn-js">
+          <i class="bi bi-play-circle"></i> Ver ejercicios
+        </a>
+        <a href="#conceptos" class="btn btn-ghost">
+          <i class="bi bi-book"></i> Explorar conceptos
+        </a>
+      </div>
+      <div class="hero-stack" data-aos="fade-up" data-aos-delay="400">
+        <span class="chip"><i class="bi bi-braces"></i> Sintaxis</span>
+        <span class="chip"><i class="bi bi-diagram-2"></i> Condicionales</span>
+        <span class="chip"><i class="bi bi-arrow-repeat"></i> Bucles</span>
+        <span class="chip"><i class="bi bi-box"></i> Funciones</span>
+        <span class="chip"><i class="bi bi-list-ol"></i> Arrays</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- INTRODUCCIÓN                                                  -->
+  <!-- ============================================================ -->
+  <section id="introduccion" class="section">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="section-kicker"><i class="bi bi-info-circle"></i> Introducción</span>
+        <h2 class="section-title">¿Por qué aprender JavaScript?</h2>
+        <p class="section-sub">
+          Aprender JavaScript es fundamental para el desarrollo web moderno y para entender
+          la lógica del lado del cliente (frontend) y cómo los navegadores interpretan y
+          ejecutan instrucciones para crear experiencias dinámicas e interactivas. El lenguaje
+          es versátil y universal: sirve tanto para el <strong>frontend</strong> como para el
+          <strong>backend</strong> (mediante <em>Node.js</em>).
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6" data-aos="fade-right">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-controller"></i></div>
+            <h5>Enfoque de aprendizaje</h5>
+            <p>
+              Comenzamos con una introducción a la programación mediante
+              <strong>ejemplos visuales y prácticos</strong> en
+              <a href="https://studio.code.org/courses/mc/units/1/lessons/1/levels/1" target="_blank" rel="noopener">Code.org</a>
+              con temática de Minecraft. Esta experiencia permitió familiarizarse con
+              secuencias, bucles y condicionales a través de bloques, facilitando la
+              transición a un lenguaje de texto como JavaScript.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-left">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-diagram-3"></i></div>
+            <h5>Estructura del directorio</h5>
+            <pre class="file-tree"><code>trimestre-3/02-javascript/
+├── index.html     # Página principal
+├── styles.css     # Estilos de la interfaz
+├── main.js        # Lógica de los ejercicios
+└── README.md      # Documentación</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CONCEPTOS CLAVE                                               -->
+  <!-- ============================================================ -->
+  <section id="conceptos" class="section section-alt">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="section-kicker"><i class="bi bi-lightbulb"></i> Teoría</span>
+        <h2 class="section-title">Conceptos clave vistos</h2>
+        <p class="section-sub">Los pilares del lenguaje con ejemplos listos para leer y reutilizar.</p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Variables -->
+        <div class="col-lg-6" data-aos="fade-up">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-tag"></i></span>
+              <h5>Variables y tipos de datos</h5>
+            </header>
+            <p>Se declaran con <code>let</code>, <code>const</code> y <code>var</code>. <code>let</code> tiene alcance de bloque; <code>var</code>, alcance de función.</p>
+            <pre><code class="language-javascript">let nombre = "Santiago";   // string
+const edad = 25;           // number
+let esActivo = true;       // boolean
+let direccion = null;      // null
+let telefono;              // undefined</code></pre>
+          </article>
+        </div>
+
+        <!-- Condicionales -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-signpost-split"></i></span>
+              <h5>Estructuras condicionales</h5>
+            </header>
+            <p>Permiten tomar decisiones con <code>if / else if / else</code> o con <code>switch</code> cuando hay múltiples casos.</p>
+            <pre><code class="language-javascript">let edad = 18;
+if (edad &lt; 18) {
+  console.log("Menor de edad");
+} else if (edad &gt;= 18 &amp;&amp; edad &lt; 60) {
+  console.log("Adulto");
+} else {
+  console.log("Adulto mayor");
+}</code></pre>
+          </article>
+        </div>
+
+        <!-- Bucles -->
+        <div class="col-lg-6" data-aos="fade-up">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-arrow-repeat"></i></span>
+              <h5>Estructuras de control (bucles)</h5>
+            </header>
+            <p><code>while</code> repite mientras la condición sea verdadera; <code>for</code> es ideal para recorrer rangos o arreglos.</p>
+            <pre><code class="language-javascript">let contador = 0;
+while (contador &lt; 5) {
+  console.log("Contador: " + contador);
+  contador++;
+}
+
+for (let i = 0; i &lt; 5; i++) {
+  console.log("Número: " + i);
+}</code></pre>
+          </article>
+        </div>
+
+        <!-- Funciones -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-box"></i></span>
+              <h5>Funciones</h5>
+            </header>
+            <p>Reutilizan código y organizan la lógica. Pueden recibir parámetros y devolver valores.</p>
+            <pre><code class="language-javascript">function mostrarMensaje() {
+  console.log("Conociendo JavaScript");
+}
+
+function sumar(a, b) { return a + b; }
+
+const promedio = (a, b, c) =&gt; (a + b + c) / 3;</code></pre>
+          </article>
+        </div>
+
+        <!-- Arreglos -->
+        <div class="col-lg-6" data-aos="fade-up">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-list-ol"></i></span>
+              <h5>Arreglos (Arrays)</h5>
+            </header>
+            <p>Almacenan colecciones. Se recorren con bucles y admiten métodos como <code>push()</code>, <code>filter()</code> o <code>map()</code>.</p>
+            <pre><code class="language-javascript">let numeros = [10, 20, 30, 40, 50];
+for (let i = 0; i &lt; numeros.length; i++) {
+  console.log(numeros[i]);
+}</code></pre>
+          </article>
+        </div>
+
+        <!-- Captura de datos -->
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+          <article class="concept-card">
+            <header class="concept-head">
+              <span class="concept-icon"><i class="bi bi-keyboard"></i></span>
+              <h5>Captura de datos por teclado</h5>
+            </header>
+            <p>En el navegador se usa <code>prompt()</code>. En Node.js existen <code>readline</code> y <code>prompt-sync</code>.</p>
+            <pre><code class="language-javascript">let nombre = prompt("¿Cuál es tu nombre?");
+console.log("Hola, " + nombre);</code></pre>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- EJERCICIOS                                                    -->
+  <!-- ============================================================ -->
+  <section id="ejercicios" class="section">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="section-kicker"><i class="bi bi-terminal"></i> Práctica</span>
+        <h2 class="section-title">Ejercicios interactivos</h2>
+        <p class="section-sub">
+          Cada tarjeta describe qué demuestra el ejercicio y cómo se resuelve mediante
+          código JS.
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Ejercicio 1 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">01</span>
+              <i class="bi bi-signpost-split exercise-ico"></i>
+            </div>
+            <h5>Condicionales <code>if / else</code></h5>
+            <p>
+              Demuestra cómo se comparan dos valores numéricos para tomar una decisión.
+              Con <code>if (dinero &gt;= precio)</code> se evalúa la condición y, según el
+              resultado, se ejecuta el bloque <code>if</code> o el <code>else</code>.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj1">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="60">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">02</span>
+              <i class="bi bi-arrow-repeat exercise-ico"></i>
+            </div>
+            <h5>Bucles y arreglos</h5>
+            <p>
+              Con un bucle <code>for</code> se recorre del 1 al 10 acumulando una suma
+              (<code>suma += i</code>) y llenando un arreglo. Luego, con
+              <code>filter(n =&gt; n % 2 === 0)</code>, se obtienen los pares.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj2">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="120">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">03</span>
+              <i class="bi bi-box exercise-ico"></i>
+            </div>
+            <h5>Funciones con parámetros</h5>
+            <p>
+              La función <code>evaluarNota(nota)</code> recibe un número y devuelve un texto
+              según el rango. Se muestra cómo una función encapsula la lógica y puede
+              reutilizarse en cualquier parte del programa.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj3">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">04</span>
+              <i class="bi bi-list-check exercise-ico"></i>
+            </div>
+            <h5>Calificación en letras <code>switch</code></h5>
+            <p>
+              Estructura <code>switch</code>: según el valor de la nota (1 a 5) se ejecuta
+              un <code>case</code> distinto. El <code>break</code> evita que el flujo siga
+              evaluando los demás casos y <code>default</code> cubre los valores inválidos.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj4">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="60">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">05</span>
+              <i class="bi bi-123 exercise-ico"></i>
+            </div>
+            <h5>Suma del 1 al 10 con <code>while</code></h5>
+            <p>
+              Bucle <code>while</code> que acumula la suma en la variable
+              <code>suma</code> y aumenta el contador <code>numero++</code> en cada
+              iteración, hasta que la condición deja de cumplirse.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj5">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="120">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">06</span>
+              <i class="bi bi-2-circle exercise-ico"></i>
+            </div>
+            <h5>Números pares del 1 al 10</h5>
+            <p>
+              Combina un <code>for</code> con un <code>if</code> y el operador módulo
+              <code>i % 2 === 0</code>. Si el residuo de dividir entre 2 es 0, el número
+              es par y se agrega al resultado.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj6">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">07</span>
+              <i class="bi bi-lightning exercise-ico"></i>
+            </div>
+            <h5>Arrow function · Promedio</h5>
+            <p>
+              Se usa una <strong>función flecha</strong>:
+              <code>const promedio = (a,b,c) =&gt; (a+b+c)/3;</code>. Es una sintaxis
+              corta para funciones que reciben parámetros y retornan un valor.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj7">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+        <!-- Ejercicio 8 -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="60">
+          <article class="exercise-card">
+            <div class="exercise-top">
+              <span class="exercise-num">08</span>
+              <i class="bi bi-receipt exercise-ico"></i>
+            </div>
+            <h5>Factura · Venta hielo seco</h5>
+            <p>
+              Simulación de una factura con descuentos según el tipo de cliente
+              (<code>if / else if</code>). Calcula <code>subtotal = cantidad * valor</code>,
+              aplica la tasa de descuento y devuelve el <code>valor neto</code> a pagar.
+            </p>
+            <button class="btn btn-js w-100" data-bs-toggle="modal" data-bs-target="#modalEj8">
+              <i class="bi bi-play-fill"></i> Abrir ejercicio
+            </button>
+          </article>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- ACTIVIDADES                                                   -->
+  <!-- ============================================================ -->
+  <section id="actividades" class="section section-alt">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="section-kicker"><i class="bi bi-clipboard-check"></i> Evidencias</span>
+        <h2 class="section-title">Actividades del trimestre</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item" data-aos="fade-right">
+          <div class="tl-dot"><i class="bi bi-question-circle"></i></div>
+          <div class="tl-body">
+            <h6>Actividad 1 · Cuestionario inicial</h6>
+            <p>Cuestionario en <a href="https://wayground.com/" target="_blank" rel="noopener">wayground.com</a> para evaluar los conocimientos previos sobre programación.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-aos="fade-right" data-aos-delay="60">
+          <div class="tl-dot"><i class="bi bi-search"></i></div>
+          <div class="tl-body">
+            <h6>Actividad 2 · Taller de trazabilidad</h6>
+            <p>Ejercicios de trazabilidad siguiendo la lógica de pseudocódigos y traduciéndolos a JavaScript.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-aos="fade-right" data-aos-delay="120">
+          <div class="tl-dot"><i class="bi bi-dice-5"></i></div>
+          <div class="tl-body">
+            <h6>Actividad 3 · Juego de mesa de arrays</h6>
+            <p>Diseño de un juego no digital para 3+ personas con el fin de enseñar arrays y estructuras de datos.</p>
+          </div>
+        </div>
+        <div class="tl-item" data-aos="fade-right" data-aos-delay="180">
+          <div class="tl-dot"><i class="bi bi-people"></i></div>
+          <div class="tl-body">
+            <h6>Actividad 4 · Desarrollo en grupo</h6>
+            <p>Programa en JS con función por integrante, usando variables, if, switch, while, for, arreglos, funciones y lectura por teclado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- RECURSOS                                                      -->
+  <!-- ============================================================ -->
+  <section id="recursos" class="section">
+    <div class="container">
+      <div class="section-head" data-aos="fade-up">
+        <span class="section-kicker"><i class="bi bi-tools"></i> Recursos</span>
+        <h2 class="section-title">Herramientas y material de apoyo</h2>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up">
+          <a class="resource-card" href="https://nodejs.org/" target="_blank" rel="noopener">
+            <i class="bi bi-hdd-network"></i>
+            <span>Node.js</span>
+            <small>JS en el servidor</small>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="60">
+          <a class="resource-card" href="https://code.visualstudio.com/" target="_blank" rel="noopener">
+            <i class="bi bi-code-square"></i>
+            <span>VS Code</span>
+            <small>Editor de código</small>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="120">
+          <a class="resource-card" href="https://runjs.app/play" target="_blank" rel="noopener">
+            <i class="bi bi-play-btn"></i>
+            <span>RunJS</span>
+            <small>Playground online</small>
+          </a>
+        </div>
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="180">
+          <a class="resource-card" href="https://lfrestrepo404.github.io/javascript-notes/" target="_blank" rel="noopener">
+            <i class="bi bi-journal-code"></i>
+            <span>JS Notes</span>
+            <small>Material de referencia</small>
+          </a>
+        </div>
+      </div>
+
+      <div class="glossary" data-aos="fade-up">
+        <h5><i class="bi bi-bookmark-star"></i> Glosario rápido</h5>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>API</strong><span>Interfaz que conecta dos programas.</span></div></div>
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>Back-End</strong><span>Procesamiento del servidor y base de datos.</span></div></div>
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>Front-End</strong><span>Parte visible con la que el usuario interactúa.</span></div></div>
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>Framework</strong><span>Conjunto de herramientas que facilitan el desarrollo.</span></div></div>
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>Node.js</strong><span>Intérprete de JavaScript en el servidor.</span></div></div>
+          <div class="col-md-6 col-lg-4"><div class="gl-item"><strong>Terminal</strong><span>Interfaz de línea de comandos.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================ -->
+  <footer id="mapa-de-sitio" class="site-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-5">
+          <h5 class="footer-brand"><i class="bi bi-code-slash"></i> ADSO · JavaScript</h5>
+          <p class="footer-desc">
+            Página de práctica del tercer trimestre del tecnólogo en Análisis y Desarrollo de Software.
+          </p>
+        </div>
+        <div class="col-md-3">
+          <h6 class="footer-title">Contenido</h6>
+          <ul class="footer-list">
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#conceptos">Conceptos clave</a></li>
+            <li><a href="#ejercicios">Ejercicios</a></li>
+            <li><a href="#actividades">Actividades</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="footer-title">Navegación</h6>
+          <ul class="footer-list">
+            <li><a href="../../index.html">Inicio del portafolio</a></li>
+            <li><a href="../../trimestre-3/index.html">Trimestre 3</a></li>
+            <li><a href="../../sitemap.html">Mapa de sitio</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <p class="footer-copy">© <span id="year"></span> santiagoencodigo · Análisis y Desarrollo de Software</p>
+    </div>
+  </footer>
+
+  <!-- Botón ir arriba -->
+  <button id="toTop" class="to-top" aria-label="Volver arriba">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- ============================================================ -->
+  <!-- MODALES DE EJERCICIOS                                         -->
+  <!-- ============================================================ -->
+
+  <!-- Ejercicio 1 -->
+  <div class="modal fade" id="modalEj1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-signpost-split"></i> Ejercicio 1 · Condicionales</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">if (dinero &gt;= precio) {
+  console.log("¡Puedes comprar el producto!");
+} else {
+  console.log("No tienes suficiente dinero.");
+}</code></pre>
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label">Dinero disponible</label>
+              <input type="number" class="form-control js-input" id="ej1-dinero" value="50">
+            </div>
+            <div class="col-6">
+              <label class="form-label">Precio del producto</label>
+              <input type="number" class="form-control js-input" id="ej1-precio" value="30">
+            </div>
+          </div>
+          <div id="ej1-result" class="result-box result-empty">Los resultados aparecerán aquí…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej1-btn"><i class="bi bi-play-fill"></i> Evaluar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 2 -->
+  <div class="modal fade" id="modalEj2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-arrow-repeat"></i> Ejercicio 2 · Bucles y arreglos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">let suma = 0;
+for (let i = 1; i &lt;= 10; i++) suma += i;
+const pares = numeros.filter(n =&gt; n % 2 === 0);</code></pre>
+          <div id="ej2-result" class="result-box result-empty">Haz clic en ejecutar para ver el recorrido…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej2-btn"><i class="bi bi-play-fill"></i> Ejecutar bucle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 3 -->
+  <div class="modal fade" id="modalEj3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-box"></i> Ejercicio 3 · Funciones</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">function evaluarNota(nota) {
+  if (nota &lt; 3) return "Reprobado";
+  if (nota &lt; 4) return "Aprobado";
+  return "Excelente";
+}</code></pre>
+          <label class="form-label">Ingresa una nota</label>
+          <input type="number" step="0.1" class="form-control js-input" id="ej3-nota" value="4.5">
+          <div id="ej3-result" class="result-box result-empty">Esperando un valor…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej3-btn"><i class="bi bi-play-fill"></i> Evaluar nota</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 4 -->
+  <div class="modal fade" id="modalEj4" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-list-check"></i> Ejercicio 4 · switch</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">switch (nota) {
+  case 1: console.log("Deficiente"); break;
+  case 2: console.log("Insuficiente"); break;
+  case 3: console.log("Aceptable"); break;
+  case 4: console.log("Sobresaliente"); break;
+  case 5: console.log("Excelente"); break;
+  default: console.log("Nota no válida");
+}</code></pre>
+          <label class="form-label">Selecciona la nota (1–5)</label>
+          <select class="form-select js-input" id="ej4-nota">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4" selected>4</option>
+            <option value="5">5</option>
+          </select>
+          <div id="ej4-result" class="result-box result-empty">Selecciona un caso…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej4-btn"><i class="bi bi-play-fill"></i> Evaluar caso</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 5 -->
+  <div class="modal fade" id="modalEj5" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-123"></i> Ejercicio 5 · while</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">let numero = 1, suma = 0;
+while (numero &lt;= 10) {
+  suma = suma + numero;
+  numero = numero + 1;
+}</code></pre>
+          <div id="ej5-result" class="result-box result-empty">Haz clic para ver cada iteración…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej5-btn"><i class="bi bi-play-fill"></i> Ejecutar while</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 6 -->
+  <div class="modal fade" id="modalEj6" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-2-circle"></i> Ejercicio 6 · Pares del 1 al 10</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">for (let i = 1; i &lt;= 10; i++) {
+  if (i % 2 === 0) console.log("Número par: " + i);
+}</code></pre>
+          <div id="ej6-result" class="result-box result-empty">Haz clic para filtrar los pares…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej6-btn"><i class="bi bi-play-fill"></i> Buscar pares</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 7 -->
+  <div class="modal fade" id="modalEj7" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-lightning"></i> Ejercicio 7 · Arrow function</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">const promedio = (a, b, c) =&gt; (a + b + c) / 3;</code></pre>
+          <div class="row g-3">
+            <div class="col-4"><input type="number" class="form-control js-input" id="ej7-n1" placeholder="Nota 1" value="4.5"></div>
+            <div class="col-4"><input type="number" class="form-control js-input" id="ej7-n2" placeholder="Nota 2" value="3.8"></div>
+            <div class="col-4"><input type="number" class="form-control js-input" id="ej7-n3" placeholder="Nota 3" value="4.2"></div>
+          </div>
+          <div id="ej7-result" class="result-box result-empty">Esperando las tres notas…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej7-btn"><i class="bi bi-play-fill"></i> Calcular promedio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ejercicio 8 -->
+  <div class="modal fade" id="modalEj8" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content js-modal">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-receipt"></i> Ejercicio 8 · Factura hielo seco</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <pre class="code-sm"><code class="language-javascript">subtotal = cantidad * valor;
+if (tipo_cliente === 1) desc = subtotal * 0.05;
+else if (tipo_cliente === 2) desc = subtotal * 0.08;
+else if (tipo_cliente === 3) desc = subtotal * 0.12;
+else if (tipo_cliente === 4) desc = subtotal * 0.15;
+valor_neto = subtotal - desc;</code></pre>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nombre del cliente</label>
+              <input type="text" class="form-control js-input" id="ej8-nombre" value="Santiago">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tipo de cliente (1–4)</label>
+              <select class="form-select js-input" id="ej8-tipo">
+                <option value="1">1 · 5% descuento</option>
+                <option value="2">2 · 8% descuento</option>
+                <option value="3" selected>3 · 12% descuento</option>
+                <option value="4">4 · 15% descuento</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Cantidad de hojas</label>
+              <input type="number" class="form-control js-input" id="ej8-cantidad" value="20">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Valor unitario</label>
+              <input type="number" class="form-control js-input" id="ej8-valor" value="3500">
+            </div>
+          </div>
+          <div id="ej8-result" class="result-box result-empty">Completa los datos y genera la factura…</div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-js" id="ej8-btn"><i class="bi bi-receipt-cutoff"></i> Generar factura</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                       -->
+  <!-- ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>

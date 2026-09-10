@@ -427,7 +427,212 @@
                 </p>
             </div>
 
-            <div class="projects-grid" id="markdown-cards-container">
+            <div class="" style="display:flex;justify-content:center;align-items:center;margin-bottom:2rem;">
+        
+            <!-- Quise realizar una prueba . ¿Cómo se ve en HTML un README.md en conjunto con un main.js con ejercicios? -->
+            <!-- JavaScript – Sencillo y Sintaxis Básica -->
+            <article style="
+                position: relative;
+                background: linear-gradient(160deg, #161b22 0%, #1a2130 100%);
+                border: 1px solid #30363d;
+                border-radius: 14px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+                font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+                color: #e6edf3;
+                max-width: 420px;
+                width: 100%;
+            "
+            onmouseover="this.style.transform='translateY(-6px)'; this.style.borderColor='rgba(247,223,30,0.4)'; this.style.boxShadow='0 20px 45px rgba(0,0,0,0.5)';"
+            onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#30363d'; this.style.boxShadow='none';">
+
+                <!-- Contenedor de la imagen -->
+                <div style="position: relative; width: 100%; overflow: hidden; background: #010409;">
+                    <img src="../Assets/img/trimestre-3/01-javascript.png"
+                        alt="Captura de pantalla del proyecto JavaScript - Sencillo y Sintaxis Básica"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: 210px;
+                            object-fit: cover;
+                            transition: transform 0.5s ease;
+                        "
+                        onmouseover="this.style.transform='scale(1.06)';"
+                        onmouseout="this.style.transform='scale(1)';">
+
+                    <!-- Overlay -->
+                    <div style="
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(180deg, rgba(13,17,23,0.1) 0%, rgba(13,17,23,0.85) 100%);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5rem;
+                        opacity: 0;
+                        transition: opacity 0.35s ease;
+                        pointer-events: none;
+                    "
+                    onmouseover="this.style.opacity='1';"
+                    onmouseout="this.style.opacity='0';">
+                        <span aria-hidden="true" style="
+                            width: 48px;
+                            height: 48px;
+                            border-radius: 50%;
+                            background: rgba(247,223,30,0.18);
+                            border: 1px solid rgba(247,223,30,0.45);
+                            display: grid;
+                            place-items: center;
+                            color: #f7df1e;
+                            font-size: 1.3rem;
+                            box-shadow: 0 0 22px rgba(247,223,30,0.4);">
+                            <i class="fa-brands fa-js"></i>
+                        </span>
+                        <span style="
+                            color: #f7df1e;
+                            font-weight: 600;
+                            font-size: 0.85rem;
+                            letter-spacing: 0.6px;
+                            text-transform: uppercase;">
+                            Ver proyecto
+                        </span>
+                    </div>
+
+                    <!-- Badge -->
+                    <div style="
+                        position: absolute;
+                        top: 0.75rem;
+                        left: 0.75rem;
+                        background: #f7df1e;
+                        color: #111418;
+                        font-weight: 800;
+                        font-size: 0.72rem;
+                        letter-spacing: 0.7px;
+                        text-transform: uppercase;
+                        padding: 0.32rem 0.7rem;
+                        border-radius: 999px;
+                        box-shadow: 0 6px 18px rgba(0,0,0,0.35);">
+                        JavaScript
+                    </div>
+                </div>
+
+                <!-- Contenido -->
+                <div style="
+                    padding: 1.35rem 1.35rem 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 1;">
+
+                    <h3 style="
+                        margin: 0 0 0.65rem;
+                        font-weight: 800;
+                        font-size: 1.15rem;
+                        letter-spacing: -0.3px;
+                        color: #e6edf3;">
+                        JavaScript – Sintaxis Básica
+                    </h3>
+
+                    <p style="
+                        margin: 0 0 1rem;
+                        color: #8b949e;
+                        font-size: 0.9rem;
+                        line-height: 1.55;
+                        flex-grow: 1;">
+                        Página interactiva que recopila los fundamentos de JavaScript vistos en el tercer trimestre: variables, condicionales, bucles, funciones, arreglos y captura de datos, con ejercicios prácticos desplegados en modales de Bootstrap.
+                    </p>
+
+                    <!-- Tags -->
+                    <div style="
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.4rem;
+                        margin-bottom: 1.1rem;">
+                        <span style="
+                            background: rgba(247,223,30,0.10);
+                            border: 1px solid rgba(247,223,30,0.28);
+                            color: #f7df1e;
+                            font-size: 0.72rem;
+                            font-weight: 600;
+                            padding: 0.28rem 0.65rem;
+                            border-radius: 999px;
+                            letter-spacing: 0.3px;">
+                            JavaScript
+                        </span>
+                        <span style="
+                            background: rgba(247,223,30,0.10);
+                            border: 1px solid rgba(247,223,30,0.28);
+                            color: #f7df1e;
+                            font-size: 0.72rem;
+                            font-weight: 600;
+                            padding: 0.28rem 0.65rem;
+                            border-radius: 999px;
+                            letter-spacing: 0.3px;">
+                            Bootstrap
+                        </span>
+                        <span style="
+                            background: rgba(247,223,30,0.10);
+                            border: 1px solid rgba(247,223,30,0.28);
+                            color: #f7df1e;
+                            font-size: 0.72rem;
+                            font-weight: 600;
+                            padding: 0.28rem 0.65rem;
+                            border-radius: 999px;
+                            letter-spacing: 0.3px;">
+                            Modales
+                        </span>
+                    </div>
+
+                    <!-- Botón -->
+                    <a href="./02-javascript/index.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 0.5rem;
+                            background: #f7df1e;
+                            color: #111418;
+                            font-weight: 700;
+                            font-size: 0.88rem;
+                            text-decoration: none;
+                            padding: 0.7rem 1.1rem;
+                            border-radius: 10px;
+                            transition: all 0.25s ease;
+                            box-shadow: 0 6px 20px rgba(247,223,30,0.22);"
+                        onmouseover="this.style.background='#ffe873'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 26px rgba(247,223,30,0.4)';"
+                        onmouseout="this.style.background='#f7df1e'; this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(247,223,30,0.22)';">
+
+                        <span aria-hidden="true" style="display: inline-flex;">
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                        Ver proyecto
+                        <span aria-hidden="true" style="display: inline-flex; transition: transform 0.25s ease;"
+                            onmouseover="this.style.transform='translateX(4px)';"
+                            onmouseout="this.style.transform='translateX(0)';">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Glow decorativo -->
+                <div aria-hidden="true" style="
+                    position: absolute;
+                    top: -60px;
+                    right: -60px;
+                    width: 160px;
+                    height: 160px;
+                    background: radial-gradient(circle, rgba(247,223,30,0.18), transparent 70%);
+                    filter: blur(28px);
+                    pointer-events: none;">
+                </div>
+            </article>
+            </div>
+
+            <div class="projects-grid" id="markdown-cards-container">                
                 <!-- Las tarjetas se generarán con JavaScript -->
             </div>
         </section>
